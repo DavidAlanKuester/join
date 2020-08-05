@@ -1,0 +1,45 @@
+body {
+    border: 0;
+}
+
+.side-bar {
+    padding: 10px;
+    position: fixed;
+    /*width: 150px;*/
+    background-color: #1E3190;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.menu-img {
+    border: 6px;
+    width: 100%;
+}
+
+.menu a:hover{
+    text-decoration: none;
+    color: white;
+}
+
+.menu-link{
+    margin-top: 10px;
+    text-align: center;
+    text-decoration: none;
+    color: gray;
+}
+
+.link-unselected{
+    color: gray;
+}
+
+.link-selected {
+    box-shadow: -5px 0px white;
+    color: white;
+}
