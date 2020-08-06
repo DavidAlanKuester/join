@@ -1,0 +1,167 @@
+.addTask-page {
+    width: 100vw;
+    height: 100vh;
+}
+
+.title-div-container, .empty-div-container {
+    width: 100vw;
+    height: 15vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 100%;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.title-text-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    height: 90%;
+    width: 90%;
+}
+
+.title-text-container h2 {
+    margin: 0;
+    font-size: 32px;
+    color: black;
+    font-weight: 500;
+}
+
+.title-text-container p {
+    margin: 0;
+    font-size: 12px;
+    color: rgb(30, 49, 144);
+}
+
+.addTask-content-container {
+    width: 100vw;
+    height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.custom-card {
+    height: 90%;
+    width: 90%;
+    background-color: rgb(244, 243, 251) !important;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.inner-custom-card {
+    height: 90%;
+    width: 90%;
+    display: flex;
+    color: rgb(30, 49, 144);
+}
+
+.inner-custom-card h3 {
+    margin: 0;
+    margin-bottom: 8px;
+}
+
+.right-cardhalf, .left-cardhalf {
+    height: 100%;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-title-section, .card-category-section, .card-date-section, .card-urgency-section {
+    height: 25%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.card-description-section {
+    height: 50%;
+}
+
+.card-description-section input {
+    height: 80%;
+    width: 95%;
+}
+
+.card-assign-commit-section {
+    height: 50%;
+}
+
+.card-title-section input, .card-date-section input {
+    width: 95%;
+    height: 50%;
+}
+
+.card-urgency-section div, .card-category-section div {
+    width: 100%;
+    height: 50%;
+    display: flex;
+}
+
+.card-urgency-section div input {
+    width: 35%;
+}
+
+.card-urgency-section div select {
+    width: 12.5%;
+}
+
+.card-category-section div input {
+    width: 75%;
+}
+
+.card-category-section div select {
+    width: 20%;
+}
+
+.assign-person-div {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 50%;
+}
+
+.assign-person-div img {
+    margin-left: 8px;
+    margin-right: 8px;
+}
+
+.assign-commit-div {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    height: 40%;
+}
+
+.assign-person-div button {
+    border-radius: 100% !important;
+    margin-left: 8px ;
+}
+
+.assign-commit-div button {
+    margin-left: 16px;
+    margin-right: 16px;
+}
+
+.picture-profile {
+    height: 50px;
+    width: 50px;
+    object-fit: cover;
+    background-color: white;
+    border-radius: 100%;
+    margin-right: 8px;
+    margin-left: 8px;
+}
