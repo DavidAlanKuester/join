@@ -20,7 +20,10 @@ body {
 
 .menu-img {
     border: 6px;
-    width: 100%;
+    /*width: 100%;*/
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
 }
 
 .menu a:hover{
@@ -42,4 +45,9 @@ body {
 .link-selected {
     box-shadow: -5px 0px white;
     color: white;
+}
+
+.link-img{
+    display: flex;
+    justify-content: center
 }
