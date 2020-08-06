@@ -1,18 +1,35 @@
 body {
-    border: 0;
+    font-family: 'PT Sans';
+}
+
+/*all pages containers should be set to the same values*/
+
+.list-page {
+    width: 100vw;
+    height: 100vh;
 }
 
 .side-bar {
-    padding: 10px;
+    width: 10%;
+    /*if the width of sidebar is to be change, this should be change as well to sum up to 100% to keep same visual aspect*/
+    /*must be same as top position of title-div-container so that they do not overlap*/
+    height: 100%;
+    padding: 5px;
+    /*same as the box-shadow's h-offset parameter so that the shadow line lies over the padding*/
     position: fixed;
-    /*width: 150px;*/
+    top: 0px;
+    left: 0px;
     background-color: #1E3190;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    /*z-index: 1;*/
+    /*draw over the list-content-container*/
 }
 
 .menu {
+    height: 30%;
+    /*adjust the value to position the links-container, up or down*/
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -26,28 +43,107 @@ body {
     object-fit: contain;
 }
 
-.menu a:hover{
+.menu a:hover {
     text-decoration: none;
     color: white;
 }
 
-.menu-link{
+.links-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.menu-link {
     margin-top: 10px;
     text-align: center;
     text-decoration: none;
     color: gray;
 }
 
-.link-unselected{
+.link-unselected {
     color: gray;
 }
 
 .link-selected {
     box-shadow: -5px 0px white;
+    /*box-shadow's h-offset parameter same as the padding of sidebar so that the shadow line lies over the padding*/
     color: white;
 }
 
-.link-img{
+.link-img {
     display: flex;
     justify-content: center
+}
+
+.title-div-container, .empty-div-container {
+    position: fixed;
+    top: 0;
+    width: 89%;
+    /*becasue of possition fixed we need to set the width, if the width of sidebar is to be change, this should be change as well to sum up to 100% to keep same visual aspect*/
+    height: 20%;
+    display: flex;
+    align-items: center;
+    /*justify-content: center;*/
+    max-width: 100%;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    z-index: 1;
+    /*draw over the list-content-container*/
+    background-color: white;
+    /**/
+}
+
+.title-text-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    /*height: 90%;
+    width: 90%;*/
+}
+
+.title-text-container h2 {
+    margin: 0;
+    font-size: 32px;
+    color: black;
+    font-weight: 500;
+}
+
+.title-text-container p {
+    margin: 0;
+    font-size: 12px;
+    color: rgb(30, 49, 144);
+}
+
+/*still in development*/
+.list-content {
+    background-color: tomato;
+    position: relative;
+    top: 30%; /*must be at least the same as title-container´s height and list-item-details sum so that they do not overlap*/
+    height: 70%;/*a greater value will give the title-list-content class some left margin and disturbt visual output making it to scroll left and right*/
+}
+
+.list-item-details {
+    background-color: white;
+    position: fixed;
+    top:20%;/*must be at least the same as title-container´s height so that they do not overlap*/
+    width: 89%; /*if the width of sidebar is to be change, this should be change as well to sum up to 100% to keep same visual aspect*/
+    height: 10%;
+    display: flex;
+    justify-content: space-between;
+    color: rgb(30, 49, 144);
+}
+
+.title-list-content {
+    position: relative;
+    top: 0;
+    left: 11%;
+    /*must be at least same as width of sidebar and so that they do not overlap*/
+    width: 89%;
+    max-width: 89%;
+    overflow: hidden;
+    /*if the width of sidebar is to be change, this should be change as well to sum up to 100% to keep same visual aspect*/
+    height: 100%;
 }
