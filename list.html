@@ -13,7 +13,7 @@
     <title>List</title>
 </head>
 
-<body>
+<body onload="getProjectMatrix()">
     <div class="list-page">
 
         <nav class=" side-bar">
@@ -22,8 +22,8 @@
                     <img class="menu-img " src="img/logo.png" alt="">
                 </a>
                 <div class="links-container">
-                    <a class="menu-link link-selected" href="#">Matrix</a>
-                    <a class="menu-link link-selected" href="#">List</a>
+                    <a id="matrix-link" class="menu-link link-unselected" href="#">Matrix</a>
+                    <a id="list-link" class="menu-link link-selected" href="#">List</a>
                 </div>
             </div>
 
