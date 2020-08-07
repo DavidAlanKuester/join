@@ -7,15 +7,33 @@
     <link rel="stylesheet" href="addTaskStyle.css">
     <script src="overallApp.js"></script>
     <script src="addTask.js"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css" integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css"
+        integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        rel="stylesheet">
     <title>Add Task</title>
 </head>
 
 <body onload="disableBtn()">
+    <nav class="side-bar">
+        <div class="menu">
+            <a class="link-img" href="#">
+                <img class="menu-img " src="img/logo.png" alt="">
+            </a>
+            <div class="links-container">
+                <a id="matrix-link" class="menu-link link-unselected" href="#">Matrix</a>
+                <a id="list-link" class="menu-link link-selected" href="#">List</a>
+            </div>
+        </div>
+
+        <a class="link-img" href="#">
+            <img class="menu-img rounded-circle border border-white" src="img/logo.png" alt="">
+        </a>
+    </nav>
     <div class="addTask-page">
         <div class="title-div-container">
             <div class="title-text-container">
-                <h2>Add Task</h2>
+                <h2><b>Add Task</b></h2>
                 <p>Learning Management Sytem Project</p>
             </div>
         </div>
@@ -32,11 +50,11 @@
                         <div class="card-category-section">
                             <h3>Category</h3>
                             <div>
-                                <input onkeydown="enableBtn()" type="text" id="category-input" name="category-input">
-                                <select>
+                                <select onclick="enableBtn()" id="category-input" name="category-input">
                                     <option value="Marketing">Marketing</option>
                                     <option value="Product">Product</option>
                                     <option value="Sales">Sales</option>
+                                    <option value="PR">Sales</option>
                                     <option value="Other">Other</option>
                                 </select>
                             </div>
@@ -56,20 +74,13 @@
                             <input onkeydown="enableBtn()" type="text" id="date-input" name="date-input">
                         </div>
 
-                        <div class="card-urgency-section">
-                            <h3>Urgency/Importance</h3>
+                        <div class="card-importance-section">
+                            <h3>Importance</h3>
                             <div>
-                                <input onkeydown="enableBtn()" type="text" id="urgency-input" name="urgency-input">
-                                <select>
+                                <select onclick="enableBtn()">
                                     <option value="High">High</option>
                                     <option value="Low">Low</option>
-    
-                                </select>
-                                <input onkeydown="enableBtn()" type="text" id="importance-input" name="importance-input">
-                                <select>
-                                    <option value="High">High</option>
-                                    <option value="Low">Low</option>
-    
+
                                 </select>
                             </div>
 
@@ -78,23 +89,41 @@
                         <div class="card-assign-commit-section">
                             <h3>Assigned to</h3>
                             <div class="assign-person-div">
-                                <img class="picture-profile " src="img/person.png">
-                                <img class="picture-profile " src="img/person.png">
-                                <img class="picture-profile " src="img/person.png">
-                                <button type="button" class="btn btn-outline-primary">+</button>
+                                <div id="assign-person-div">
+                                </div>
+                                <div id="assign-person-btn-div">
+                                    <button onclick="addPerson()" id="plus-btn" type="button" class="btn btn-primary"
+                                        style="background-color: rgb(30, 49, 144) !important"><b>Add</b></button>
+                                        <div class="d-none" id="remove-btn-div">
+                                            <button onclick="removePerson()" id="remove-btn" type="button" class="btn btn-danger"><b>Remove</b>
+                                            </button>
+                                        </div>
+
+                                </div>
+
                             </div>
                             <div class="assign-commit-div">
-                                <button id="cancel-btn" type="button" class="btn" style="background-color: rgb(244, 243, 251) !important; color: rgb(30, 49, 144) !important;"><b>Cancel</b></button>
-                                <button onclick="createTask()" id="create-btn" type="button" class="btn btn-primary" style="background-color: rgb(30, 49, 144) !important"><b>Create Task</b></button>
+                                <button id="cancel-btn" type="button" class="btn"
+                                    style="background-color: rgb(244, 243, 251) !important; color: rgb(30, 49, 144) !important;"><b>Cancel</b></button>
+                                <button onclick="createTask()" id="create-btn" type="button" class="btn btn-primary"
+                                    style="background-color: rgb(30, 49, 144) !important"><b>Create Task</b></button>
                             </div>
-                  
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="empty-div-container"></div>
+        <div class="empty-div-container">
+            <div class="alert alert-success custom-alert" role="alert">
+                <p>You have created a new task!</p>
+            </div>
+            <div class="alert alert-danger custom-alert" role="alert">
+                <p>Please fill out the components!</p>
+            </div>
+
+        </div>
 
 
 
