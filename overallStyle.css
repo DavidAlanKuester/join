@@ -10,3 +10,76 @@ body {
 .label-blue {
     color: rgb(30, 49, 144);
 }
+
+/********************SIDE_BAR_RELATED_SETTINGS********************/
+.side-bar {
+    width: 10%;
+    /*if the width of sidebar is to be change, left position atribute of title-list-content class must be at least the same as the width of sidebar,
+    * so that the two elements, side-bar and title-list-content, do not overlap*/
+    height: 100%;
+    padding-left: 5px;
+    /*same as the positive box-shadow's h-offset value of link-selected class, so that the shadow line lies over the padding*/
+    padding-right: 5px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    background-color: #1E3190;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 2; /*for debug purpose*/
+    /*draw over the list-content-container*/
+    animation: showSidebar 2s ease;
+}
+
+.menu {
+    height: 30%;
+    /*adjust the value to position the links-container, up or down*/
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.link-img {
+    display: flex;
+    justify-content: center
+}
+
+.menu-img {
+    border: 6px;
+    /*width: 100%;*/
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+}
+
+.links-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.menu-link {
+    margin-top: 10px;
+    text-align: center;
+    text-decoration: none;
+    color: gray;
+}
+
+.menu a:hover {
+    text-decoration: none;
+    color: white;
+}
+
+.link-unselected {
+    color: gray;
+}
+
+.link-selected {
+    box-shadow: -5px 0px white;
+    /*box-shadow's h-offset parameter same as the padding of sidebar so that the shadow line lies over the padding*/
+    color: white;
+}
+/********************SIDE_BAR_RELATED_SETTINGS_END********************/
