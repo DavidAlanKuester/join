@@ -1,6 +1,3 @@
-body {
-    font-family: 'PT Sans', sans-serif;
-}
 
 /*all pages containers should be set to the same values*/
 .list-page {
@@ -87,8 +84,8 @@ body {
     left: 11%;
     /*if the left position of title-list-content is to be change, width of sidebar class must be at least the same as this left position,
     * so that the two elements, side-bar and title-list-content, do not overlap*/
-    width: 89%;
-    max-width: 89%;
+    width: 88%;
+    max-width: 88%;
     overflow: hidden;
     /*if the left position is to be changed this should be change as well to sum up to at most 100% to keep same visual aspect*/
     height: 100%;
@@ -97,7 +94,7 @@ body {
 .title-div-container, .empty-div-container {
     position: fixed;
     top: 0;
-    width: 89%;
+    width: 88%;
     /*becasue of possition fixed we need to set the width, if the width of sidebar is to be change, this should be change as well to sum up to 100% to keep same visual aspect*/
     height: 20%;
     display: flex;
@@ -139,7 +136,7 @@ body {
 .list-content {
     background-color: tomato;
     position: relative;
-    top: 30%;
+    top: 25%;
     /*must be at least the same as title-container´s height and list-item-details sum so that they do not overlap*/
     height: 70%;
     /*a greater value will give the title-list-content class some left margin and disturbt visual output making it to scroll left and right*/
@@ -150,12 +147,16 @@ body {
     position: fixed;
     top: 20%;
     /*must be at least the same as title-container´s height so that they do not overlap*/
-    width: 89%;
+    width: 88%;
     /*if the width of sidebar is to be change, this should be change as well to sum up to 100% to keep same visual aspect*/
-    height: 10%;
+    /*height: 10%;*/
     display: flex;
     justify-content: space-between;
     color: rgb(30, 49, 144);
+}
+
+.list-item-details p{
+    margin-bottom: 0 !important;
 }
 /********************TITLE_LIST_CONTENT_RELATED_SETTINGS_END********************/
 
