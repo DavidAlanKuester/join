@@ -59,10 +59,12 @@
     font-size: 12px;
     color: rgb(30, 49, 144);
 }
+/********************TITLE_LIST_CONTENT_RELATED_SETTINGS_END********************/
 
+
+/********************LIST_CONTENT_RELATED_SETTINGS********************/
 /*still in development*/
 .list-content {
-    /*background-color: tomato;*/
     position: relative;
     top: 25%;
     /*must be at least the same as title-container´s height and list-item-details sum so that they do not overlap*/
@@ -70,7 +72,7 @@
     /*a greater value will give the title-list-content class some left margin and disturbt visual output making it to scroll left and right*/
 }
 
-.list-item-details {
+.list-item-description {
     background-color: white;
     position: fixed;
     top: 20%;
@@ -83,16 +85,31 @@
     color: rgb(30, 49, 144);
 }
 
-.list-item-details p{
+.list-item-description p{
     margin-bottom: 0 !important;
 }
 
-.list-item{
+/*settings to descriptions-text to match the coresponding  list-item-content*/
+#assigned-p{
+    width: 25%;
+}
+
+#category-p{
+    width: 25%;
+    text-align: center;
+}
+
+#details-p{
+    width: 50%;
+    text-align: end;
+}
+
+.list-item-content{
     display: flex;
-    justify-content: space-between;
+    /*justify-content: space-between;*/
     align-items: center;
     height: 10%;
-    width: 100%;
+    /*width: 100%;*/
     background-color: gray;
     margin-bottom: 10px;
     border-radius: 10px;
@@ -101,21 +118,14 @@
     border-left-width: 10px;
 }
 
-#details-p{
-    width: 50%;
-    text-align: end;
-}
-
-#category-p{
+.assigned-to-content{
     width: 25%;
-    text-align: center;
+    /*height: 100%;*/
+    display: flex;
+    align-items: center;
 }
 
-#assigned-p{
-    width: 25%;
-}
-
-.item-img{
+.assigned-to-img{
     margin-left: 10px;
     margin-right: 10px;
     width: 40px;
@@ -123,19 +133,26 @@
     object-fit: contain;
 }
 
-.item-details{
+.category-content{
+    width: 25%;
+    /*height: 100%;*/
+    text-align: center;
+}
+
+.details-content{
     width: 50%;
-    height: 100%;
+    /*height: 100%;*/
     max-height: 100%;
     overflow: hidden;
 }
+/********************LIST_CONTENT_RELATED_SETTINGS_END********************/
+
 
 /*a feature to scale the item as pointer is over it*/
 /*.list-item:hover{
     transform: scaleX(1.2);
     transform: scaleY(1.2);
 }*/
-/********************TITLE_LIST_CONTENT_RELATED_SETTINGS_END********************/
 
 /********************KEY_FRAMES_ANIMATIONS********************/
 @keyframes showSidebar{
