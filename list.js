@@ -88,8 +88,8 @@ tasks =
 };
 
 function getProjectMatrix(currentProjetId, currentUserId) {
-    //console.log('GET PROJECT MATRIX FROM matrix.js');
     //display list of assigned tasks in order of level of urgency and importance
+
     let totalUsers = tasks["user-tasks"];
     console.log('Size of Total Users', totalUsers);
     let totalTasks = 0;
@@ -102,10 +102,11 @@ function getProjectMatrix(currentProjetId, currentUserId) {
 
     let currentUserTaskslist = [];
     for (let i = 0; i < totalUsers.length; i++) {//get all tasks assigned by the user
-        if (tasks["user-tasks"][i]["user-id"] == currentUserId) {
+        if (totalUsers[i]["user-id"] == currentUserId) {
             //found current user
             //collect all tasks assigned by the current user
-            currentUserTaskslist = tasks["user-tasks"][i]["tasks"];
+            currentUserTaskslist = totalUsers[i]["tasks"];
+            break;
         }
     }
 
@@ -121,20 +122,22 @@ function getProjectMatrix(currentProjetId, currentUserId) {
 
     console.log("Current project " + currentProjetId + " of current user " + currentUserId + " has " + currentProjectAssignedTasks.length + " tasks assigned");
 
-    //create same number of elements as the number of tasks to append to list-content element 
+    //create same number of list-item-content elements as the number of tasks to append to list-content element 
     let listContent = document.getElementById("list");
 
     let listItems = [];
     for (let i = 0; i < currentProjectAssignedTasks.length; i++) {
+
         let listItemContent = document.createElement("div");
         listItemContent.classList.add("list-item-content");
-        //user img
+
+        //user img 
         let assignedToImg = document.createElement("img");
         assignedToImg.src = "img/person.png";
         assignedToImg.classList.add("assigned-to-img", "rounded-circle");
         //listItemContent.appendChild(assignedToImg);
 
-        //user name and contact
+        //user name and contact for whom the tasks was assigned
         let userNameAndContact = document.createElement("div");
         userNameAndContact.innerHTML = "Name" + "<br>" + "Contact";
         //listItemContent.appendChild(userNameAndContact);
@@ -145,19 +148,22 @@ function getProjectMatrix(currentProjetId, currentUserId) {
         assignedToContent.appendChild(userNameAndContact);
         listItemContent.appendChild(assignedToContent);
 
-        //item category
-        let itemCategorie = document.createElement("div");
-        itemCategorie.classList.add("category-content");
-        itemCategorie.innerHTML = "Category";
-        listItemContent.appendChild(itemCategorie);
+        //task category value
+        let categoryContent = document.createElement("div");
+        categoryContent.classList.add("category-content");
+        categoryContent.innerHTML = currentProjectAssignedTasks[i]["category"];
+        listItemContent.appendChild(categoryContent);
 
-        //item description
+        //task description value
         let descrition = document.createElement("div");
         descrition.classList.add("details-content");
-        descrition.innerHTML = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint, deserunt? Magni temporibus reprehenderit ab unde necessitatibus velit. Quos id, vero, vitae nisi iure nulla necessitatibus incidunt culpa quas quae asperiores?";
+        descrition.innerHTML = currentProjectAssignedTasks[i]["description"];
         listItemContent.appendChild(descrition);
 
-
+        //TODO
+        //get importance and due-date values
+        //calculate the level of task importance and urgency
+        //apply correct color to task
 
         listItems.push(listItemContent);
     }
