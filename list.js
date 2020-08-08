@@ -119,8 +119,42 @@ function getProjectMatrix(currentProjetId, currentUserId) {
         }
     }
 
-    console.log("Current project "+currentProjetId+" of current user "+currentUserId+" has "+currentProjectAssignedTasks.length+" tasks assigned");
+    console.log("Current project " + currentProjetId + " of current user " + currentUserId + " has " + currentProjectAssignedTasks.length + " tasks assigned");
 
-    
+    //create same number of elements as the number of tasks to append to list-content element 
+    let listContent = document.getElementById("list");
+
+    let listItems = [];
+    for (let i = 0; i < currentProjectAssignedTasks.length; i++) {
+        let listItem = document.createElement("div");
+        listItem.classList.add("list-item");
+        //user img
+        let itemImage = document.createElement("img");
+        itemImage.src = "img/person.png";
+        itemImage.classList.add("item-img", "rounded-circle");
+        listItem.appendChild(itemImage);
+
+        //user name and contact
+        let userNameAndContact = document.createElement("div");
+        userNameAndContact.innerHTML = "Name" + "<br>" + "Contact";
+        listItem.appendChild(userNameAndContact);
+        //item category
+        let itemCategorie = document.createElement("div");
+        itemCategorie.innerHTML = "Category";
+        listItem.appendChild(itemCategorie);
+        //item description
+        let descrition = document.createElement("div");
+        descrition.classList.add("item-details");
+        descrition.innerHTML = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint, deserunt? Magni temporibus reprehenderit ab unde necessitatibus velit. Quos id, vero, vitae nisi iure nulla necessitatibus incidunt culpa quas quae asperiores?";
+        listItem.appendChild(descrition);
+
+
+
+        listItems.push(listItem);
+    }
+
+    for (let i = 0; i < listItems.length; i++) {
+        listContent.appendChild(listItems[i]);
+    }
 
 }

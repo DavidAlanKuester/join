@@ -9,11 +9,11 @@
     <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
     <script src="overallApp.js"></script>
     <script src="list.js"></script>
-    
+
     <title>List</title>
 </head>
 
-<body onload="getProjectMatrix(2, 1)">
+<body onload="getProjectMatrix(1, 1)">
     <div class="list-page">
 
         <nav class=" side-bar">
@@ -26,7 +26,7 @@
                     <a id="list-link" class="menu-link link-selected" href="#">List</a>
                 </div>
             </div>
-        
+
             <a class="link-img" href="#">
                 <img class="menu-img rounded-circle border border-white" src="img/person.png" alt="">
             </a>
@@ -41,12 +41,27 @@
                 </div>
             </div>
 
-            <div class="list-content">
+            <div id="list" class="list-content">
                 <div class="list-item-details">
-                    <p>ASSIGNED TO</p>
-                    <p>CATEGORY</p>
-                    <p>DETAILS</p>
+                    <p id="assigned-p">ASSIGNED TO</p>
+                    <p id="category-p">CATEGORY</p>
+                    <p id="details-p">DETAILS</p>
                 </div>
+                <!--Blueprint of dinamicaly created and appended element inside list.js
+                    <div class="list-item">
+                        <div>
+                            <img class="item-img rounded-circle" src="img/person.png">
+                            <p>Name</p>
+                            <p>Contact</p>
+                        </div>
+
+                        <p>Categorie</p>
+
+                        <p>Description</p>
+                        
+                    </div>
+                -->
+
             </div>
         </div>
 
