@@ -14,7 +14,7 @@
     * so that the two elements, side-bar and title-list-content, do not overlap*/
     width: 88%;
     max-width: 88%;
-    overflow: hidden;
+    overflow-x: hidden;
     /*if the left position is to be changed this should be change as well to sum up to at most 100% to keep same visual aspect*/
     height: 100%;
 }
@@ -62,11 +62,11 @@
 
 /*still in development*/
 .list-content {
-    background-color: tomato;
+    /*background-color: tomato;*/
     position: relative;
     top: 25%;
     /*must be at least the same as title-container´s height and list-item-details sum so that they do not overlap*/
-    height: 70%;
+    /*height: 70%;*/
     /*a greater value will give the title-list-content class some left margin and disturbt visual output making it to scroll left and right*/
 }
 
@@ -79,13 +79,62 @@
     /*if the width of sidebar is to be change, this should be change as well to sum up to 100% to keep same visual aspect*/
     /*height: 10%;*/
     display: flex;
-    justify-content: space-between;
+    /*justify-content: space-between;*/
     color: rgb(30, 49, 144);
 }
 
 .list-item-details p{
     margin-bottom: 0 !important;
 }
+
+.list-item{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 10%;
+    width: 100%;
+    background-color: gray;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    border-left-style: solid;
+    border-left-color: orange;/*changes, depends on the level of item importants */
+    border-left-width: 10px;
+}
+
+#details-p{
+    width: 50%;
+    text-align: end;
+}
+
+#category-p{
+    width: 25%;
+    text-align: center;
+}
+
+#assigned-p{
+    width: 25%;
+}
+
+.item-img{
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
+.item-details{
+    width: 50%;
+    height: 100%;
+    max-height: 100%;
+    overflow: hidden;
+}
+
+/*a feature to scale the item as pointer is over it*/
+/*.list-item:hover{
+    transform: scaleX(1.2);
+    transform: scaleY(1.2);
+}*/
 /********************TITLE_LIST_CONTENT_RELATED_SETTINGS_END********************/
 
 /********************KEY_FRAMES_ANIMATIONS********************/
