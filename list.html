@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
     <script src="overallApp.js"></script>
-    <script type="module" src="list.js"></script>
+    <script type="module" src="list.js"></script> <!--type module needed for imports-->
 
     <title>List</title>
 </head>
@@ -16,8 +16,8 @@
 <body>
     <div class="list-page">
 
-        <div w3-include-html="sidebar.html"></div>
-        <!--<nav class=" side-bar">
+        <div w3-include-html="sidebar.html"></div> 
+        <!--<nav class=" side-bar"> added using the includeHTML functionality
             <div class="menu">
                 <a class="link-img" href="#">
                     <img class="menu-img " src="img/logo.png" alt="">
@@ -49,6 +49,17 @@
                     <p id="category-p">CATEGORY</p>
                     <p id="details-p">DETAILS</p>
                 </div>
+
+                <!--//BASIC LOOK OF A LIST-ITEM GENERATED INSIDE LIST.JS
+                    <div class="list-item-content">
+                        <div class="assigned-to-content">
+                            <img src="img/person.png" class="assigned-to-img rounded-circle">
+                            <div>Name<br>Contact</div>
+                        </div>
+                        <div class="category-content">Management</div>
+                        <div class="details-content">Create a management summary for the 2020 quartal 3 turnover</div>
+                    </div>
+                -->
 
             </div>
         </div>

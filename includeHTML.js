@@ -1,3 +1,5 @@
+//credits for this function goes to https://www.w3schools.com/howto/howto_html_include.asp
+//works only by running the site on a server
 export function includeHTML() {
     var z, i, elmnt, file, xhttp;
     /* Loop through a collection of all HTML elements: */
