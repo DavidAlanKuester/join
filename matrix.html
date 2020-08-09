@@ -11,7 +11,7 @@
     <title>Matrix</title>
 </head>
 
-<body>
+<body onload="initializeMatrix()">
     <div class="bg-container">
         <div class="sidebar-left-container">
             I am zee sidebar
@@ -67,8 +67,27 @@
                             <div class="matrix-title-container label-blue font-headlines">
                                 DO
                             </div>
-                            <div class="matrix-tasks-container bg-light-blue">
-                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque expedita ullam laudantium dolore. Quis soluta deleniti aliquid ipsa non. Quia consequatur ducimus ea, iste provident ullam delectus deserunt assumenda quis!
+                            <div id="matrix-tasks-do-here" class="matrix-tasks-container bg-light-blue">
+                                <!--
+                                <div class="matrix-task-container">
+                                    <div class="matrix-task-date">12.05.20</div>
+                                    <div class="matrix-task-title">Title Prepare Presentation</div>
+                                    <div class="matrix-task-description">Description Some description goes here this is were some description goes...</div>
+                                    <div class="matrix-task-category-img-container">
+                                        <div class="matrix-task-category">Category Marketing</div>
+                                        <div><img src="img/person.png" class="matrix-task-img"></div>
+                                    </div>
+                                </div>
+                                <div class="matrix-task-container">
+                                    <div class="matrix-task-date">13.06.20</div>
+                                    <div class="matrix-task-title">Market Alignment Call</div>
+                                    <div class="matrix-task-description">Description Some description goes here this is were some description goes...</div>
+                                    <div class="matrix-task-category-img-container">
+                                        <div class="matrix-task-category">Category Marketing</div>
+                                        <div><img src="img/person.png" class="matrix-task-img"></div>
+                                    </div>
+                                </div>
+                                -->
                             </div>
                         </div>
                         <!--    SCHEDULE    -->
@@ -76,8 +95,8 @@
                             <div class="matrix-title-container label-blue font-headlines">
                                 SCHEDULE
                             </div>
-                            <div class="matrix-tasks-container bg-light-blue float-left">
-                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magnam voluptatum dolorem officiis vitae beatae? Obcaecati porro facilis consectetur reiciendis nemo doloremque, incidunt animi temporibus, quod deleniti id error? Sequi, et.
+                            <div id="matrix-tasks-schedule-here" class="matrix-tasks-container bg-light-blue float-left">
+                                
                             </div>
                         </div>
                     </div>
@@ -88,8 +107,8 @@
                             <div class="matrix-title-container label-blue font-headlines">
                                 DELEGATE
                             </div>
-                            <div class="matrix-tasks-container bg-light-blue">
-                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facere velit eaque nam repellendus. Reiciendis sequi obcaecati, modi aut veritatis dolore assumenda adipisci nisi dolorem voluptates, eligendi consequatur expedita a? Vitae?
+                            <div id="matrix-tasks-delegate-here" class="matrix-tasks-container bg-light-blue">
+                                
                             </div>
                         </div>
                         <!--    ELIMINATE   -->
@@ -97,8 +116,8 @@
                             <div class="matrix-title-container label-blue font-headlines">
                                 ELIMINATE
                             </div>
-                            <div class="matrix-tasks-container bg-light-blue float-left">
-                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Culpa sapiente quisquam libero voluptatum deserunt blanditiis numquam, dolor quidem voluptas adipisci, omnis id exercitationem obcaecati! Aliquam sit voluptatibus eligendi atque vel?
+                            <div id="matrix-tasks-eliminate-here" class="matrix-tasks-container bg-light-blue float-left">
+                                
                             </div>
                         </div>
                     </div>
@@ -106,7 +125,9 @@
             </div>
         </div>
     </div>
-    <button style="width: 50px; height: 50px;" onclick="callJson()">push see button</button>
+<!--
+<button style="width: 50px; height: 50px;" onclick="initializeMatrix()">push see button</button>
+-->
 
 
 </body>
