@@ -1,3 +1,12 @@
+const MatrixIds =
+{
+    ADD_Task_DO: "matrix-tasks-do-here",
+    ADD_TASK_SCHEDULE: "matrix-tasks-schedule-here",
+    ADD_TASK_DELEGATE: "matrix-tasks-delegate-here",
+    ADD_TASK_ELIMINATE: "matrix-tasks-eliminate-here"
+}
+Object.freeze(MatrixIds);
+
 let tasks =
 {
     "user-tasks":
@@ -11,7 +20,7 @@ let tasks =
                             "title": "Create PowerPoint Presentation",
                             "due-date": "2020-08-07",
                             "category": "Management",
-                            "importance": "1",
+                            "importance": "0",
                             "description": "Create a management summary for the 2020 quartal 3 turnover",
                             "assigned-to":
                                 [
@@ -86,21 +95,32 @@ let tasks =
 };
 
 function initializeMatrix() {
-
-}
-
-function callJson() {
     let doTasks = [];
     let scheduleTasks = [];
     let delegateTasks = [];
     let eliminateTasks = [];
+    loadTasksIntoCategories(doTasks, scheduleTasks, delegateTasks, eliminateTasks);
+    initializeCategoryInMatrix(doTasks, MatrixIds.ADD_Task_DO);
+    initializeCategoryInMatrix(scheduleTasks, MatrixIds.ADD_TASK_SCHEDULE);
+    initializeCategoryInMatrix(delegateTasks, MatrixIds.ADD_TASK_DELEGATE);
+    initializeCategoryInMatrix(eliminateTasks, MatrixIds.ADD_TASK_ELIMINATE);
+}
 
+function loadTasksIntoCategories(doTasks, scheduleTasks, delegateTasks, eliminateTasks) {
     tasks["user-tasks"].forEach(user => {
         user.tasks.forEach(task => {
             AddTaskInEisenhowerCategory(task,
                 doTasks, scheduleTasks, delegateTasks, eliminateTasks)
         });
     });
+    /*     console.log("do");
+        console.log(doTasks);
+        console.log("schedule");
+        console.log(scheduleTasks);
+        console.log("delegate");
+        console.log(delegateTasks);
+        console.log("eliminate");
+        console.log(eliminateTasks); */
 }
 
 function AddTaskInEisenhowerCategory(
@@ -110,7 +130,7 @@ function AddTaskInEisenhowerCategory(
         case eisenhowerMatrixCategrories.DO:
             doTasks.push(task);
             break;
-        
+
         case eisenhowerMatrixCategrories.SCHEDULE:
             scheduleTasks.push(task);
             break;
@@ -131,7 +151,7 @@ function AddTaskInEisenhowerCategory(
 
 function getEisenhowerCategory(task) {
     // criteria for DO-Task
-    if (isDue(task.dueDate && taskIsimportant(task))) {
+    if (taskIsimportant(task) && isDue(task["due-date"])) {
         return eisenhowerMatrixCategrories.DO;
     }
     //criteria for schedule task
@@ -151,17 +171,53 @@ function taskIsimportant(task) {
     return (task.importance == 0) ? true : false;
 }
 
-function getCurrentDateString() {
-    let date = new Date();
+function isDue(dateString) {
+    let today = new Date();
+    today = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    let dueDate = new Date(dateString);
+    return (dueDate.getTime() <= today) ? true : false;
+}
+
+/**
+ * This function takes a date String and returns a string converted in the format DD-MM-YYYY
+ * @param {} date 
+ */
+function ConvertToEuropeanDateString(dateString, delimiter) {
+    let date = new Date(dateString);
+    return (
+        '' + date.getDay() + delimiter
+        + date.getMonth() + delimiter
+        + date.getFullYear().toString().substr(2, 2)
+    );
+}
+
+function initializeCategoryInMatrix(tasksJson, IdString) {
+    tasksJson.forEach(taskJson => {
+        let taskHtmlString = createTask(taskJson);
+        document.getElementById(IdString).insertAdjacentHTML("beforeend", taskHtmlString);
+    });
+}
+
+function createTask(task) {
+    return ('<div class="matrix-task-container">'
+        + '<div class="matrix-task-date">' + ConvertToEuropeanDateString(task['due-date'], '.') + '</div>'
+        + '<div class="matrix-task-title">' + task['title'] + '</div>'
+        + '<div class="matrix-task-description">' + task['description'] + '</div>'
+        + '<div class="matrix-task-category-img-container">'
+        + '<div class="matrix-task-category">' + task['category'] + '</div>'
+        + '<div><img src="img/person.png" class="matrix-task-img"></div>'
+        + '</div>'
+        + '</div>');
+
+
+}
+
+/*
+    function getCurrentDateString() {
+            let date = new Date();
     year = date.getFullYear();
     month = date.getMonth();
     date = date.getDate();
     return (year + '-' + (month + 1) + '-' + date);
 }
-
-function isDue(dateString) {
-    let today = new Date();
-    today = new Date(today.getFullYear, today.getMonth, today.getDate);
-    dueDate = new Date(dateString);
-    return (dueDate.getTime() <= today) ? true : false;
-}
+*/
