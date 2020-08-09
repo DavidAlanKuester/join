@@ -1,6 +1,8 @@
+import {includeHTML} from "./includeHTML.js"
+
 //presumed tasks object structure
 
-tasks =
+let tasks =
 {
     "user-tasks":
         [
@@ -88,8 +90,9 @@ tasks =
 };
 
 function getProjectMatrix(currentProjetId, currentUserId) {
+    includeHTML();
     //display list of assigned tasks in order of level of urgency and importance
-
+    
     let totalUsers = tasks["user-tasks"];
     console.log('Size of Total Users', totalUsers);
     let totalTasks = 0;
@@ -173,3 +176,7 @@ function getProjectMatrix(currentProjetId, currentUserId) {
     }
 
 }
+
+window.onload = function(){
+    getProjectMatrix(1, 1);
+};

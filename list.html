@@ -8,15 +8,16 @@
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
     <script src="overallApp.js"></script>
-    <script src="list.js"></script>
+    <script type="module" src="list.js"></script>
 
     <title>List</title>
 </head>
 
-<body onload="getProjectMatrix(1, 1)">
+<body>
     <div class="list-page">
 
-        <nav class=" side-bar">
+        <div w3-include-html="sidebar.html"></div>
+        <!--<nav class=" side-bar">
             <div class="menu">
                 <a class="link-img" href="#">
                     <img class="menu-img " src="img/logo.png" alt="">
@@ -30,7 +31,7 @@
             <a class="link-img" href="#">
                 <img class="menu-img rounded-circle border border-white" src="img/person.png" alt="">
             </a>
-        </nav>
+        </nav>-->
 
         <div class="title-list-content">
 
@@ -42,7 +43,7 @@
             </div>
 
             <div id="list" class="list-content">
-                
+
                 <div class="list-item-description">
                     <p id="assigned-p">ASSIGNED TO</p>
                     <p id="category-p">CATEGORY</p>
