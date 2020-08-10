@@ -7,6 +7,8 @@ const eisenhowerMatrixCategrories =
 }
 Object.freeze(eisenhowerMatrixCategrories);
 
+//includes html file inside container using w3-include-html attribute's values as the name of the html file
+//example: <div w3-include-html="fileName.html"></div>
 function includeHTML() {
     var z, i, elmnt, file, xhttp;
     /* Loop through a collection of all HTML elements: */

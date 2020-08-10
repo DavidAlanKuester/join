@@ -88,10 +88,85 @@ let tasks =
         ]
 };
 
+function getUserById(id) {
+   for(let i = 0; i < tasks["user-tasks"].length; i++){
+       const user = tasks["user-tasks"][i];
+       if( user["user-id"] == id){
+           return user;
+       }
+   }
+   return "NO_USER_WITH_ID: "+id+"FOUND";
+}
+
+function createAssigment(user, task){
+    return {
+        eisenhowerMatrixCategorie: getEisenhowerCategorie(task.importance, task.due-date),
+        to: user,
+        category: task["category"],
+        details: task["descrition"]
+    }
+}
+
+function getEisenhowerCategorie(important, dueDate){
+    let urgent = calculateUrgency(dueDate);
+    if(urgent && important){
+        return "HIGH";
+    }
+
+    if(important && !urgent){
+        return "SCHEDULE";
+    }
+
+    if(urgent && !important){
+        return "DELEGATE";
+    }
+
+    if(!urgent && !important){
+        return "ELIMINATE";
+    }
+}
+
+function calculateUrgency(date){
+    const oneDayMilliseconds = 86400000;
+    let time = new Date().getTime();
+    date.split("-");
+    let shortDate = dueDate[1]+"/"+dueDate[0]+"/"+dueDate[2]; //convert date to short string format "MM/DD/YEAR"
+    let dateToMilliseconds = new Date(shortDate).getTime();
+    let timeDifference = dateToMilliseconds - time;
+    if(timeDifference < oneDayMilliseconds){
+        return true;
+    }
+    return false;
+}
+
 function getProjectMatrix(currentProjetId, currentUserId) {
+
+    let currentUser = getUserById(currentUserId);
+    console.log("CURRENT USER", currentUser);
+
+    let tasksInCurrentProject = [];
+
+   currentUser.tasks.forEach(task => {
+       task["in-projects"].forEach(id =>{
+           if( id == currentProjetId){
+               tasksInCurrentProject.push(task);
+           }
+       });
+   });
+
+   let assigments = [];
+   
+   tasksInCurrentProject.forEach(task =>{
+        task["assigned-to"].forEach(userId =>{
+            assigments.push(createAssigment(getUserById(userId, task)));
+        });
+   });
+
+
+   console.log("TASKS LIST IN CURRENT PROJECT "+currentProjetId, tasksInCurrentProject);
     //includeHTML();//includes sidebar.HTML inside list.html
     //display list of assigned tasks in order of level of urgency and importance
-    
+
     let totalUsers = tasks["user-tasks"];
     console.log('Size of Total Users', totalUsers);
     let totalTasks = 0;
