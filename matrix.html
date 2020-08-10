@@ -7,11 +7,12 @@
     <link rel="stylesheet" href="overallStyle.css">
     <link rel="stylesheet" href="matrixStyle.css">
     <script src="overallApp.js"></script>
-    <script type="module" src="matrix.js"></script>
+    <script src="matrix.js"></script>
+    <script type="module" src="matrixInitialize.js"></script>
     <title>Matrix</title>
 </head>
 
-<body>
+<body onload="initializeMatrix()">
     <div class="bg-container">
         <div w3-include-html="sidebar.html"></div>
         <div class="outer-matrix-container">
