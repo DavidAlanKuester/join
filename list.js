@@ -1,4 +1,3 @@
-import {includeHTML} from "./includeHTML.js"
 
 //presumed tasks object structure
 
@@ -176,9 +175,3 @@ function getProjectMatrix(currentProjetId, currentUserId) {
     }
 
 }
-
-//removed from body tag call so that it works when running the site on o server
-window.onload = function(){
-    includeHTML();
-    getProjectMatrix(1, 1);
-};

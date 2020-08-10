@@ -8,12 +8,12 @@
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
     <script src="overallApp.js"></script>
-    <script type="module" src="list.js"></script> <!--type module needed for imports-->
+    <script src="list.js"></script> <!--type module needed for imports-->
 
     <title>List</title>
 </head>
 
-<body>
+<body onload="getProjectMatrix(1, 1), includeHTML()">
     <div class="list-page">
 
         <div w3-include-html="sidebar.html"></div> 
