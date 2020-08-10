@@ -1,3 +1,5 @@
+import {includeHTML} from "./includeHTML.js"
+
 const MatrixIds =
 {
     ADD_Task_DO: "matrix-tasks-do-here",
@@ -94,7 +96,9 @@ let tasks =
         ]
 };
 
+
 function initializeMatrix() {
+    includeHTML();
     let doTasks = [];
     let scheduleTasks = [];
     let delegateTasks = [];
@@ -211,6 +215,11 @@ function createTask(task) {
 
 
 }
+
+//removed from body tag call so that it works when running the site on o server
+window.onload = function(){
+    initializeMatrix();
+};
 
 /*
     function getCurrentDateString() {
