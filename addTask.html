@@ -50,12 +50,17 @@
                         <div class="card-category-section">
                             <h3>Category</h3>
                             <div>
-                                <select onclick="enableBtn()" id="category-input" name="category-input">
-                                    <option value="Marketing">Marketing</option>
-                                    <option value="Product">Product</option>
-                                    <option value="Sales">Sales</option>
-                                    <option value="PR">Sales</option>
-                                    <option value="Other">Other</option>
+                                <p id="category-output"></p>
+                                <select  onchange="selectCategory()" id="category-input" name="category-input">
+                                    <option ></option>
+                                    <option value="marketing">Marketing</option>
+                                    <option value="product">Product</option>
+                                    <option value="sales">Sales</option>
+                                    <option value="pr">PR</option>
+                                    <option value="hr">HR</option>
+                                    <option value="it">IT</option>
+                                    <option value="private">Private</option>
+                                    <option value="other">Other</option>
                                 </select>
                             </div>
 
@@ -77,10 +82,11 @@
                         <div class="card-importance-section">
                             <h3>Importance</h3>
                             <div>
-                                <select onclick="enableBtn()">
+                                <p id="importance-output"></p>
+                                <select onchange="selectImportance()" id="importance-input">
+                                    <option></option>
                                     <option value="High">High</option>
                                     <option value="Low">Low</option>
-
                                 </select>
                             </div>
 

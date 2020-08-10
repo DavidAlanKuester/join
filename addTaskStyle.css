@@ -106,19 +106,49 @@
 }
 
 .card-importance-section div, .card-category-section div {
-    width: 100%;
+    width: 95%;
     height: 50%;
     display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.card-importance-section div p {
+    width: 70%;
+    margin: 0;
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border: 1px solid black;
+    background-color: white;
+    color: black;
+    padding: 2px;
 }
 
 
 .card-importance-section div select {
-    width: 50%;
+    width: 30%;
+    height: 100%;
+}
+
+.card-category-section div p {
+    width: 70%;
+    margin: 0;
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border: 1px solid black;
+    background-color: white;
+    color: black;
+    padding: 2px;
 }
 
 
 .card-category-section div select {
-    width: 50%;
+    width: 30%;
+    height: 100%;
 }
 
 .assign-person-div {
