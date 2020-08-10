@@ -2,6 +2,14 @@ import {includeHTML} from "./includeHTML.js"
 
 // *************** Mode to enable Cancel & Create Button -Start ************************
 
+function initialise() {
+    includeHTML();
+    disableBtn();
+    enableBtn();
+    addPerson();
+    
+}
+
 
 function disableBtn() {
     document.getElementById('cancel-btn').disabled = true;
@@ -26,7 +34,7 @@ function enableCreateTaskBtn() {
 // *************** Mode to enable Cancel & Create Button -End ************************
 
 // *****Assigned To Section - Add Persons -Start *********
-persons = 0;
+let persons = 0;
 
 function addPerson() {
     persons++;
@@ -112,5 +120,5 @@ function newTask() {
 
 
 window.onload = function(){
-    disableBtn();
+    initialise();
 };
