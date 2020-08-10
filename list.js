@@ -90,7 +90,7 @@ let tasks =
 };
 
 function getProjectMatrix(currentProjetId, currentUserId) {
-    includeHTML();//includes sidebar.HTML inside list.html
+    //includeHTML();//includes sidebar.HTML inside list.html
     //display list of assigned tasks in order of level of urgency and importance
     
     let totalUsers = tasks["user-tasks"];
@@ -179,5 +179,6 @@ function getProjectMatrix(currentProjetId, currentUserId) {
 
 //removed from body tag call so that it works when running the site on o server
 window.onload = function(){
+    includeHTML();
     getProjectMatrix(1, 1);
 };
