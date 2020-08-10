@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="overallStyle.css">
     <link rel="stylesheet" href="addTaskStyle.css">
     <script src="overallApp.js"></script>
-    <script src="addTask.js"></script>
+    <script type="module" src="addTask.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css"
         integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"
@@ -14,22 +14,8 @@
     <title>Add Task</title>
 </head>
 
-<body onload="disableBtn()">
-    <nav class="side-bar">
-        <div class="menu">
-            <a class="link-img" href="#">
-                <img class="menu-img " src="img/logo.png" alt="">
-            </a>
-            <div class="links-container">
-                <a id="matrix-link" class="menu-link link-unselected" href="#">Matrix</a>
-                <a id="list-link" class="menu-link link-selected" href="#">List</a>
-            </div>
-        </div>
-
-        <a class="link-img" href="#">
-            <img class="menu-img rounded-circle border border-white" src="img/logo.png" alt="">
-        </a>
-    </nav>
+<body>
+    <div w3-include-html="sidebar.html"></div> 
     <div class="addTask-page">
         <div class="title-div-container">
             <div class="title-text-container">

@@ -1,3 +1,5 @@
+import {includeHTML} from "./includeHTML.js"
+
 // *************** Mode to enable Cancel & Create Button -Start ************************
 
 
@@ -106,3 +108,9 @@ function newTask() {
     tasks.push(newTask)
     console.log(newTask);
 }
+
+
+
+window.onload = function(){
+    disableBtn();
+};
