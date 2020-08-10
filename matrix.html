@@ -7,15 +7,13 @@
     <link rel="stylesheet" href="overallStyle.css">
     <link rel="stylesheet" href="matrixStyle.css">
     <script src="overallApp.js"></script>
-    <script src="matrix.js"></script>
+    <script type="module" src="matrix.js"></script>
     <title>Matrix</title>
 </head>
 
-<body onload="initializeMatrix()">
+<body>
     <div class="bg-container">
-        <div class="sidebar-left-container">
-            I am zee sidebar
-        </div>
+        <div w3-include-html="sidebar.html"></div>
         <div class="outer-matrix-container">
             <!--    Upper Category URGENCY  -->
             <div class="urgency-text-container">
