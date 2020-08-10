@@ -116,9 +116,26 @@
     margin-bottom: 10px;
     border-radius: 5px;
     border-left-style: solid;
-    border-left-color: orange;/*changes, depends on the level of item importants */
+    
     border-left-width: 5px;
 }
+
+.eisenhower-matrix-categrories-do{
+    border-left-color: orange;
+}
+
+.eisenhower-matrix-categrories-shedule{
+    border-left-color: purple;
+}
+
+.eisenhower-matrix-categrories-delegate{
+    border-left-color: green;
+}
+
+.eisenhower-matrix-categrories-do{
+    border-left-color: blue;
+}
+
 
 .assigned-to-content{
     width: 25%;
