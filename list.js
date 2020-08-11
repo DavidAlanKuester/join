@@ -164,7 +164,6 @@ function getProjectMatrix(currentProjetId, currentUserId) {
 
 
    console.log("TASKS LIST IN CURRENT PROJECT "+currentProjetId, tasksInCurrentProject);
-    //includeHTML();//includes sidebar.HTML inside list.html
     //display list of assigned tasks in order of level of urgency and importance
 
     let totalUsers = tasks["user-tasks"];

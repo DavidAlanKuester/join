@@ -6,7 +6,6 @@
     <link rel="stylesheet" href="overallStyle.css">
     <link rel="stylesheet" href="addTaskStyle.css">
     <script src="overallApp.js"></script>
-    <script type="module" src="addTaskInitialise.js"></script>
     <script src="addTask.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css"
         integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" crossorigin="anonymous">
@@ -15,7 +14,7 @@
     <title>Add Task</title>
 </head>
 
-<body>
+<body onload="includeHTML()">
     <div w3-include-html="sidebar.html"></div> 
     <div class="addTask-page">
         <div class="title-div-container">
