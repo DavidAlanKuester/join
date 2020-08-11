@@ -1,6 +1,4 @@
-
 // *************** Mode to enable Cancel & Create Button -Start ************************
-
 function enableBtns() {
     addTaskForm.addEventListener('input', () => {
         if (titleInput.value.length > 0 && descriptionInput.value.length > 0 && dateInput.value.length > 0) {
@@ -11,7 +9,6 @@ function enableBtns() {
     });
 
 }
-
 // *************** Mode to enable Cancel & Create Button -End ************************
 
 // *****Assigned To Section - Add Persons -Start *********
@@ -53,7 +50,6 @@ function selectImportance() {
 // ***** Value Add from Select to P - End ******* 
 
 // ***** Create Task (JSON Push) - start ******* 
-
 let tasks = [];
 let taskID = 0
 
@@ -68,9 +64,9 @@ function createTask() {
 
 function addDisableAttributeBtn() {
     cancelBtn.disabled = true;
-    createBtn.disabled = true;
-   
+    createBtn.disabled = true;  
 }
+
 function newTask() {
     // let personDiv = document.getElementById('assign-person-div');
     // let Imgs = personDiv.document.getElementsByTagName('img');
@@ -93,7 +89,6 @@ function displaySucessAlert() {
     }, 1000);
 }
 // ***** Create Task (JSON Push) - End ******* 
-
 
 // ***** Cancel Task  - Start ******* 
 function cancelTask() {
