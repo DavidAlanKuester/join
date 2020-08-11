@@ -174,12 +174,3 @@
     transform: scaleY(1.2);
 }*/
 
-/********************KEY_FRAMES_ANIMATIONS********************/
-@keyframes showSidebar{
-    from{
-        left: -11%;/*should match the positive left position value of sidebar*/
-    }to{
-        left: 0%; 
-    }
-}
-/********************KEY_FRAMES_ANIMATIONS_END********************/

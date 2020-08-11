@@ -4,18 +4,11 @@
     height: 100vh;
 }
 
-.matrixSidebar {
-    width: 10%;
-}
-
-.sidebar-left-container {
-    width: 20%;
-    height: 100%;
-}
-
 .outer-matrix-container {
-    width: 90%;
+    width: 88%;
     height: 100%;
+    left: 11%;
+    position: relative;
 }
 
 .urgency-text-container {
@@ -230,7 +223,7 @@
 }
 
 .matrix-task-category {
-    background-color: rgb(112,149,255);
+    background-color: rgb(112, 149, 255);
     padding: 8px;
     border-radius: 5px;
     color: white;

@@ -156,14 +156,14 @@ function getProjectMatrix(currentProjetId, currentUserId) {
 
    let assigments = [];
    
-   tasksInCurrentProject.forEach(task =>{
+  /* tasksInCurrentProject.forEach(task =>{
         task["assigned-to"].forEach(userId =>{
             assigments.push(createAssigment(getUserById(userId, task)));
         });
-   });
+   });*/
 
 
-   console.log("TASKS LIST IN CURRENT PROJECT "+currentProjetId, tasksInCurrentProject);
+  /* console.log("TASKS LIST IN CURRENT PROJECT "+currentProjetId, tasksInCurrentProject);*/
     //display list of assigned tasks in order of level of urgency and importance
 
     let totalUsers = tasks["user-tasks"];
