@@ -1,33 +1,3 @@
-let users = [
-    {
-        "id": "0",
-        "img": "img/person.png",
-        "name": "JSON0",
-        "eMail": "@JSON.de"
-    },
-    {
-        
-        "id": "1",
-        "img": "img/person.png",
-        "name": "JSON1",
-        "eMail": "@JSON.de"
-    },
-    {
-        
-        "id": "2",
-        "img": "img/person.png",
-        "name": "JSON2",
-        "eMail": "@JSON.de"
-    },
-    {
-        
-        "id": "3",
-        "img": "img/person.png",
-        "name": "JSON3",
-        "eMail": "@JSON.de"
-    }
-];
-
 const eisenhowerMatrixCategrories =
 {
     DO: "do",
