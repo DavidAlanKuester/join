@@ -8,7 +8,6 @@
     <script src="overallApp.js"></script>
     <script type="module" src="addTaskInitialise.js"></script>
     <script src="addTask.js"></script>
-
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css"
         integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"
@@ -40,7 +39,7 @@
                             <div>
                                 <p id="categoryOutput"></p>
                                 <select  onchange="selectCategory()" id="categoryInput" name="category-input">
-                                    <option ></option>
+                                    <option value=""></option>
                                     <option value="marketing">Marketing</option>
                                     <option value="product">Product</option>
                                     <option value="sales">Sales</option>
@@ -70,9 +69,9 @@
                         <div class="card-importance-section">
                             <h3>Importance</h3>
                             <div>
-                                <p id="importance-output"></p>
-                                <select onchange="selectImportance()" id="importance-input">
-                                    <option></option>
+                                <p id="importanceOutput"></p>
+                                <select onchange="selectImportance()" id="importanceInput">
+                                    <option value=""></option>
                                     <option value="High">High</option>
                                     <option value="Low">Low</option>
                                 </select>
@@ -97,7 +96,7 @@
 
                             </div>
                             <div class="assign-commit-div">
-                                <button id="cancelBtn" name="cancelBtn" type="button" disabled="disabled" class="btn"
+                                <button onclick="cancelTask()" id="cancelBtn" name="cancelBtn" type="button" disabled="disabled" class="btn"
                                     style="background-color: rgb(244, 243, 251) !important; color: rgb(30, 49, 144) !important;"><b>Cancel</b></button>
                                 <button onclick="createTask()" id="createBtn" name="createBtn" type="button" disabled="disabled" class="btn btn-primary"
                                     style="background-color: rgb(30, 49, 144) !important"><b>Create Task</b></button>
@@ -109,11 +108,8 @@
             </div>
         </div>
         <div class="empty-div-container">
-            <div class="alert alert-success custom-alert" role="alert">
+            <div id="createdTaskAlert" class="alert alert-success custom-alert d-none" role="alert">
                 <p>You have created a new task!</p>
-            </div>
-            <div class="alert alert-danger custom-alert" role="alert">
-                <p>Please fill out the components!</p>
             </div>
 
         </div>

@@ -3,9 +3,10 @@
 
 function enableBtns() {
     addTaskForm.addEventListener('input', () => {
-        if (titleInput.value.length > 0 && descriptionInput.value.length > 0 && dateInput.value.length > 0)  {
-            cancelBtn.removeAttribute('disabled');
+        if (titleInput.value.length > 0 && descriptionInput.value.length > 0 && dateInput.value.length > 0) {
             createBtn.removeAttribute('disabled');
+        } else if (titleInput.value.length > 0 || descriptionInput.value.length > 0 || dateInput.value.length > 0) {
+            cancelBtn.removeAttribute('disabled');
         }
     });
 
@@ -45,7 +46,7 @@ function selectCategory() {
 }
 
 function selectImportance() {
-    let importanceChoice = document.getElementById('importance-input');
+    let importanceChoice = document.getElementById('importanceInput');
     let displayImportanceText = importanceChoice.options[importanceChoice.selectedIndex].text;
     document.getElementById('importance-output').innerHTML = displayImportanceText;
 }
@@ -59,14 +60,19 @@ let taskID = 0
 function createTask() {
     newTask();
     addDisableAttributeBtn();
+    displaySucessAlert();
+    setTimeout(function(){ 
+        cancelTask();
+    }, 1000);
 }
 
 function addDisableAttributeBtn() {
-    cancelBtn.setAttribute('cancelBtn', 'disabled');
-    createBtn.setAttribute('createBtn', 'disabled');
+    cancelBtn.disabled = true;
+    createBtn.disabled = true;
+   
 }
 function newTask() {
-   // let personDiv = document.getElementById('assign-person-div');
+    // let personDiv = document.getElementById('assign-person-div');
     // let Imgs = personDiv.document.getElementsByTagName('img');
     let newTask = {
         "task-id": taskID++,
@@ -74,12 +80,31 @@ function newTask() {
         "category": document.getElementById('categoryInput').value,
         "description": document.getElementById('descriptionInput').value,
         "due-date": document.getElementById('dateInput').value,
-        "importance": document.getElementById('importance-input').value,
-      //  "assigned-to": Imgs
+        "importance": document.getElementById('importanceInput').value,
+        //  "assigned-to": Imgs
     }
     tasks.push(newTask)
 }
+
+function displaySucessAlert() {
+    document.getElementById('createdTaskAlert').classList.remove('d-none');
+    setTimeout(function(){ 
+        document.getElementById('createdTaskAlert').classList.add('d-none');
+    }, 1000);
+}
 // ***** Create Task (JSON Push) - End ******* 
 
+
+// ***** Cancel Task  - Start ******* 
+function cancelTask() {
+    document.getElementById('titleInput').value = "";
+    document.getElementById('categoryInput').value = ""
+    document.getElementById('categoryOutput').innerHTML = "";
+    document.getElementById('descriptionInput').value = "";
+    document.getElementById('dateInput').value = "";
+    document.getElementById('importanceInput').value = ""
+    document.getElementById('importanceOutput').innerHTML = "";
+}
+// ***** Cancel Task  - End ******* 
 
 
