@@ -4,13 +4,17 @@
     height: 100vh;
 }
 
+.matrixSidebar {
+    width: 10%;
+}
+
 .sidebar-left-container {
     width: 20%;
     height: 100%;
 }
 
 .outer-matrix-container {
-    width: 80%;
+    width: 90%;
     height: 100%;
 }
 

@@ -8,13 +8,14 @@
     <link rel="stylesheet" href="matrixStyle.css">
     <script src="overallApp.js"></script>
     <script src="matrix.js"></script>
-    <script type="module" src="matrixInitialize.js"></script>
     <title>Matrix</title>
 </head>
 
-<body onload="initializeMatrix()">
+<body onload="initializeMatrix(), includeHTML()">
     <div class="bg-container">
-        <div w3-include-html="sidebar.html"></div>
+        <div class="matrixSidebar">
+            <div w3-include-html="sidebar.html"></div>
+        </div>
         <div class="outer-matrix-container">
             <!--    Upper Category URGENCY  -->
             <div class="urgency-text-container">
