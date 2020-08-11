@@ -120,19 +120,20 @@
     border-left-width: 5px;
 }
 
-.eisenhower-matrix-categrories-do{
+/*colors for the list-item-content depending of the eisenhowerMatrixCategorie value of the assigment inside list.js*/
+.do{
     border-left-color: orange;
 }
 
-.eisenhower-matrix-categrories-shedule{
+.schedule{
     border-left-color: purple;
 }
 
-.eisenhower-matrix-categrories-delegate{
+.delegate{
     border-left-color: green;
 }
 
-.eisenhower-matrix-categrories-do{
+.eliminate{
     border-left-color: blue;
 }
 

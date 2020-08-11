@@ -43,7 +43,7 @@ let taskDummy =
                         {
                             "task-id": "1",
                             "title": "Create PowerPoint Presentation",
-                            "due-date": "07-08-2020",
+                            "due-date": "2020-08-07",
                             "category": "Management",
                             "importance": "1",
                             "description": "Create a management summary for the 2020 quartal 3 turnover",
@@ -60,7 +60,7 @@ let taskDummy =
                         {
                             "task-id": "2",
                             "title": "Organise Business Party",
-                            "due-date": "20-08-2020",
+                            "due-date": "2020-08-20",
                             "category": "Marketing",
                             "importance": "0",
                             "description": "Organize a remote business party for the marketing department",
@@ -77,7 +77,7 @@ let taskDummy =
                         {
                             "task-id": "3",
                             "title": "Pick up package",
-                            "due-date": "31-08-2020",
+                            "due-date": "2020-08-31",
                             "category": "Other",
                             "importance": "1",
                             "description": "",
@@ -100,7 +100,7 @@ let taskDummy =
                         {
                             "task-id": "4",
                             "title": "Prepare Sales Meeting",
-                            "due-date": "22-08-2020",
+                            "due-date": "2020-08-22",
                             "category": "Sales",
                             "importance": "1",
                             "description": "Prepare for a sales meeting to inform about the product offers",
