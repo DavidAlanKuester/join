@@ -1,96 +1,6 @@
-
-//presumed tasks object structure
-
-let tasks =
-{
-    "user-tasks":
-        [
-            {
-                "user-id": "1",
-                "tasks":
-                    [
-                        {
-                            "task-id": "1",
-                            "title": "Create PowerPoint Presentation",
-                            "due-date": "07-08-2020",
-                            "category": "Management",
-                            "importance": "1",
-                            "description": "Create a management summary for the 2020 quartal 3 turnover",
-                            "assigned-to":
-                                [
-                                    "1"
-                                ],
-                            "in-projects":
-                                [
-                                    "1",
-                                    "2"
-                                ]
-                        },
-                        {
-                            "task-id": "2",
-                            "title": "Organise Business Party",
-                            "due-date": "20-08-2020",
-                            "category": "Marketing",
-                            "importance": "0",
-                            "description": "Organize a remote business party for the marketing department",
-                            "assigned-to":
-                                [
-                                    "1",
-                                    "2"
-                                ],
-                            "in-projects":
-                                [
-                                    "1"
-                                ]
-                        },
-                        {
-                            "task-id": "3",
-                            "title": "Pick up package",
-                            "due-date": "31-08-2020",
-                            "category": "Other",
-                            "importance": "1",
-                            "description": "",
-                            "assigned-to":
-                                [
-                                    "1",
-                                    "2"
-                                ],
-                            "in-projects":
-                                [
-                                    "1"
-                                ]
-                        }
-                    ]
-            },
-            {
-                "user-id": "2",
-                "tasks":
-                    [
-                        {
-                            "task-id": "4",
-                            "title": "Prepare Sales Meeting",
-                            "due-date": "22-08-2020",
-                            "category": "Sales",
-                            "importance": "1",
-                            "description": "Prepare for a sales meeting to inform about the product offers",
-                            "assigned-to":
-                                [
-                                    "2"
-                                ],
-                            "in-projects":
-                                [
-                                    "1"
-                                ]
-                        }
-
-                    ]
-            }
-        ]
-};
-
 function getUserById(id) {
-   for(let i = 0; i < tasks["user-tasks"].length; i++){
-       const user = tasks["user-tasks"][i];
+   for(let i = 0; i < taskDummy["user-tasks"].length; i++){
+       const user = taskDummy["user-tasks"][i];
        if( user["user-id"] == id){
            return user;
        }
@@ -134,9 +44,9 @@ function calculateUrgency(date){
     let dateToMilliseconds = new Date(shortDate).getTime();
     let timeDifference = dateToMilliseconds - time;
     if(timeDifference < oneDayMilliseconds){
-        return true;
+        return true;// urgent
     }
-    return false;
+    return false;// not urgent
 }
 
 function getProjectMatrix(currentProjetId, currentUserId) {
@@ -156,11 +66,11 @@ function getProjectMatrix(currentProjetId, currentUserId) {
 
    let assigments = [];
    
-  /* tasksInCurrentProject.forEach(task =>{
+    tasksInCurrentProject.forEach(task =>{
         task["assigned-to"].forEach(userId =>{
             assigments.push(createAssigment(getUserById(userId, task)));
         });
-   });*/
+   });
 
 
   /* console.log("TASKS LIST IN CURRENT PROJECT "+currentProjetId, tasksInCurrentProject);*/

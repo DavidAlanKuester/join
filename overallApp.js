@@ -1,34 +1,37 @@
+let createdTasks = [];
+
 let users = [
     {
         "id": "0",
         "img": "img/person.png",
         "name": "JSON0",
-        "eMail": "@JSON.de"
+        "eMail": "@JSON0.de"
     },
     {
         
         "id": "1",
         "img": "img/person.png",
         "name": "JSON1",
-        "eMail": "@JSON.de"
+        "eMail": "@JSON1.de"
     },
     {
         
         "id": "2",
         "img": "img/person.png",
         "name": "JSON2",
-        "eMail": "@JSON.de"
+        "eMail": "@JSON2.de"
     },
     {
         
         "id": "3",
         "img": "img/person.png",
         "name": "JSON3",
-        "eMail": "@JSON.de"
+        "eMail": "@JSON3.de"
     }
 ];
 
 //presumed task object structure
+//due-date should have short date string format "MM/DAY/YEAR"
 let taskDummy =
 {
     "user-tasks":
