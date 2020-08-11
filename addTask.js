@@ -1,34 +1,14 @@
-import {includeHTML} from "./includeHTML.js"
 
 // *************** Mode to enable Cancel & Create Button -Start ************************
 
-function initialise() {
-    includeHTML();
-    disableBtn();
-    enableBtn();
-    addPerson();
-    
-}
+function enableBtns() {
+    addTaskForm.addEventListener('input', () => {
+        if (titleInput.value.length > 0 && descriptionInput.value.length > 0 && dateInput.value.length > 0)  {
+            cancelBtn.removeAttribute('disabled');
+            createBtn.removeAttribute('disabled');
+        }
+    });
 
-
-function disableBtn() {
-    document.getElementById('cancel-btn').disabled = true;
-    document.getElementById('create-btn').disabled = true;
-}
-
-function enableBtn() {
-    enableCancelBtn();
-    enableCreateTaskBtn();
-}
-
-function enableCancelBtn() {
-    document.getElementById('cancel-btn').disabled =
-        document.getElementById('title-input').value.trim().length == 0;
-}
-
-function enableCreateTaskBtn() {
-    document.getElementById('create-btn').disabled =
-        document.getElementById('title-input').value.trim().length == 0;
 }
 
 // *************** Mode to enable Cancel & Create Button -End ************************
@@ -48,35 +28,20 @@ function addPerson() {
     if (persons <= 1) {
         document.getElementById('remove-btn-div').classList.remove('d-none');
     }
-
-    /* ADD REMOVE BtN with JavaScript
-
-    if (persons <=1) {
-        let removeBtn = document.createElement('button')
-        let div = document.getElementById('assign-person-btn-div');
-        removeBtn.classList.add('btn');
-        removeBtn.classList.add('btn-danger');
-        removeBtn.style.backgroundColor ="#dc3545";
-        removeBtn.innerHTML = "Remove";
-        div.appendChild(removeBtn);
-    }
-    */
 }
 function removePerson() {
     persons = 0;
     document.getElementById('assign-person-div').innerHTML = '';
     document.getElementById('remove-btn-div').classList.add('d-none');
-
 }
-
-
 // *****Assigned To Section - Add Persons - End *********
 
 // ***** Value Add from Select to P - start ******* 
 function selectCategory() {
-    let categoryChoice = document.getElementById('category-input');
+    let categoryChoice = document.getElementById('categoryInput');
     let displayCategoryText = categoryChoice.options[categoryChoice.selectedIndex].text;
-    document.getElementById('category-output').innerHTML = displayCategoryText;
+    document.getElementById('categoryOutput').innerHTML = displayCategoryText;
+    categoryOutputBoolean = true;
 }
 
 function selectImportance() {
@@ -86,39 +51,35 @@ function selectImportance() {
 }
 // ***** Value Add from Select to P - End ******* 
 
-
-
-
-
 // ***** Create Task (JSON Push) - start ******* 
-// ***** Create Task (JSON Push) - End ******* 
+
 let tasks = [];
 let taskID = 0
 
 function createTask() {
     newTask();
- 
+    addDisableAttributeBtn();
 }
 
-
+function addDisableAttributeBtn() {
+    cancelBtn.setAttribute('cancelBtn', 'disabled');
+    createBtn.setAttribute('createBtn', 'disabled');
+}
 function newTask() {
    // let personDiv = document.getElementById('assign-person-div');
     // let Imgs = personDiv.document.getElementsByTagName('img');
     let newTask = {
         "task-id": taskID++,
-        "title": document.getElementById('title-input').value,
-        "category": document.getElementById('category-input').value,
-        "description": document.getElementById('description-input').value,
-        "due-date": document.getElementById('date-input').value,
+        "title": document.getElementById('titleInput').value,
+        "category": document.getElementById('categoryInput').value,
+        "description": document.getElementById('descriptionInput').value,
+        "due-date": document.getElementById('dateInput').value,
         "importance": document.getElementById('importance-input').value,
       //  "assigned-to": Imgs
     }
     tasks.push(newTask)
-    console.log(newTask);
 }
+// ***** Create Task (JSON Push) - End ******* 
 
 
 
-window.onload = function(){
-    initialise();
-};

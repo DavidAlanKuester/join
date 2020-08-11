@@ -6,7 +6,9 @@
     <link rel="stylesheet" href="overallStyle.css">
     <link rel="stylesheet" href="addTaskStyle.css">
     <script src="overallApp.js"></script>
-    <script type="module" src="addTask.js"></script>
+    <script type="module" src="addTaskInitialise.js"></script>
+    <script src="addTask.js"></script>
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css"
         integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"
@@ -24,20 +26,20 @@
             </div>
         </div>
 
-        <div class="addTask-content-container">
+        <div class="addTask-content-container" id="addTaskForm">
             <div class="card custom-card">
                 <div class="inner-custom-card">
                     <div class="right-cardhalf">
                         <div class="card-title-section">
                             <h3>Title</h3>
-                            <input onkeydown="enableBtn()" type="text" id="title-input" name="title-input">
+                            <input onkeydown="enableBtns()" type="text" id="titleInput" name="titleInput">
                         </div>
 
                         <div class="card-category-section">
                             <h3>Category</h3>
                             <div>
-                                <p id="category-output"></p>
-                                <select  onchange="selectCategory()" id="category-input" name="category-input">
+                                <p id="categoryOutput"></p>
+                                <select  onchange="selectCategory()" id="categoryInput" name="category-input">
                                     <option ></option>
                                     <option value="marketing">Marketing</option>
                                     <option value="product">Product</option>
@@ -52,9 +54,9 @@
 
                         </div>
 
-                        <div onkeydown="enableBtn()" class="card-description-section">
+                        <div onkeydown="enableBtns()" class="card-description-section">
                             <h3>Description</h3>
-                            <input type="text" id="description-input" name="description-input">
+                            <input type="text" id="descriptionInput" name="description-input">
                         </div>
                     </div>
 
@@ -62,7 +64,7 @@
 
                         <div class="card-date-section">
                             <h3>Due Date</h3>
-                            <input onkeydown="enableBtn()" type="text" id="date-input" name="date-input">
+                            <input onkeydown="enableBtns()" type="text" id="dateInput" name="date-input">
                         </div>
 
                         <div class="card-importance-section">
@@ -95,9 +97,9 @@
 
                             </div>
                             <div class="assign-commit-div">
-                                <button id="cancel-btn" type="button" class="btn"
+                                <button id="cancelBtn" name="cancelBtn" type="button" disabled="disabled" class="btn"
                                     style="background-color: rgb(244, 243, 251) !important; color: rgb(30, 49, 144) !important;"><b>Cancel</b></button>
-                                <button onclick="createTask()" id="create-btn" type="button" class="btn btn-primary"
+                                <button onclick="createTask()" id="createBtn" name="createBtn" type="button" disabled="disabled" class="btn btn-primary"
                                     style="background-color: rgb(30, 49, 144) !important"><b>Create Task</b></button>
                             </div>
 
@@ -106,7 +108,6 @@
                 </div>
             </div>
         </div>
-
         <div class="empty-div-container">
             <div class="alert alert-success custom-alert" role="alert">
                 <p>You have created a new task!</p>
@@ -116,17 +117,7 @@
             </div>
 
         </div>
-
-
-
-
-
-
-
-
     </div>
-
-
 </body>
 
 </html>
