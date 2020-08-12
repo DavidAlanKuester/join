@@ -1,7 +1,7 @@
 
 let tasks = [];
 
-let createdTasks = [];
+let createdTasks;
 
 let users = [
     {
