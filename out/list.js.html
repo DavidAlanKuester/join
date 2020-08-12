@@ -1,10 +1,36 @@
-let tasksInCurrentProject = [];
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: list.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: list.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>let tasksInCurrentProject = [];
 let assigments = [];
-
-
 /* search the taskDummy object and gets the object with the user-id property that equals the id parameter*/
 function getUserById(id) {
-    for (let i = 0; i < taskDummy["user-tasks"].length; i++) {
+    for (let i = 0; i &lt; taskDummy["user-tasks"].length; i++) {
         const user = taskDummy["user-tasks"][i];
         if (user["user-id"] == id) {
             return user;
@@ -26,19 +52,19 @@ function createAssigment(user, task) {
 /*calculates the level of eisenhowermatrix categorie needed for the coloring of the list-item element*/
 function getEisenhowerCategorie(important, dueDate) {
     let urgent = calculateUrgency(dueDate);
-    if (urgent && important) {
+    if (urgent &amp;&amp; important) {
         return "do";
     }
 
-    if (important && !urgent) {
+    if (important &amp;&amp; !urgent) {
         return "schedule";
     }
 
-    if (urgent && !important) {
+    if (urgent &amp;&amp; !important) {
         return "delegate";
     }
 
-    if (!urgent && !important) {
+    if (!urgent &amp;&amp; !important) {
         return "eliminate";
     }
 }
@@ -54,7 +80,7 @@ function calculateUrgency(date) {
     let timeDifference = dateToMilliseconds - time;
 
     // true = urgent
-    return timeDifference < oneDayMilliseconds;
+    return timeDifference &lt; oneDayMilliseconds;
 
 }
 
@@ -94,14 +120,14 @@ function initAssigments() {
  */
 function generateListItem(categoryClass, imgSrc, category, description) {
     return `
-    <div class="list-item-content  ${categoryClass}">
-    <div class="assigned-to-content">
-        <img src="${imgSrc}" class="assigned-to-img rounded-circle">
-        <div>Name<br>Contact</div>
-    </div>
-    <div class="category-content">${category}</div>
-    <div class="details-content">${description}</div>
-    </div>
+    &lt;div class="list-item-content  ${categoryClass}">
+    &lt;div class="assigned-to-content">
+        &lt;img src="${imgSrc}" class="assigned-to-img rounded-circle">
+        &lt;div>Name&lt;br>Contact&lt;/div>
+    &lt;/div>
+    &lt;div class="category-content">${category}&lt;/div>
+    &lt;div class="details-content">${description}&lt;/div>
+    &lt;/div>
 `;
 }
 
@@ -120,9 +146,9 @@ function getProjectMatrix(currentProjetId, currentUserId) {
 
     assigments.forEach(assigment => {
         let htmlCode = `
-        <div class="category">
+        &lt;div class="category">
 
-        </div>
+        &lt;/div>
         `;
 
         let listItemContent = document.createElement("div");
@@ -136,7 +162,7 @@ function getProjectMatrix(currentProjetId, currentUserId) {
 
         //user name and contact for whom the tasks was assigned
         let userNameAndContact = document.createElement("div");
-        userNameAndContact.innerHTML = assigment.to.name + "<br>" + assigment.to.eMail;
+        userNameAndContact.innerHTML = assigment.to.name + "&lt;br>" + assigment.to.eMail;
         //listItemContent.appendChild(userNameAndContact);
 
         let assignedToContent = document.createElement("div");
@@ -175,7 +201,7 @@ function getProjectMatrix(currentProjetId, currentUserId) {
     /*let totalUsers = tasks["user-tasks"];
     console.log('Size of Total Users', totalUsers);
     let totalTasks = 0;
-    for (let i = 0; i < totalUsers.length; i++) {
+    for (let i = 0; i &lt; totalUsers.length; i++) {
         totalTasks += totalUsers[i]["tasks"].length;
     }
     console.log('total tasks ', totalTasks);
@@ -183,7 +209,7 @@ function getProjectMatrix(currentProjetId, currentUserId) {
     //get current user tasks list of current project
 
     let currentUserTaskslist = [];
-    for (let i = 0; i < totalUsers.length; i++) {//get all tasks assigned by the user
+    for (let i = 0; i &lt; totalUsers.length; i++) {//get all tasks assigned by the user
         if (totalUsers[i]["user-id"] == currentUserId) {
             //found current user
             //collect all tasks assigned by the current user
@@ -194,8 +220,8 @@ function getProjectMatrix(currentProjetId, currentUserId) {
 
     //search tasks list, if task assigned in current project, push it
     let currentProjectAssignedTasks = [];
-    for (let i = 0; i < currentUserTaskslist.length; i++) {
-        for (let j = 0; j < currentUserTaskslist[i]["in-projects"].length; j++) {
+    for (let i = 0; i &lt; currentUserTaskslist.length; i++) {
+        for (let j = 0; j &lt; currentUserTaskslist[i]["in-projects"].length; j++) {
             if (currentUserTaskslist[i]["in-projects"][j] == currentProjetId) {
                 currentProjectAssignedTasks.push(currentUserTaskslist[i]);
             }
@@ -207,7 +233,7 @@ function getProjectMatrix(currentProjetId, currentUserId) {
     //create same number of list-item-content elements as the number of tasks to append to list-content element 
 
     let listItems = [];
-    for (let i = 0; i < currentProjectAssignedTasks.length; i++) {
+    for (let i = 0; i &lt; currentProjectAssignedTasks.length; i++) {
 
         let listItemContent = document.createElement("div");
         listItemContent.classList.add("list-item-content");
@@ -220,7 +246,7 @@ function getProjectMatrix(currentProjetId, currentUserId) {
 
         //user name and contact for whom the tasks was assigned
         let userNameAndContact = document.createElement("div");
-        userNameAndContact.innerHTML = "Name" + "<br>" + "Contact";
+        userNameAndContact.innerHTML = "Name" + "&lt;br>" + "Contact";
         //listItemContent.appendChild(userNameAndContact);
 
         let assignedToContent = document.createElement("div");
@@ -249,8 +275,30 @@ function getProjectMatrix(currentProjetId, currentUserId) {
         listItems.push(listItemContent);
     }*/
 
-    for (let i = 0; i < listItems.length; i++) {
+    for (let i = 0; i &lt; listItems.length; i++) {
         listContent.appendChild(listItems[i]);
     }
 
-}
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#generateListItem">generateListItem</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.5</a> on Wed Aug 12 2020 19:11:16 GMT+0200 (GMT+02:00)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

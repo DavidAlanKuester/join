@@ -107,6 +107,7 @@ function initializeMatrix() {
     initializeCategoryInMatrix(eliminateTasks, MatrixIds.ADD_TASK_ELIMINATE);
 }
 
+
 function loadTasksIntoCategories(doTasks, scheduleTasks, delegateTasks, eliminateTasks) {
     tasks["user-tasks"].forEach(user => {
         user.tasks.forEach(task => {
@@ -145,7 +146,7 @@ function AddTaskInEisenhowerCategory(
             break;
         */
         default:
-            console.log("Error in AddTaskInEisenhoverCategory");
+            console.error("Error in AddTaskInEisenhoverCategory");
             break;
     }
 }
@@ -169,19 +170,20 @@ function getEisenhowerCategory(task) {
 }
 
 function taskIsimportant(task) {
-    return (task.importance == 0) ? true : false;
+    return task.importance == 0;
 }
 
 function isDue(dateString) {
     let today = new Date();
     today = new Date(today.getFullYear(), today.getMonth(), today.getDate());
     let dueDate = new Date(dateString);
-    return (dueDate.getTime() <= today) ? true : false;
+    return dueDate.getTime() <= today;
 }
 
 /**
  * This function takes a date String and returns a string converted in the format DD-MM-YYYY
- * @param {} date 
+ * @param {ISO 8601 string} dateString 
+ * @param {string} delimiter 
  */
 function ConvertToEuropeanDateString(dateString, delimiter) {
     let date = new Date(dateString);
@@ -209,8 +211,6 @@ function createTask(task) {
          <div><img src="img/person.png" class="matrix-task-img"></div>
          </div>
          </div>`);
-
-
 }
 
 /*

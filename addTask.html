@@ -14,8 +14,8 @@
     <title>Add Task</title>
 </head>
 
-<body onload="includeHTML()">
-    <div w3-include-html="sidebar.html"></div> 
+<body onload="includeHTML(); insertUsers();">
+    <div w3-include-html="sidebar.html"></div>
     <div class="addTask-page">
         <div class="title-div-container">
             <div class="title-text-container">
@@ -37,7 +37,7 @@
                             <h3>Category</h3>
                             <div>
                                 <p id="categoryOutput"></p>
-                                <select  onchange="selectCategory()" id="categoryInput" name="category-input">
+                                <select onchange="selectCategory()" id="categoryInput" name="category-input">
                                     <option value=""></option>
                                     <option value="marketing">Marketing</option>
                                     <option value="product">Product</option>
@@ -86,18 +86,21 @@
                                 <div id="assign-person-btn-div">
                                     <button onclick="addPerson()" id="plus-btn" type="button" class="btn btn-primary"
                                         style="background-color: rgb(30, 49, 144) !important"><b>Add</b></button>
-                                        <div class="d-none" id="remove-btn-div">
-                                            <button onclick="removePerson()" id="remove-btn" type="button" class="btn btn-danger"><b>Remove</b>
-                                            </button>
-                                        </div>
+                                    <div class="d-none" id="remove-btn-div">
+                                        <button onclick="removePerson()" id="remove-btn" type="button"
+                                            class="btn btn-danger"><b>Remove</b>
+                                        </button>
+                                    </div>
 
                                 </div>
 
                             </div>
                             <div class="assign-commit-div">
-                                <button onclick="cancelTask()" id="cancelBtn" name="cancelBtn" type="button" disabled="disabled" class="btn"
+                                <button onclick="cancelTask()" id="cancelBtn" name="cancelBtn" type="button"
+                                    disabled="disabled" class="btn"
                                     style="background-color: rgb(244, 243, 251) !important; color: rgb(30, 49, 144) !important;"><b>Cancel</b></button>
-                                <button onclick="createTask()" id="createBtn" name="createBtn" type="button" disabled="disabled" class="btn btn-primary"
+                                <button onclick="createTask()" id="createBtn" name="createBtn" type="button"
+                                    disabled="disabled" class="btn btn-primary"
                                     style="background-color: rgb(30, 49, 144) !important"><b>Create Task</b></button>
                             </div>
 
@@ -110,6 +113,13 @@
             <div id="createdTaskAlert" class="alert alert-success custom-alert d-none" role="alert">
                 <p>You have created a new task!</p>
             </div>
+
+        </div>
+    </div>
+
+
+    <div class="user-picker">
+        <div id="user-picker-container">
 
         </div>
     </div>

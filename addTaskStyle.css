@@ -202,3 +202,29 @@
     font-size: 32px;
     margin: 0;
 }
+
+.user-picker {
+    z-index: 10;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#user-picker-container {
+    height: 80vh;
+    width: 80vw;
+    background-color: white;
+    border-radius: 16px !important;
+    padding: 16px;
+}
+
+.user-picker-row:hover {
+    cursor: pointer;
+    background-color: rgba(0,0,0,0.5);
+}

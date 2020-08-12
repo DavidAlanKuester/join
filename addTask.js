@@ -1,18 +1,46 @@
+let selectedUsers = [];
+
 // *************** Mode to enable Cancel & Create Button -Start ************************
 function enableBtns() {
     addTaskForm.addEventListener('input', () => {
-        if (titleInput.value.length > 0 && descriptionInput.value.length > 0 && dateInput.value.length > 0) {
-            createBtn.removeAttribute('disabled');
-        } else if (titleInput.value.length > 0 || descriptionInput.value.length > 0 || dateInput.value.length > 0) {
-            cancelBtn.removeAttribute('disabled');
-        }
+        executeEnableButtonScript();
     });
 
+}
+
+function executeEnableButtonScript() {
+    if (titleInput.value.length > 0 && descriptionInput.value.length > 0 && dateInput.value.length > 0) {
+        createBtn.removeAttribute('disabled');
+    } else if (titleInput.value.length > 0 || descriptionInput.value.length > 0 || dateInput.value.length > 0) {
+        cancelBtn.removeAttribute('disabled');
+    }
 }
 // *************** Mode to enable Cancel & Create Button -End ************************
 
 // *****Assigned To Section - Add Persons -Start *********
 let persons = users;
+
+function insertUsers() {
+
+    users.forEach(function (user) {
+        let htmlContent = `
+    <div class="user-picker-row" onclick="selectUser(${user.id})">
+    <img src="./${user.img}" style="width: 100px; height: 100px;">
+    ${user.name}
+</div>
+`;
+
+        document.getElementById('user-picker-container').insertAdjacentHTML("beforeend", htmlContent);
+    });
+}
+
+function selectUser(id){
+    let user = users.find(function(u) {
+        return u.id == id;
+    });
+    console.log('Found user', user);
+    selectedUsers.push(user);
+}
 
 function addPerson() {
     persons++;
@@ -40,6 +68,8 @@ function selectCategory() {
     let displayCategoryText = categoryChoice.options[categoryChoice.selectedIndex].text;
     document.getElementById('categoryOutput').innerHTML = displayCategoryText;
     categoryOutputBoolean = true;
+
+    executeEnableButtonScript();
 }
 
 function selectImportance() {
@@ -56,14 +86,14 @@ function createTask() {
     newTask();
     addDisableAttributeBtn();
     displaySucessAlert();
-    setTimeout(function(){ 
+    setTimeout(function () {
         cancelTask();
     }, 1000);
 }
 
 function addDisableAttributeBtn() {
     cancelBtn.disabled = true;
-    createBtn.disabled = true;  
+    createBtn.disabled = true;
 }
 
 function newTask() {
@@ -83,7 +113,7 @@ function newTask() {
 
 function displaySucessAlert() {
     document.getElementById('createdTaskAlert').classList.remove('d-none');
-    setTimeout(function(){ 
+    setTimeout(function () {
         document.getElementById('createdTaskAlert').classList.add('d-none');
     }, 1000);
 }
@@ -99,6 +129,6 @@ function cancelTask() {
     document.getElementById('importanceInput').value = ""
     document.getElementById('importanceOutput').innerHTML = "";
 }
-// ***** Cancel Task  - End ******* 
+// ***** Cancel Task  - End *******
 
 
