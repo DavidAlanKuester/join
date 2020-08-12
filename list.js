@@ -50,10 +50,10 @@ function calculateUrgency(date) {
     let time = new Date().getTime();
     let dateToMilliseconds = new Date(date).getTime();
     let timeDifference = dateToMilliseconds - time;
-    if (timeDifference < oneDayMilliseconds) {
-        return true;// urgent
-    }
-    return false;// not urgent
+
+    // true = urgent
+    return timeDifference < oneDayMilliseconds;
+
 }
 
 /*a task can be added to more projects*/
@@ -95,6 +95,12 @@ function getProjectMatrix(currentProjetId, currentUserId) {
     let listItems = [];
 
     assigments.forEach(assigment =>{
+        let htmlCode = `
+        <div class="category">
+            
+        </div>
+        `;
+
         let listItemContent = document.createElement("div");
         listItemContent.classList.add("list-item-content");
 

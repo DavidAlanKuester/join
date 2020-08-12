@@ -200,15 +200,15 @@ function initializeCategoryInMatrix(tasksJson, IdString) {
 }
 
 function createTask(task) {
-    return ('<div class="matrix-task-container">'
-        + '<div class="matrix-task-date">' + ConvertToEuropeanDateString(task['due-date'], '.') + '</div>'
-        + '<div class="matrix-task-title">' + task['title'] + '</div>'
-        + '<div class="matrix-task-description">' + task['description'] + '</div>'
-        + '<div class="matrix-task-category-img-container">'
-        + '<div class="matrix-task-category">' + task['category'] + '</div>'
-        + '<div><img src="img/person.png" class="matrix-task-img"></div>'
-        + '</div>'
-        + '</div>');
+    return (`<div class="matrix-task-container">
+         <div class="matrix-task-date"> ${ConvertToEuropeanDateString(task['due-date'], '.')} </div>
+         <div class="matrix-task-title"> ${task['title']} </div>
+         <div class="matrix-task-description"> ${task['description']} </div>
+         <div class="matrix-task-category-img-container">
+         <div class="matrix-task-category"> ${task['category']} </div>
+         <div><img src="img/person.png" class="matrix-task-img"></div>
+         </div>
+         </div>`);
 
 
 }
