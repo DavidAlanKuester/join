@@ -5,6 +5,12 @@ let createdTasks;
 
 let users = [
     {
+        'id': 0,
+        "img": "img/id0.png",
+        "name": "JSON0",
+        "eMail": "@JSON0.de"
+    },
+    {
         'id': 1,
         "img": "img/id0.png",
         "name": "JSON0",
