@@ -71,7 +71,7 @@ function initUserTasksFromProjectId(user, projectId) {
 /*a task can be assign to more users*/
 /* first the tasksInCurrentProject array should be initialise, we only what the tasks that are in one project
 /* initialise assigments array with tasks
-* for each task assigment create assigment
+* for each task and for each user that task was assigne to, create assigment
 */
 function initAssigments() {
     tasksInCurrentProject.forEach(task => {
@@ -90,6 +90,7 @@ function getProjectMatrix(currentProjetId, currentUserId) {
     initAssigments();
     console.log("Assigments of user "+currentUserId, assigments);
 
+    //html element that contains all the listItems
     let listContent = document.getElementById("list");
     let listItems = [];
 

@@ -1,7 +1,6 @@
 # Node JS specific #
 node_modules/*
 package-lock.json
-package.json
 # Visual Studio Code specific #
 .vscode/*
 
