@@ -1,19 +1,46 @@
-let tasksInCurrentProject = [];
-let assigments = [];
+/**
+ * Holds the tasks created by the current user
+ * @type {Array}
+ */
+let currentUserTasks = [];
 
-
-/* search the taskDummy object and gets the object with the user-id property that equals the id parameter*/
-function getUserById(id) {
-    for (let i = 0; i < tasksDummy["user-tasks"].length; i++) {
-        const user = tasksDummy["user-tasks"][i];
-        if (user["user-id"] == id) {
-            return user;
+/**
+ * Initialise currentUserTasks array 
+ * @param {number} userId - used to get only the tasks created by the user with id value same as userId from tasksDummy array 
+ */
+function initiateUserTasksArray(userId){
+    tasksDummy.forEach( task => {
+        if(task.creator == userId){
+            currentUserTasks.push(task);
         }
-    }
-    return "NO_USER_WITH_ID: " + id + "FOUND";
+    });
 }
 
-/*returns an object that holds the information of an list-item element appended to list-content element from list.html*/
+/**
+ * Holds the assigments of each task
+ * @type {Array}
+ */
+let assigments = [];
+
+ function initiateAssigments(user, task){
+
+ }
+
+/**
+ * Returns user with id value same as id parameter value
+ * @param {number} id - a number id to find the wanted user from  users array
+ * @returns {(object|undefined)} user with id value same as id parameter value or undefinde if users array has no user that matches the id parameter value
+ */
+function getUserById(id){
+   return  users.find( user => user.id == id);
+}
+
+/**
+ * 
+ * @param {object} user 
+ * @param {object} task 
+ * @returns 
+ */
 function createAssigment(user, task) {
     return {
         eisenhowerMatrixCategorie: getEisenhowerCategorie(task.importance, task["due-date"]),
@@ -87,28 +114,37 @@ function initAssigments() {
  * 
  * Generates HTML Code for a task
  * 
- * @param {string} categoryClass - CSS class which should label the caterogy
- * @param {string} imgSrc - link tpo the profile picture
- * @param {string} category - Displayed category, e.g "Management"
- * @param {string} description - Description of the task itself
+ * @param {object} user - Display image, name and email of the user
+ * @param {object} task - Display task color, categorie and description
  */
-function generateListItem(categoryClass, imgSrc, category, description) {
+function generateListItem(user, task) {
     return `
-    <div class="list-item-content  ${categoryClass}">
+    <div class="list-item-content  ${task.display}">
     <div class="assigned-to-content">
-        <img src="${imgSrc}" class="assigned-to-img rounded-circle">
-        <div>Name<br>Contact</div>
+        <img src="${user.img}" class="assigned-to-img rounded-circle">
+        <div>${user.name}<br>${user.eMail}</div>
     </div>
-    <div class="category-content">${category}</div>
-    <div class="details-content">${description}</div>
+    <div class="category-content">${task.category}</div>
+    <div class="details-content">${task.description}</div>
     </div>
 `;
 }
 
-function getProjectMatrix(currentProjetId, currentUserId) {
+function getProjectMatrix(currentUserId) {
 
-    let currentUser = getUserById(currentUserId);
+    let listContent = document.getElementById("list");
+
+    initiateUserTasksArray(currentUserId);
+
+    currentUserTasks.forEach(task =>{
+        task["assigned-to"].forEach( userId =>{
+             let listItem = generateListItem(getUserById(userId), task);
+             listContent.insertAdjacentHTML("beforeend",listItem);
+        })
+    });
+    /* let currentUser = getUserById(currentUserId);
     console.log("CURRENT USER", currentUser);
+   
     initUserTasksFromProjectId(currentUser, currentProjetId);
     console.log("Tasks in Project " + currentProjetId, tasksInCurrentProject);
     initAssigments();
@@ -119,11 +155,6 @@ function getProjectMatrix(currentProjetId, currentUserId) {
     let listItems = [];
 
     assigments.forEach(assigment => {
-        let htmlCode = `
-        <div class="category">
-
-        </div>
-        `;
 
         let listItemContent = document.createElement("div");
         listItemContent.classList.add("list-item-content");
@@ -166,91 +197,8 @@ function getProjectMatrix(currentProjetId, currentUserId) {
         listItems.push(listItemContent);
     });
 
-
-
-
-    /* console.log("TASKS LIST IN CURRENT PROJECT "+currentProjetId, tasksInCurrentProject);*/
-    //display list of assigned tasks in order of level of urgency and importance
-
-    /*let totalUsers = tasks["user-tasks"];
-    console.log('Size of Total Users', totalUsers);
-    let totalTasks = 0;
-    for (let i = 0; i < totalUsers.length; i++) {
-        totalTasks += totalUsers[i]["tasks"].length;
-    }
-    console.log('total tasks ', totalTasks);
-
-    //get current user tasks list of current project
-
-    let currentUserTaskslist = [];
-    for (let i = 0; i < totalUsers.length; i++) {//get all tasks assigned by the user
-        if (totalUsers[i]["user-id"] == currentUserId) {
-            //found current user
-            //collect all tasks assigned by the current user
-            currentUserTaskslist = totalUsers[i]["tasks"];
-            break;
-        }
-    }
-
-    //search tasks list, if task assigned in current project, push it
-    let currentProjectAssignedTasks = [];
-    for (let i = 0; i < currentUserTaskslist.length; i++) {
-        for (let j = 0; j < currentUserTaskslist[i]["in-projects"].length; j++) {
-            if (currentUserTaskslist[i]["in-projects"][j] == currentProjetId) {
-                currentProjectAssignedTasks.push(currentUserTaskslist[i]);
-            }
-        }
-    }
-
-    console.log("Current project " + currentProjetId + " of current user " + currentUserId + " has " + currentProjectAssignedTasks.length + " tasks assigned");
-
-    //create same number of list-item-content elements as the number of tasks to append to list-content element 
-
-    let listItems = [];
-    for (let i = 0; i < currentProjectAssignedTasks.length; i++) {
-
-        let listItemContent = document.createElement("div");
-        listItemContent.classList.add("list-item-content");
-
-        //user img 
-        let assignedToImg = document.createElement("img");
-        assignedToImg.src = "img/person.png";
-        assignedToImg.classList.add("assigned-to-img", "rounded-circle");
-        //listItemContent.appendChild(assignedToImg);
-
-        //user name and contact for whom the tasks was assigned
-        let userNameAndContact = document.createElement("div");
-        userNameAndContact.innerHTML = "Name" + "<br>" + "Contact";
-        //listItemContent.appendChild(userNameAndContact);
-
-        let assignedToContent = document.createElement("div");
-        assignedToContent.classList.add("assigned-to-content");
-        assignedToContent.appendChild(assignedToImg);
-        assignedToContent.appendChild(userNameAndContact);
-        listItemContent.appendChild(assignedToContent);
-
-        //task category value
-        let categoryContent = document.createElement("div");
-        categoryContent.classList.add("category-content");
-        categoryContent.innerHTML = currentProjectAssignedTasks[i]["category"];
-        listItemContent.appendChild(categoryContent);
-
-        //task description value
-        let descrition = document.createElement("div");
-        descrition.classList.add("details-content");
-        descrition.innerHTML = currentProjectAssignedTasks[i]["description"];
-        listItemContent.appendChild(descrition);
-
-        //TODO
-        //get importance and due-date values
-        //calculate the level of task importance and urgency
-        //apply correct color to task
-
-        listItems.push(listItemContent);
-    }*/
-
     for (let i = 0; i < listItems.length; i++) {
         listContent.appendChild(listItems[i]);
-    }
+    }*/
 
 }
