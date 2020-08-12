@@ -4,8 +4,8 @@ let assigments = [];
 
 /* search the taskDummy object and gets the object with the user-id property that equals the id parameter*/
 function getUserById(id) {
-    for (let i = 0; i < taskDummy["user-tasks"].length; i++) {
-        const user = taskDummy["user-tasks"][i];
+    for (let i = 0; i < tasksDummy["user-tasks"].length; i++) {
+        const user = tasksDummy["user-tasks"][i];
         if (user["user-id"] == id) {
             return user;
         }
