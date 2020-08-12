@@ -115,15 +115,8 @@ function loadTasksIntoCategories(doTasks, scheduleTasks, delegateTasks, eliminat
                 doTasks, scheduleTasks, delegateTasks, eliminateTasks)
         });
     });
-    /*     console.log("do");
-        console.log(doTasks);
-        console.log("schedule");
-        console.log(scheduleTasks);
-        console.log("delegate");
-        console.log(delegateTasks);
-        console.log("eliminate");
-        console.log(eliminateTasks); */
 }
+
 
 function AddTaskInEisenhowerCategory(
     task, doTasks, scheduleTasks, delegateTasks, eliminateTasks) {
@@ -141,15 +134,12 @@ function AddTaskInEisenhowerCategory(
             delegateTasks.push(task);
             break;
 
-        /*case eisenhowerMatrixCategrories.SCHEDULE:
-            eliminateTasks.push(task);
-            break;
-        */
         default:
             console.error("Error in AddTaskInEisenhoverCategory");
             break;
     }
 }
+
 
 function getEisenhowerCategory(task) {
     // criteria for DO-Task
@@ -164,14 +154,13 @@ function getEisenhowerCategory(task) {
     if (!taskIsimportant(task)) {
         return eisenhowerMatrixCategrories.DELEGATE;
     }
-    // criteria for eliminate task
-    // TODO
-    // To define
 }
+
 
 function taskIsimportant(task) {
     return task.importance == 0;
 }
+
 
 function isDue(dateString) {
     let today = new Date();
@@ -179,6 +168,7 @@ function isDue(dateString) {
     let dueDate = new Date(dateString);
     return dueDate.getTime() <= today;
 }
+
 
 /**
  * This function takes a date String and returns a string converted in the format DD-MM-YYYY
@@ -194,12 +184,14 @@ function ConvertToEuropeanDateString(dateString, delimiter) {
     );
 }
 
+
 function initializeCategoryInMatrix(tasksJson, IdString) {
     tasksJson.forEach(taskJson => {
         let taskHtmlString = createTask(taskJson);
         document.getElementById(IdString).insertAdjacentHTML("beforeend", taskHtmlString);
     });
 }
+
 
 function createTask(task) {
     return (`<div class="matrix-task-container">
