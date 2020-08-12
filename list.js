@@ -1,172 +1,147 @@
-
-//presumed tasks object structure
-
-let tasks =
-{
-    "user-tasks":
-        [
-            {
-                "user-id": "1",
-                "tasks":
-                    [
-                        {
-                            "task-id": "1",
-                            "title": "Create PowerPoint Presentation",
-                            "due-date": "07-08-2020",
-                            "category": "Management",
-                            "importance": "1",
-                            "description": "Create a management summary for the 2020 quartal 3 turnover",
-                            "assigned-to":
-                                [
-                                    "1"
-                                ],
-                            "in-projects":
-                                [
-                                    "1",
-                                    "2"
-                                ]
-                        },
-                        {
-                            "task-id": "2",
-                            "title": "Organise Business Party",
-                            "due-date": "20-08-2020",
-                            "category": "Marketing",
-                            "importance": "0",
-                            "description": "Organize a remote business party for the marketing department",
-                            "assigned-to":
-                                [
-                                    "1",
-                                    "2"
-                                ],
-                            "in-projects":
-                                [
-                                    "1"
-                                ]
-                        },
-                        {
-                            "task-id": "3",
-                            "title": "Pick up package",
-                            "due-date": "31-08-2020",
-                            "category": "Other",
-                            "importance": "1",
-                            "description": "",
-                            "assigned-to":
-                                [
-                                    "1",
-                                    "2"
-                                ],
-                            "in-projects":
-                                [
-                                    "1"
-                                ]
-                        }
-                    ]
-            },
-            {
-                "user-id": "2",
-                "tasks":
-                    [
-                        {
-                            "task-id": "4",
-                            "title": "Prepare Sales Meeting",
-                            "due-date": "22-08-2020",
-                            "category": "Sales",
-                            "importance": "1",
-                            "description": "Prepare for a sales meeting to inform about the product offers",
-                            "assigned-to":
-                                [
-                                    "2"
-                                ],
-                            "in-projects":
-                                [
-                                    "1"
-                                ]
-                        }
-
-                    ]
-            }
-        ]
-};
-
+let tasksInCurrentProject = [];
+let assigments = [];
+/* search the taskDummy object and gets the object with the user-id property that equals the id parameter*/
 function getUserById(id) {
-   for(let i = 0; i < tasks["user-tasks"].length; i++){
-       const user = tasks["user-tasks"][i];
-       if( user["user-id"] == id){
-           return user;
-       }
-   }
-   return "NO_USER_WITH_ID: "+id+"FOUND";
+    for (let i = 0; i < taskDummy["user-tasks"].length; i++) {
+        const user = taskDummy["user-tasks"][i];
+        if (user["user-id"] == id) {
+            return user;
+        }
+    }
+    return "NO_USER_WITH_ID: " + id + "FOUND";
 }
 
-function createAssigment(user, task){
+/*returns an object that holds the information of an list-item element appended to list-content element from list.html*/
+function createAssigment(user, task) {
     return {
-        eisenhowerMatrixCategorie: getEisenhowerCategorie(task.importance, task.due-date),
+        eisenhowerMatrixCategorie: getEisenhowerCategorie(task.importance, task["due-date"]),
         to: user,
         category: task["category"],
-        details: task["descrition"]
+        details: task["description"]
     }
 }
 
-function getEisenhowerCategorie(important, dueDate){
+/*calculates the level of eisenhowermatrix categorie needed for the coloring of the list-item element*/
+function getEisenhowerCategorie(important, dueDate) {
     let urgent = calculateUrgency(dueDate);
-    if(urgent && important){
-        return "HIGH";
+    if (urgent && important) {
+        return "do";
     }
 
-    if(important && !urgent){
-        return "SCHEDULE";
+    if (important && !urgent) {
+        return "schedule";
     }
 
-    if(urgent && !important){
-        return "DELEGATE";
+    if (urgent && !important) {
+        return "delegate";
     }
 
-    if(!urgent && !important){
-        return "ELIMINATE";
+    if (!urgent && !important) {
+        return "eliminate";
     }
 }
 
-function calculateUrgency(date){
+/*calculates the urgency of a task
+* if difference of given date and time is less then one day, then task is urgen
+* else task is not urgent
+*/
+function calculateUrgency(date) {
     const oneDayMilliseconds = 86400000;
     let time = new Date().getTime();
-    date.split("-");
-    let shortDate = dueDate[1]+"/"+dueDate[0]+"/"+dueDate[2]; //convert date to short string format "MM/DD/YEAR"
-    let dateToMilliseconds = new Date(shortDate).getTime();
+    let dateToMilliseconds = new Date(date).getTime();
     let timeDifference = dateToMilliseconds - time;
-    if(timeDifference < oneDayMilliseconds){
-        return true;
+    if (timeDifference < oneDayMilliseconds) {
+        return true;// urgent
     }
-    return false;
+    return false;// not urgent
+}
+
+/*a task can be added to more projects*/
+/*initialise tasksInCurrentProject only with the tasks of a given user that are added to a projectId*/
+function initUserTasksFromProjectId(user, projectId) {
+    user.tasks.forEach(task => {
+        task["in-projects"].forEach(id => {
+            if (id == projectId) {
+                tasksInCurrentProject.push(task);
+            }
+        });
+    });
+}
+
+/*a task can be assign to more users*/
+/* first the tasksInCurrentProject array should be initialise, we only what the tasks that are in one project
+/* initialise assigments array with tasks
+* for each task assigment create assigment
+*/
+function initAssigments() {
+    tasksInCurrentProject.forEach(task => {
+        task["assigned-to"].forEach(userId => {
+            assigments.push(createAssigment(users[userId], task)); //here userId is a index to users array of objects 
+        });
+    });
 }
 
 function getProjectMatrix(currentProjetId, currentUserId) {
 
     let currentUser = getUserById(currentUserId);
     console.log("CURRENT USER", currentUser);
+    initUserTasksFromProjectId(currentUser, currentProjetId);
+    console.log("Tasks in Project "+currentProjetId, tasksInCurrentProject);
+    initAssigments();
+    console.log("Assigments of user "+currentUserId, assigments);
 
-    let tasksInCurrentProject = [];
+    let listContent = document.getElementById("list");
+    let listItems = [];
 
-   currentUser.tasks.forEach(task => {
-       task["in-projects"].forEach(id =>{
-           if( id == currentProjetId){
-               tasksInCurrentProject.push(task);
-           }
-       });
-   });
+    assigments.forEach(assigment =>{
+        let listItemContent = document.createElement("div");
+        listItemContent.classList.add("list-item-content");
 
-   let assigments = [];
-   
-  /* tasksInCurrentProject.forEach(task =>{
-        task["assigned-to"].forEach(userId =>{
-            assigments.push(createAssigment(getUserById(userId, task)));
-        });
-   });*/
+        //user img 
+        let assignedToImg = document.createElement("img");
+        assignedToImg.src = assigment.to.img;
+        assignedToImg.classList.add("assigned-to-img", "rounded-circle");
+        //listItemContent.appendChild(assignedToImg);
+
+        //user name and contact for whom the tasks was assigned
+        let userNameAndContact = document.createElement("div");
+        userNameAndContact.innerHTML = assigment.to.name + "<br>" + assigment.to.eMail;
+        //listItemContent.appendChild(userNameAndContact);
+
+        let assignedToContent = document.createElement("div");
+        assignedToContent.classList.add("assigned-to-content");
+        assignedToContent.appendChild(assignedToImg);
+        assignedToContent.appendChild(userNameAndContact);
+        listItemContent.appendChild(assignedToContent);
+
+        //task category value
+        let categoryContent = document.createElement("div");
+        categoryContent.classList.add("category-content");
+        categoryContent.innerHTML =assigment.category;
+        listItemContent.appendChild(categoryContent);
+
+        //task description value
+        let descrition = document.createElement("div");
+        descrition.classList.add("details-content");
+        descrition.innerHTML = assigment.details;
+        listItemContent.appendChild(descrition);
+
+        //TODO
+        //get importance and due-date values
+        //calculate the level of task importance and urgency
+        //apply correct color to task
+        listItemContent.classList.add(assigment.eisenhowerMatrixCategorie)
+
+        listItems.push(listItemContent);
+    });
 
 
-  /* console.log("TASKS LIST IN CURRENT PROJECT "+currentProjetId, tasksInCurrentProject);*/
+
+
+    /* console.log("TASKS LIST IN CURRENT PROJECT "+currentProjetId, tasksInCurrentProject);*/
     //display list of assigned tasks in order of level of urgency and importance
 
-    let totalUsers = tasks["user-tasks"];
+    /*let totalUsers = tasks["user-tasks"];
     console.log('Size of Total Users', totalUsers);
     let totalTasks = 0;
     for (let i = 0; i < totalUsers.length; i++) {
@@ -199,7 +174,6 @@ function getProjectMatrix(currentProjetId, currentUserId) {
     console.log("Current project " + currentProjetId + " of current user " + currentUserId + " has " + currentProjectAssignedTasks.length + " tasks assigned");
 
     //create same number of list-item-content elements as the number of tasks to append to list-content element 
-    let listContent = document.getElementById("list");
 
     let listItems = [];
     for (let i = 0; i < currentProjectAssignedTasks.length; i++) {
@@ -242,7 +216,7 @@ function getProjectMatrix(currentProjetId, currentUserId) {
         //apply correct color to task
 
         listItems.push(listItemContent);
-    }
+    }*/
 
     for (let i = 0; i < listItems.length; i++) {
         listContent.appendChild(listItems[i]);

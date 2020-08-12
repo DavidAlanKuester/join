@@ -1,35 +1,128 @@
+
 let tasks = [];
 let id = [0, 1, 2, 3]
 let idImgs = ['id' + id + '.png', 'id' + id + '.png', 'id' + id + '.png', 'id' + id + '.png']
+
+let createdTasks = [];
+
 let users = [
     {
         'id': id,
         "img": "img/" + idImgs,
         "name": "JSON0",
-        "eMail": "@JSON.de"
+        "eMail": "@JSON0.de"
     },
     {
         
         "id": id,
         "img": "img/" + idImgs,
         "name": "JSON1",
-        "eMail": "@JSON.de"
+        "eMail": "@JSON1.de"
     },
     {
         
         "id": id,
         "img": "img/" + idImgs,
         "name": "JSON2",
-        "eMail": "@JSON.de"
+        "eMail": "@JSON2.de"
     },
     {
         
         "id": id,
         "img": "img/" + idImgs,
         "name": "JSON3",
-        "eMail": "@JSON.de"
+        "eMail": "@JSON3.de"
     }
 ];
+
+//presumed task object structure
+//due-date should have short date string format "MM/DAY/YEAR"
+let taskDummy =
+{
+    "user-tasks":
+        [
+            {
+                "user-id": "1",
+                "tasks":
+                    [
+                        {
+                            "task-id": "1",
+                            "title": "Create PowerPoint Presentation",
+                            "due-date": "2020-08-07",
+                            "category": "Management",
+                            "importance": "1",
+                            "description": "Create a management summary for the 2020 quartal 3 turnover",
+                            "assigned-to":
+                                [
+                                    "1"
+                                ],
+                            "in-projects":
+                                [
+                                    "1",
+                                    "2"
+                                ]
+                        },
+                        {
+                            "task-id": "2",
+                            "title": "Organise Business Party",
+                            "due-date": "2020-08-20",
+                            "category": "Marketing",
+                            "importance": "0",
+                            "description": "Organize a remote business party for the marketing department",
+                            "assigned-to":
+                                [
+                                    "1",
+                                    "2"
+                                ],
+                            "in-projects":
+                                [
+                                    "1"
+                                ]
+                        },
+                        {
+                            "task-id": "3",
+                            "title": "Pick up package",
+                            "due-date": "2020-08-31",
+                            "category": "Other",
+                            "importance": "1",
+                            "description": "",
+                            "assigned-to":
+                                [
+                                    "1",
+                                    "2"
+                                ],
+                            "in-projects":
+                                [
+                                    "1"
+                                ]
+                        }
+                    ]
+            },
+            {
+                "user-id": "2",
+                "tasks":
+                    [
+                        {
+                            "task-id": "4",
+                            "title": "Prepare Sales Meeting",
+                            "due-date": "2020-08-22",
+                            "category": "Sales",
+                            "importance": "1",
+                            "description": "Prepare for a sales meeting to inform about the product offers",
+                            "assigned-to":
+                                [
+                                    "2"
+                                ],
+                            "in-projects":
+                                [
+                                    "1"
+                                ]
+                        }
+
+                    ]
+            }
+        ]
+};
 
 const eisenhowerMatrixCategrories =
 {
