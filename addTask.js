@@ -12,14 +12,14 @@ function enableBtns() {
 // *************** Mode to enable Cancel & Create Button -End ************************
 
 // *****Assigned To Section - Add Persons -Start *********
-let persons = 0;
+let persons = users;
 
 function addPerson() {
     persons++;
     if (persons <= 4) {
         let person = document.createElement('img');
         let div = document.getElementById('assign-person-div');
-        person.src = 'img/person.png';
+        person.src = 'img/' + idImgs;
         div.appendChild(person);
         persons = persons + 0;
     }
@@ -45,12 +45,11 @@ function selectCategory() {
 function selectImportance() {
     let importanceChoice = document.getElementById('importanceInput');
     let displayImportanceText = importanceChoice.options[importanceChoice.selectedIndex].text;
-    document.getElementById('importance-output').innerHTML = displayImportanceText;
+    document.getElementById('importanceOutput').innerHTML = displayImportanceText;
 }
 // ***** Value Add from Select to P - End ******* 
 
 // ***** Create Task (JSON Push) - start ******* 
-let tasks = [];
 let taskID = 0
 
 function createTask() {

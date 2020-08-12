@@ -1,28 +1,31 @@
+let tasks = [];
+let id = [0, 1, 2, 3]
+let idImgs = ['id' + id + '.png', 'id' + id + '.png', 'id' + id + '.png', 'id' + id + '.png']
 let users = [
     {
-        "id": "0",
-        "img": "img/person.png",
+        'id': id,
+        "img": "img/" + idImgs,
         "name": "JSON0",
         "eMail": "@JSON.de"
     },
     {
         
-        "id": "1",
-        "img": "img/person.png",
+        "id": id,
+        "img": "img/" + idImgs,
         "name": "JSON1",
         "eMail": "@JSON.de"
     },
     {
         
-        "id": "2",
-        "img": "img/person.png",
+        "id": id,
+        "img": "img/" + idImgs,
         "name": "JSON2",
         "eMail": "@JSON.de"
     },
     {
         
-        "id": "3",
-        "img": "img/person.png",
+        "id": id,
+        "img": "img/" + idImgs,
         "name": "JSON3",
         "eMail": "@JSON.de"
     }
