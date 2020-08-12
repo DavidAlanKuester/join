@@ -130,7 +130,7 @@ function generateListItem(user, task) {
 `;
 }
 
-function getProjectMatrix(currentUserId) {
+function initiateList(currentUserId) {
 
     let listContent = document.getElementById("list");
 
@@ -142,63 +142,4 @@ function getProjectMatrix(currentUserId) {
              listContent.insertAdjacentHTML("beforeend",listItem);
         })
     });
-    /* let currentUser = getUserById(currentUserId);
-    console.log("CURRENT USER", currentUser);
-   
-    initUserTasksFromProjectId(currentUser, currentProjetId);
-    console.log("Tasks in Project " + currentProjetId, tasksInCurrentProject);
-    initAssigments();
-    console.log("Assigments of user " + currentUserId, assigments);
-
-    //html element that contains all the listItems
-    let listContent = document.getElementById("list");
-    let listItems = [];
-
-    assigments.forEach(assigment => {
-
-        let listItemContent = document.createElement("div");
-        listItemContent.classList.add("list-item-content");
-
-        //user img 
-        let assignedToImg = document.createElement("img");
-        assignedToImg.src = assigment.to.img;
-        assignedToImg.classList.add("assigned-to-img", "rounded-circle");
-        //listItemContent.appendChild(assignedToImg);
-
-        //user name and contact for whom the tasks was assigned
-        let userNameAndContact = document.createElement("div");
-        userNameAndContact.innerHTML = assigment.to.name + "<br>" + assigment.to.eMail;
-        //listItemContent.appendChild(userNameAndContact);
-
-        let assignedToContent = document.createElement("div");
-        assignedToContent.classList.add("assigned-to-content");
-        assignedToContent.appendChild(assignedToImg);
-        assignedToContent.appendChild(userNameAndContact);
-        listItemContent.appendChild(assignedToContent);
-
-        //task category value
-        let categoryContent = document.createElement("div");
-        categoryContent.classList.add("category-content");
-        categoryContent.innerHTML = assigment.category;
-        listItemContent.appendChild(categoryContent);
-
-        //task description value
-        let descrition = document.createElement("div");
-        descrition.classList.add("details-content");
-        descrition.innerHTML = assigment.details;
-        listItemContent.appendChild(descrition);
-
-        //TODO
-        //get importance and due-date values
-        //calculate the level of task importance and urgency
-        //apply correct color to task
-        listItemContent.classList.add(assigment.eisenhowerMatrixCategorie)
-
-        listItems.push(listItemContent);
-    });
-
-    for (let i = 0; i < listItems.length; i++) {
-        listContent.appendChild(listItems[i]);
-    }*/
-
 }
