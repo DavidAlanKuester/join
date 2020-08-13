@@ -109,9 +109,16 @@ const eisenhowerMatrixCategrories =
 }
 Object.freeze(eisenhowerMatrixCategrories);
 
-//includes html file inside container using w3-include-html attribute's values as the name of the html file
-//example: <div w3-include-html="fileName.html"></div>
-function includeHTML() {
+/**
+ * 
+ * Includes html file inside container using w3-include-html attribute's values as the name of the html file
+ * example: <div w3-include-html="fileName.html"></div>
+ * 
+ * Changes the visual output of sidebar.html links to match the current navigated site
+ * 
+ * @param {string} site - name of the site to which the HTML file was included
+ */
+function includeHTML(site) {
     var z, i, elmnt, file, xhttp;
     /* Loop through a collection of all HTML elements: */
     z = document.getElementsByTagName("*");
@@ -128,6 +135,7 @@ function includeHTML() {
                     if (this.status == 404) { elmnt.innerHTML = "Page not found."; }
                     /* Remove the attribute, and call this function once more: */
                     elmnt.removeAttribute("w3-include-html");
+                    changeSideBarTo(site);
                     includeHTML();
                 }
             }
@@ -137,4 +145,44 @@ function includeHTML() {
             return;
         }
     }
+}
+
+/**
+ * 
+ * Changes the sidebar links visual output to match the current navigated site 
+ * 
+ * @param {string} site - name of the site 
+ */
+function changeSideBarTo(site){
+    switch(site){
+        case "list":
+            changeSideBarLinksToListSelected();
+            break;
+        case "matrix":
+            changeSideBarLinksToMatrixSelected();
+            break;
+        case "addTask":
+            changeSideBarLinksToAddtask();
+            break;
+        default:
+            console.error("ERROR:: unknown site "+site);
+    }
+}
+
+function changeSideBarLinksToListSelected(){
+    document.getElementById("matrix-link").classList.add("link-unselected");
+    document.getElementById("list-link").classList.add("link-selected");
+    document.getElementById("list-link").innerHTML = "List";
+}
+
+function changeSideBarLinksToMatrixSelected(){
+    document.getElementById("matrix-link").classList.add("link-selected");
+    document.getElementById("list-link").classList.add("link-unselected");
+    document.getElementById("list-link").innerHTML = "List";
+}
+
+function changeSideBarLinksToAddtask(){
+    document.getElementById("matrix-link").classList.add("link-unselected");
+    document.getElementById("list-link").classList.add("link-unselected");
+    document.getElementById("list-link").innerHTML = "View List";
 }
