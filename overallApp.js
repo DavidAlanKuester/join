@@ -165,7 +165,7 @@ function changeSideBarTo(site){
             changeSideBarLinksToAddtask();
             break;
         default:
-            console.error("ERROR:: unknown site "+site);
+            console.error("ERROR:: unknown site "+site+" please check your site function includeHTML call attribute value to match one of the cases");
     }
 }
 
