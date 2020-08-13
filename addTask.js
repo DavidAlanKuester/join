@@ -25,7 +25,7 @@ function insertUsers() {
     users.forEach(function (user) {
         let htmlContent = `
     <div class="user-picker-row" onclick="selectUser(${user.id})">
-    <img src="./${user.img}" style="width: 100px; height: 100px;">
+    <img src="./${user.img}" style="width: 75px; height: 75px; padding: 8px;">
     ${user.name}
 </div>
 `;
@@ -42,7 +42,13 @@ function selectUser(id){
     selectedUsers.push(user);
 }
 
+function back() {
+    document.getElementById('addPersonBlend').classList.add('d-none');
+
+}
+
 function addPerson() {
+    document.getElementById('addPersonBlend').classList.remove('d-none');
     persons++;
     if (persons <= 4) {
         let person = document.createElement('img');
