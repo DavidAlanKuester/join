@@ -93,3 +93,20 @@ body {
     }
 }
 /********************KEY_FRAMES_ANIMATIONS_END********************/
+
+/*colors for the list-item-content depending of the eisenhowerMatrixCategorie value of the assigment inside list.js*/
+.do {
+    border-left-color: orange;
+}
+
+.schedule {
+    border-left-color: purple;
+}
+
+.delegate {
+    border-left-color: green;
+}
+
+.eliminate {
+    border-left-color: blue;
+}

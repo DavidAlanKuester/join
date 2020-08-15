@@ -87,19 +87,19 @@ function initializeTasksInMatrix(matrixTasks) {
     matrixTasks.forEach(task => {
         switch (task["display"]) {
             case eisenhowerMatrixCategrories.DO:
-                addTaskToMatrix(task, MatrixIds.ADD_Task_DO);
+                addTaskToMatrix(task, MatrixIds.ADD_Task_DO, ".do");
                 break;
     
             case eisenhowerMatrixCategrories.SCHEDULE:
-                addTaskToMatrix(task, MatrixIds.ADD_TASK_SCHEDULE);
+                addTaskToMatrix(task, MatrixIds.ADD_TASK_SCHEDULE, ".schedule");
                 break;
     
             case eisenhowerMatrixCategrories.DELEGATE:
-                addTaskToMatrix(task, MatrixIds.ADD_TASK_DELEGATE);
+                addTaskToMatrix(task, MatrixIds.ADD_TASK_DELEGATE, ".delegate");
                 break;
 
             case eisenhowerMatrixCategrories.ELIMINATE:
-                addTaskToMatrix(task, MatrixIds.ADD_TASK_ELIMINATE);
+                addTaskToMatrix(task, MatrixIds.ADD_TASK_ELIMINATE, ".eliminate");
                 break;            
     
             default:
@@ -116,7 +116,7 @@ function initializeTasksInMatrix(matrixTasks) {
  * @param {String} IdString - a string representing the ID where to add the task
  */
 function addTaskToMatrix(task, IdString){
-    let taskHtmlString = createTask(task);
+    let taskHtmlString = createMatrixTask(task);
     document.getElementById(IdString).insertAdjacentHTML("beforeend", taskHtmlString);
 }
 
@@ -141,7 +141,7 @@ function ConvertToEuropeanDateString(dateString, delimiter) {
  * and returns the created task
  * @param {Json object} task - a task represented as a JSON object 
  */
-function createTask(task) {
+function createMatrixTask(task) {
     return (`<div class="matrix-task-container">
          <div class="matrix-task-date"> ${ConvertToEuropeanDateString(task['due-date'], '.')} </div>
          <div class="matrix-task-title"> ${task['title']} </div>
