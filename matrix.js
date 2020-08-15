@@ -161,13 +161,13 @@ function dragTask(ev) {
 
 
 function dropTask(ev) {
-    ev.preventDefault();
-    let id = ev.dataTransfer.getData("text");
-    console.log(ev.target);
-    console.log(ev.target.class);
-    ev.target.appendChild(document.getElementById(id));
-    // update task based on task id
-    console.log("foo");
+    ev.target.classList.forEach(cssClass => {
+        if (cssClass === 'drop-area') {
+            ev.preventDefault();
+            let id = ev.dataTransfer.getData("text");
+            ev.target.appendChild(document.getElementById(id));
+        }
+    });
 }
 
 

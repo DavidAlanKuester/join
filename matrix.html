@@ -14,7 +14,6 @@
 
 <body onload="includeHTML('matrix'), initializeMatrix(0)">
     <div class="bg-container">
-
         <div w3-include-html="sidebar.html"></div>
 
         <div class="outer-matrix-container">
@@ -68,28 +67,8 @@
                             <div class="matrix-title-container label-blue font-headlines">
                                 DO
                             </div>
-                            <div id="matrix-tasks-do-here" class="matrix-tasks-container bg-light-blue"
+                            <div id="matrix-tasks-do-here" class="matrix-tasks-container bg-light-blue drop-area"
                                 ondragover="allowDrop(event)" ondrop="dropTask(event)">
-                                <!--
-                                <div class="matrix-task-container">
-                                    <div class="matrix-task-date">12.05.20</div>
-                                    <div class="matrix-task-title">Title Prepare Presentation</div>
-                                    <div class="matrix-task-description">Description Some description goes here this is were some description goes...</div>
-                                    <div class="matrix-task-category-img-container">
-                                        <div class="matrix-task-category">Category Marketing</div>
-                                        <div><img src="img/person.png" class="matrix-task-img"></div>
-                                    </div>
-                                </div>
-                                <div class="matrix-task-container">
-                                    <div class="matrix-task-date">13.06.20</div>
-                                    <div class="matrix-task-title">Market Alignment Call</div>
-                                    <div class="matrix-task-description">Description Some description goes here this is were some description goes...</div>
-                                    <div class="matrix-task-category-img-container">
-                                        <div class="matrix-task-category">Category Marketing</div>
-                                        <div><img src="img/person.png" class="matrix-task-img"></div>
-                                    </div>
-                                </div>
-                                -->
                             </div>
                         </div>
                         <!--    SCHEDULE    -->
@@ -97,7 +76,8 @@
                             <div class="matrix-title-container label-blue font-headlines">
                                 SCHEDULE
                             </div>
-                            <div id="matrix-tasks-schedule-here" class="matrix-tasks-container bg-light-blue float-left"
+                            <div id="matrix-tasks-schedule-here"
+                                class="matrix-tasks-container bg-light-blue float-left drop-area"
                                 ondragover="allowDrop(event)" ondrop="dropTask(event)">
 
                             </div>
@@ -110,7 +90,7 @@
                             <div class="matrix-title-container label-blue font-headlines">
                                 DELEGATE
                             </div>
-                            <div id="matrix-tasks-delegate-here" class="matrix-tasks-container bg-light-blue"
+                            <div id="matrix-tasks-delegate-here" class="matrix-tasks-container bg-light-blue drop-area"
                                 ondragover="allowDrop(event)" ondrop="dropTask(event)">
 
                             </div>
@@ -121,8 +101,8 @@
                                 ELIMINATE
                             </div>
                             <div id="matrix-tasks-eliminate-here"
-                                class="matrix-tasks-container bg-light-blue float-left" ondragover="allowDrop(event)"
-                                ondrop="dropTask(event)">
+                                class="matrix-tasks-container bg-light-blue float-left  drop-area"
+                                ondragover="allowDrop(event)" ondrop="dropTask(event)">
 
                             </div>
                         </div>
