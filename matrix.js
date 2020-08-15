@@ -1,3 +1,6 @@
+/**
+ * Enum der IDs zum hinzufügen der task zu den Eisenhower Kategorien 
+ */
 const MatrixIds =
 {
     ADD_Task_DO: "matrix-tasks-do-here",
@@ -7,114 +10,173 @@ const MatrixIds =
 }
 Object.freeze(MatrixIds);
 
-let tasks =
-{
-    "user-tasks":
-        [
-            {
-                "user-id": "0",
-                "tasks":
-                    [
-                        {
-                            "task-id": "0",
-                            "title": "Create PowerPoint Presentation",
-                            "due-date": "2020-08-07",
-                            "category": "Management",
-                            "importance": "0",
-                            "description": "Create a management summary for the 2020 quartal 3 turnover",
-                            "assigned-to":
-                                [
-                                    "0"
-                                ],
-                            "in-projects":
-                                [
-                                    "0",
-                                    "1"
-                                ]
-                        },
-                        {
-                            "task-id": "1",
-                            "title": "Organise Business Party",
-                            "due-date": "2020-08-20",
-                            "category": "Marketing",
-                            "importance": "0",
-                            "description": "Organize a remote business party for the marketing department",
-                            "assigned-to":
-                                [
-                                    "0",
-                                    "1"
-                                ],
-                            "in-projects":
-                                [
-                                    "0"
-                                ]
-                        },
-                        {
-                            "task-id": "2",
-                            "title": "Pick up package",
-                            "due-date": "2020-08-31",
-                            "category": "Other",
-                            "importance": "1",
-                            "description": "",
-                            "assigned-to":
-                                [
-                                    "0",
-                                    "1"
-                                ],
-                            "in-projects":
-                                [
-                                    "0"
-                                ]
-                        }
-                    ]
-            },
-            {
-                "user-id": "1",
-                "tasks":
-                    [
-                        {
-                            "task-id": "3",
-                            "title": "Prepare Sales Meeting",
-                            "due-date": "2020-08-22",
-                            "category": "Sales",
-                            "importance": "1",
-                            "description": "Prepare for a sales meeting to inform about the product offers",
-                            "assigned-to":
-                                [
-                                    "1"
-                                ],
-                            "in-projects":
-                                [
-                                    "0"
-                                ]
-                        }
+/**
+ * This method initially loads the Matrix
+ * @param {number} currentUserId - a number representing the ID of the current user
+ */
+function initializeMatrix(currentUserId) {
+    /**
+     * A list of Json tasks that should be represented in the matrix
+     */
+    let matrixTasks = [];
+    getMatrixTasks(tasksDummy, currentUserId, matrixTasks);
+    checkTasksForArrivingDueDate(matrixTasks);
+    initializeTasksInMatrix(matrixTasks);
+}
 
-                    ]
-            }
-        ]
-};
+/**
+ * This method iterates through all tasks and checks if they are relevant 
+ * to display in the matrix of the current user.
+ * and returns all relevant elements.
+ * @param {Json Array} tasks - a Json array representing all taks 
+ * @param {number} userId - a number representing a user Id
+ * @param {Json Array} matrixTasks - a Json array representing all tasks relevant to display in the matrix
+ */
+function getMatrixTasks(tasks, userId, matrixTasks) {
+    tasks.forEach(task => {
+        if (isCurrentUserAssigneeInTask(task, userId) || isCreatorCurrentUserOfTask(task, userId) ) {
+            matrixTasks.push(task);
+        }
+    });
+}
 
+/**
+ * This method iterates through all assginees in a task 
+ * and returns true if the provided userID is inside that list
+ * @param {Json object} task - a task represented as a JSON object 
+ * @param {number} userId - a number representing the user-ID
+ */
+function isCurrentUserAssigneeInTask(task, userId) {
+    task["assigned-to"].forEach(assigneeId => {
+        if (assigneeId.toString() === userId.toString()) {
+            return true;
+        }
+    });
+    return false;
+}
 
-function initializeMatrix() {
-    let doTasks = [];
-    let scheduleTasks = [];
-    let delegateTasks = [];
-    let eliminateTasks = [];
-    loadTasksIntoCategories(doTasks, scheduleTasks, delegateTasks, eliminateTasks);
-    initializeCategoryInMatrix(doTasks, MatrixIds.ADD_Task_DO);
-    initializeCategoryInMatrix(scheduleTasks, MatrixIds.ADD_TASK_SCHEDULE);
-    initializeCategoryInMatrix(delegateTasks, MatrixIds.ADD_TASK_DELEGATE);
-    initializeCategoryInMatrix(eliminateTasks, MatrixIds.ADD_TASK_ELIMINATE);
+/**
+ * This method returns true if the provided task belongs to te provided user-ID. False if not
+ * @param {Json object} task - a task represented as a JSON object 
+ * @param {number} userId - a number representing the user-ID
+ */
+function isCreatorCurrentUserOfTask(task, userId) {
+    return (task["creator"].toString() === userId.toString());
+}
+
+/**
+ * This method iterates through all Json tasks and checks if a task
+ * with the property schedule has reached its due date.
+ * If the due date has been reached the task is set to Category do 
+ * @param {Json arbitrary} matrixTasks - a list of Json tasks
+ */
+function checkTasksForArrivingDueDate(matrixTasks) {
+    matrixTasks.forEach(task => {
+        if (isScheduleTask(task) && isDue(task["due-date"])) {
+            setTaskCategoryToDo(task);
+        }
+    });
+}
+
+/**
+ * This method iterates through all tasks and adds the task to the matrix
+ * according to the display property of the task
+ * @param {Json Array} matrixTasks - a list of Json tasks
+ */
+function initializeTasksInMatrix(matrixTasks) {
+    matrixTasks.forEach(task => {
+        switch (task["display"]) {
+            case eisenhowerMatrixCategrories.DO:
+                addTaskToMatrix(task, MatrixIds.ADD_Task_DO);
+                break;
+    
+            case eisenhowerMatrixCategrories.SCHEDULE:
+                addTaskToMatrix(task, MatrixIds.ADD_TASK_SCHEDULE);
+                break;
+    
+            case eisenhowerMatrixCategrories.DELEGATE:
+                addTaskToMatrix(task, MatrixIds.ADD_TASK_DELEGATE);
+                break;
+
+            case eisenhowerMatrixCategrories.ELIMINATE:
+                addTaskToMatrix(task, MatrixIds.ADD_TASK_ELIMINATE);
+                break;            
+    
+            default:
+                console.error("Error in initializeTasksInMatrix");
+                break;
+        }
+    });
+    
+}
+
+/**
+ * This method creates an html task from a Json task and adds it to a provided ID
+ * @param {Json object} task - a task represented as a JSON object 
+ * @param {String} IdString - a string representing the ID where to add the task
+ */
+function addTaskToMatrix(task, IdString){
+    let taskHtmlString = createTask(task);
+    document.getElementById(IdString).insertAdjacentHTML("beforeend", taskHtmlString);
 }
 
 
-function loadTasksIntoCategories(doTasks, scheduleTasks, delegateTasks, eliminateTasks) {
-    tasks["user-tasks"].forEach(user => {
-        user.tasks.forEach(task => {
-            AddTaskInEisenhowerCategory(task,
-                doTasks, scheduleTasks, delegateTasks, eliminateTasks)
-        });
-    });
+/**
+ * This function takes a date String and returns a string converted in the format DD-MM-YYYY.
+ * The delimiter between the date can be set to an arbitrary string.
+ * @param {ISO 8601 string} dateString 
+ * @param {string} delimiter 
+ */
+function ConvertToEuropeanDateString(dateString, delimiter) {
+    let date = new Date(dateString);
+    return (
+        '' + date.getDay() + delimiter
+        + date.getMonth() + delimiter
+        + date.getFullYear().toString().substr(2, 2)
+    );
+}
+
+/**
+ * This task accepts a task, creates a HTML object to represent that task
+ * and returns the created task
+ * @param {Json object} task - a task represented as a JSON object 
+ */
+function createTask(task) {
+    return (`<div class="matrix-task-container">
+         <div class="matrix-task-date"> ${ConvertToEuropeanDateString(task['due-date'], '.')} </div>
+         <div class="matrix-task-title"> ${task['title']} </div>
+         <div class="matrix-task-description"> ${task['description']} </div>
+         <div class="matrix-task-category-img-container">
+         <div class="matrix-task-category"> ${task['category']} </div>
+         <div><img src="img/person.png" class="matrix-task-img"></div>
+         </div>
+         </div>`);
+}
+
+/**
+ * This task accepts a task and returns true if that task has the display property of schedule
+ * @param {Json object} task - a task represented as a JSON object 
+ */
+function isScheduleTask(task) {
+    return (task["display"].toString() === eisenhowerMatrixCategrories.SCHEDULE.toString());
+}
+
+/*  #######################################################################################################################        
+                                    FOR INITIALIZE EISENHOWERCATEGORY WHEN CREATING TASK
+    #######################################################################################################################
+function getEisenhowerCategory(task) {
+    // criteria for DO-Task
+    if (isTaskImportant(task) && isDue(task["due-date"])) {
+        return eisenhowerMatrixCategrories.DO;
+    }
+    //criteria for schedule task
+    if (isTaskImportant(task)) {
+        return eisenhowerMatrixCategrories.SCHEDULE;
+    }
+    // criteria for delegate task
+    if (!isTaskImportant(task)) {
+        return eisenhowerMatrixCategrories.DELEGATE;
+    }
 }
 
 
@@ -141,76 +203,15 @@ function AddTaskInEisenhowerCategory(
 }
 
 
-function getEisenhowerCategory(task) {
-    // criteria for DO-Task
-    if (taskIsimportant(task) && isDue(task["due-date"])) {
-        return eisenhowerMatrixCategrories.DO;
-    }
-    //criteria for schedule task
-    if (taskIsimportant(task)) {
-        return eisenhowerMatrixCategrories.SCHEDULE;
-    }
-    // criteria for delegate task
-    if (!taskIsimportant(task)) {
-        return eisenhowerMatrixCategrories.DELEGATE;
-    }
-}
-
-
-function taskIsimportant(task) {
-    return task.importance == 0;
-}
-
-
-function isDue(dateString) {
-    let today = new Date();
-    today = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-    let dueDate = new Date(dateString);
-    return dueDate.getTime() <= today;
-}
-
-
-/**
- * This function takes a date String and returns a string converted in the format DD-MM-YYYY
- * @param {ISO 8601 string} dateString 
- * @param {string} delimiter 
- */
-function ConvertToEuropeanDateString(dateString, delimiter) {
-    let date = new Date(dateString);
-    return (
-        '' + date.getDay() + delimiter
-        + date.getMonth() + delimiter
-        + date.getFullYear().toString().substr(2, 2)
-    );
-}
-
-
-function initializeCategoryInMatrix(tasksJson, IdString) {
-    tasksJson.forEach(taskJson => {
-        let taskHtmlString = createTask(taskJson);
-        document.getElementById(IdString).insertAdjacentHTML("beforeend", taskHtmlString);
+function loadTasksIntoCategories(doTasks, scheduleTasks, delegateTasks, eliminateTasks) {
+    tasks["user-tasks"].forEach(user => {
+        user.tasks.forEach(task => {
+            AddTaskInEisenhowerCategory(task,
+                doTasks, scheduleTasks, delegateTasks, eliminateTasks)
+        });
     });
 }
 
-
-function createTask(task) {
-    return (`<div class="matrix-task-container">
-         <div class="matrix-task-date"> ${ConvertToEuropeanDateString(task['due-date'], '.')} </div>
-         <div class="matrix-task-title"> ${task['title']} </div>
-         <div class="matrix-task-description"> ${task['description']} </div>
-         <div class="matrix-task-category-img-container">
-         <div class="matrix-task-category"> ${task['category']} </div>
-         <div><img src="img/person.png" class="matrix-task-img"></div>
-         </div>
-         </div>`);
-}
-
-/*
-    function getCurrentDateString() {
-            let date = new Date();
-    year = date.getFullYear();
-    month = date.getMonth();
-    date = date.getDate();
-    return (year + '-' + (month + 1) + '-' + date);
-}
+#######################################################################################################################
+#######################################################################################################################
 */
