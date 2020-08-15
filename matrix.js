@@ -1,3 +1,6 @@
+/**
+ * Enum der IDs zum hinzufügen der task zu den Eisenhower Kategorien 
+ */
 const MatrixIds =
 {
     ADD_Task_DO: "matrix-tasks-do-here",
@@ -7,25 +10,43 @@ const MatrixIds =
 }
 Object.freeze(MatrixIds);
 
-
+/**
+ * This method initially loads the Matrix
+ * @param {number} currentUserId - a number representing the ID of the current user
+ */
 function initializeMatrix(currentUserId) {
+    /**
+     * A list of Json tasks that should be represented in the matrix
+     */
     let matrixTasks = [];
     getMatrixTasks(tasksDummy, currentUserId, matrixTasks);
     checkTasksForArrivingDueDate(matrixTasks);
     initializeTasksInMatrix(matrixTasks);
 }
 
-
+/**
+ * This method iterates through all tasks and checks if they are relevant 
+ * to display in the matrix of the current user.
+ * and returns all relevant elements.
+ * @param {Json Array} tasks - a Json array representing all taks 
+ * @param {number} userId - a number representing a user Id
+ * @param {Json Array} matrixTasks - a Json array representing all tasks relevant to display in the matrix
+ */
 function getMatrixTasks(tasks, userId, matrixTasks) {
     tasks.forEach(task => {
-        if (isCurrentUserTasks(task, userId) || isCreatorCurrentUser(task, userId) ) {
+        if (isCurrentUserAssigneeInTask(task, userId) || isCreatorCurrentUserOfTask(task, userId) ) {
             matrixTasks.push(task);
         }
     });
 }
 
-
-function isCurrentUserTasks(task, userId) {
+/**
+ * This method iterates through all assginees in a task 
+ * and returns true if the provided userID is inside that list
+ * @param {Json object} task - a task represented as a JSON object 
+ * @param {number} userId - a number representing the user-ID
+ */
+function isCurrentUserAssigneeInTask(task, userId) {
     task["assigned-to"].forEach(assigneeId => {
         if (assigneeId.toString() === userId.toString()) {
             return true;
@@ -34,12 +55,21 @@ function isCurrentUserTasks(task, userId) {
     return false;
 }
 
-
-function isCreatorCurrentUser(task, userId) {
+/**
+ * This method returns true if the provided task belongs to te provided user-ID. False if not
+ * @param {Json object} task - a task represented as a JSON object 
+ * @param {number} userId - a number representing the user-ID
+ */
+function isCreatorCurrentUserOfTask(task, userId) {
     return (task["creator"].toString() === userId.toString());
 }
 
-
+/**
+ * This method iterates through all Json tasks and checks if a task
+ * with the property schedule has reached its due date.
+ * If the due date has been reached the task is set to Category do 
+ * @param {Json arbitrary} matrixTasks - a list of Json tasks
+ */
 function checkTasksForArrivingDueDate(matrixTasks) {
     matrixTasks.forEach(task => {
         if (isScheduleTask(task) && isDue(task["due-date"])) {
@@ -48,7 +78,11 @@ function checkTasksForArrivingDueDate(matrixTasks) {
     });
 }
 
-
+/**
+ * This method iterates through all tasks and adds the task to the matrix
+ * according to the display property of the task
+ * @param {Json Array} matrixTasks - a list of Json tasks
+ */
 function initializeTasksInMatrix(matrixTasks) {
     matrixTasks.forEach(task => {
         switch (task["display"]) {
@@ -76,7 +110,11 @@ function initializeTasksInMatrix(matrixTasks) {
     
 }
 
-
+/**
+ * This method creates an html task from a Json task and adds it to a provided ID
+ * @param {Json object} task - a task represented as a JSON object 
+ * @param {String} IdString - a string representing the ID where to add the task
+ */
 function addTaskToMatrix(task, IdString){
     let taskHtmlString = createTask(task);
     document.getElementById(IdString).insertAdjacentHTML("beforeend", taskHtmlString);
@@ -84,7 +122,8 @@ function addTaskToMatrix(task, IdString){
 
 
 /**
- * This function takes a date String and returns a string converted in the format DD-MM-YYYY
+ * This function takes a date String and returns a string converted in the format DD-MM-YYYY.
+ * The delimiter between the date can be set to an arbitrary string.
  * @param {ISO 8601 string} dateString 
  * @param {string} delimiter 
  */
@@ -97,7 +136,11 @@ function ConvertToEuropeanDateString(dateString, delimiter) {
     );
 }
 
-
+/**
+ * This task accepts a task, creates a HTML object to represent that task
+ * and returns the created task
+ * @param {Json object} task - a task represented as a JSON object 
+ */
 function createTask(task) {
     return (`<div class="matrix-task-container">
          <div class="matrix-task-date"> ${ConvertToEuropeanDateString(task['due-date'], '.')} </div>
@@ -110,29 +153,13 @@ function createTask(task) {
          </div>`);
 }
 
-
+/**
+ * This task accepts a task and returns true if that task has the display property of schedule
+ * @param {Json object} task - a task represented as a JSON object 
+ */
 function isScheduleTask(task) {
     return (task["display"].toString() === eisenhowerMatrixCategrories.SCHEDULE.toString());
 }
-
-
-function setTaskCategoryToDo(task) {
-    task["display"] = eisenhowerMatrixCategrories.DO;
-}
-
-
-function isTaskImportant(task) {
-    return task.importance == 0;
-}
-
-
-function isDue(dateString) {
-    let today = new Date();
-    today = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-    let dueDate = new Date(dateString);
-    return dueDate.getTime() <= today;
-}
-
 
 /*  #######################################################################################################################        
                                     FOR INITIALIZE EISENHOWERCATEGORY WHEN CREATING TASK

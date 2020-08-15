@@ -186,3 +186,31 @@ function changeSideBarLinksToAddtask(){
     document.getElementById("list-link").classList.add("link-unselected");
     document.getElementById("list-link").innerHTML = "View List";
 }
+
+/**
+ * This method accepts a task and sets the display property of that task to "do"
+ * @param {Json object} task - a task represented as a JSON object
+ */
+function setTaskCategoryToDo(task) {
+    task["display"] = eisenhowerMatrixCategrories.DO;
+}
+
+/**
+ * This method accepts a task and returns if the task is an important task.
+ * @param {Json object} task - a task represented as a JSON object
+ */
+function isTaskImportant(task) {
+    return task.importance == 0;
+}
+
+/**
+ * This method gets a String that represents a date and 
+ * returns true if that date is today or in the past. False if not today or in the past. 
+ * @param {ISO 8601 string} dateString - accepts a ISO 8601 String Syntax (YYYY-MM-DD)
+ */
+function isDue(dateString) {
+    let today = new Date();
+    today = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    let dueDate = new Date(dateString);
+    return dueDate.getTime() <= today;
+}
