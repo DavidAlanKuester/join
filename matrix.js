@@ -34,7 +34,7 @@ function initializeMatrix(currentUserId) {
  */
 function getMatrixTasks(tasks, userId, matrixTasks) {
     tasks.forEach(task => {
-        if (isCurrentUserAssigneeInTask(task, userId) || isCreatorCurrentUserOfTask(task, userId) ) {
+        if (isCurrentUserAssigneeInTask(task, userId) || isCreatorCurrentUserOfTask(task, userId)) {
             matrixTasks.push(task);
         }
     });
@@ -48,9 +48,7 @@ function getMatrixTasks(tasks, userId, matrixTasks) {
  */
 function isCurrentUserAssigneeInTask(task, userId) {
     task["assigned-to"].forEach(assigneeId => {
-        if (assigneeId.toString() === userId.toString()) {
-            return true;
-        }
+        if (assigneeId.toString() === userId.toString()) return true;
     });
     return false;
 }
@@ -72,9 +70,7 @@ function isCreatorCurrentUserOfTask(task, userId) {
  */
 function checkTasksForArrivingDueDate(matrixTasks) {
     matrixTasks.forEach(task => {
-        if (isScheduleTask(task) && isDue(task["due-date"])) {
-            setTaskCategoryToDo(task);
-        }
+        if (isScheduleTask(task) && isDue(task["due-date"])) setTaskCategoryToDo(task);
     });
 }
 
@@ -87,27 +83,27 @@ function initializeTasksInMatrix(matrixTasks) {
     matrixTasks.forEach(task => {
         switch (task["display"]) {
             case eisenhowerMatrixCategrories.DO:
-                addTaskToMatrix(task, MatrixIds.ADD_Task_DO, ".do");
+                addTaskToMatrix(task, MatrixIds.ADD_Task_DO, "do");
                 break;
-    
+
             case eisenhowerMatrixCategrories.SCHEDULE:
-                addTaskToMatrix(task, MatrixIds.ADD_TASK_SCHEDULE, ".schedule");
+                addTaskToMatrix(task, MatrixIds.ADD_TASK_SCHEDULE, "schedule");
                 break;
-    
+
             case eisenhowerMatrixCategrories.DELEGATE:
-                addTaskToMatrix(task, MatrixIds.ADD_TASK_DELEGATE, ".delegate");
+                addTaskToMatrix(task, MatrixIds.ADD_TASK_DELEGATE, "delegate");
                 break;
 
             case eisenhowerMatrixCategrories.ELIMINATE:
-                addTaskToMatrix(task, MatrixIds.ADD_TASK_ELIMINATE, ".eliminate");
-                break;            
-    
+                addTaskToMatrix(task, MatrixIds.ADD_TASK_ELIMINATE, "eliminate");
+                break;
+
             default:
                 console.error("Error in initializeTasksInMatrix");
                 break;
         }
     });
-    
+
 }
 
 /**
@@ -115,8 +111,8 @@ function initializeTasksInMatrix(matrixTasks) {
  * @param {Json object} task - a task represented as a JSON object 
  * @param {String} IdString - a string representing the ID where to add the task
  */
-function addTaskToMatrix(task, IdString){
-    let taskHtmlString = createMatrixTask(task);
+function addTaskToMatrix(task, IdString, sidebarColorClassString) {
+    let taskHtmlString = createMatrixTask(task, sidebarColorClassString);
     document.getElementById(IdString).insertAdjacentHTML("beforeend", taskHtmlString);
 }
 
@@ -141,17 +137,39 @@ function ConvertToEuropeanDateString(dateString, delimiter) {
  * and returns the created task
  * @param {Json object} task - a task represented as a JSON object 
  */
-function createMatrixTask(task) {
-    return (`<div class="matrix-task-container">
+function createMatrixTask(task, sidebarColorClassString) {
+    return (`<div id="task-${task["task-id"]}" class="matrix-task-container ${sidebarColorClassString}" 
+            draggable="true" ondragstart="dragTask(event)">
          <div class="matrix-task-date"> ${ConvertToEuropeanDateString(task['due-date'], '.')} </div>
          <div class="matrix-task-title"> ${task['title']} </div>
          <div class="matrix-task-description"> ${task['description']} </div>
          <div class="matrix-task-category-img-container">
          <div class="matrix-task-category"> ${task['category']} </div>
-         <div><img src="img/person.png" class="matrix-task-img"></div>
+         <div><img src="img/id0.png" class="matrix-task-img"></div>
          </div>
          </div>`);
 }
+
+
+function allowDrop(ev) {
+    ev.preventDefault();
+}
+
+function dragTask(ev) {
+    ev.dataTransfer.setData("text", ev.target.id);
+}
+
+
+function dropTask(ev) {
+    ev.preventDefault();
+    let id = ev.dataTransfer.getData("text");
+    console.log(ev.target);
+    console.log(ev.target.class);
+    ev.target.appendChild(document.getElementById(id));
+    // update task based on task id
+    console.log("foo");
+}
+
 
 /**
  * This task accepts a task and returns true if that task has the display property of schedule
@@ -161,7 +179,7 @@ function isScheduleTask(task) {
     return (task["display"].toString() === eisenhowerMatrixCategrories.SCHEDULE.toString());
 }
 
-/*  #######################################################################################################################        
+/*  #######################################################################################################################
                                     FOR INITIALIZE EISENHOWERCATEGORY WHEN CREATING TASK
     #######################################################################################################################
 function getEisenhowerCategory(task) {

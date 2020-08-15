@@ -14,9 +14,9 @@
 
 <body onload="includeHTML('matrix'), initializeMatrix(0)">
     <div class="bg-container">
-       
-            <div w3-include-html="sidebar.html"></div>
-        
+
+        <div w3-include-html="sidebar.html"></div>
+
         <div class="outer-matrix-container">
             <!--    Upper Category URGENCY  -->
             <div class="urgency-text-container">
@@ -53,7 +53,7 @@
                         <div class="i-t-m-lower">
                             <div class="importance-vertical-line"></div>
                         </div>
-                        
+
                     </div>
                     <div class="importance-text-down font-headlines">
                         LOW
@@ -68,7 +68,8 @@
                             <div class="matrix-title-container label-blue font-headlines">
                                 DO
                             </div>
-                            <div id="matrix-tasks-do-here" class="matrix-tasks-container bg-light-blue">
+                            <div id="matrix-tasks-do-here" class="matrix-tasks-container bg-light-blue"
+                                ondragover="allowDrop(event)" ondrop="dropTask(event)">
                                 <!--
                                 <div class="matrix-task-container">
                                     <div class="matrix-task-date">12.05.20</div>
@@ -96,8 +97,9 @@
                             <div class="matrix-title-container label-blue font-headlines">
                                 SCHEDULE
                             </div>
-                            <div id="matrix-tasks-schedule-here" class="matrix-tasks-container bg-light-blue float-left">
-                                
+                            <div id="matrix-tasks-schedule-here" class="matrix-tasks-container bg-light-blue float-left"
+                                ondragover="allowDrop(event)" ondrop="dropTask(event)">
+
                             </div>
                         </div>
                     </div>
@@ -108,8 +110,9 @@
                             <div class="matrix-title-container label-blue font-headlines">
                                 DELEGATE
                             </div>
-                            <div id="matrix-tasks-delegate-here" class="matrix-tasks-container bg-light-blue">
-                                
+                            <div id="matrix-tasks-delegate-here" class="matrix-tasks-container bg-light-blue"
+                                ondragover="allowDrop(event)" ondrop="dropTask(event)">
+
                             </div>
                         </div>
                         <!--    ELIMINATE   -->
@@ -117,8 +120,10 @@
                             <div class="matrix-title-container label-blue font-headlines">
                                 ELIMINATE
                             </div>
-                            <div id="matrix-tasks-eliminate-here" class="matrix-tasks-container bg-light-blue float-left">
-                                
+                            <div id="matrix-tasks-eliminate-here"
+                                class="matrix-tasks-container bg-light-blue float-left" ondragover="allowDrop(event)"
+                                ondrop="dropTask(event)">
+
                             </div>
                         </div>
                     </div>
@@ -126,7 +131,7 @@
             </div>
         </div>
     </div>
-<!--
+    <!--
 <button style="width: 50px; height: 50px;" onclick="initializeMatrix()">push see button</button>
 -->
 
