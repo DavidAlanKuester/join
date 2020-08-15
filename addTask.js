@@ -1,4 +1,5 @@
 let selectedUsers = [];
+let userID = [];
 
 // *************** Mode to enable Cancel & Create Button -Start ************************
 function enableBtns() {
@@ -29,13 +30,12 @@ function insertUsers() {
     ${user.name}
 </div>
 `;
-
         document.getElementById('user-picker-container').insertAdjacentHTML("beforeend", htmlContent);
     });
 }
 
-function selectUser(id){
-    let user = users.find(function(u) {
+function selectUser(id) {
+    let user = users.find(function (u) {
         return u.id == id;
     });
     console.log('Found user', user);
@@ -44,25 +44,37 @@ function selectUser(id){
 
 function back() {
     document.getElementById('addPersonBlend').classList.add('d-none');
+    // Render selected users
+    for (let i = 0; i < selectedUsers.length; i++) {
+        let user = selectedUsers[0];
+        let htmlContent = `<div><img src="${user.img}">${user.name}</div>`;
+        document.getElementById('assign-person-div').insertAdjacentHTML("beforeend", htmlContent);
+        if (i >= 0) {
+            document.getElementById('remove-btn').classList.remove('d-none');
+        }
+        
+    }   
+}
 
+function getUserID() {
+    for(let i=0; i < selectedUsers.length; i++){
+        let user = selectedUsers[i];
+        userID.push(user.id);
+      }
 }
 
 function addPerson() {
     document.getElementById('addPersonBlend').classList.remove('d-none');
-    persons++;
-    if (persons <= 4) {
-        let person = document.createElement('img');
+    if (selectedUsers <= 4) {
+        let user = document.createElement('img');
         let div = document.getElementById('assign-person-div');
-        person.src = 'img/' + idImgs;
-        div.appendChild(person);
-        persons = persons + 0;
+        user.src = selectedUsers[3][img];
+        div.appendChild(user);
     }
-    if (persons <= 1) {
-        document.getElementById('remove-btn-div').classList.remove('d-none');
-    }
+
 }
 function removePerson() {
-    persons = 0;
+    selectedUsers = 0;
     document.getElementById('assign-person-div').innerHTML = '';
     document.getElementById('remove-btn-div').classList.add('d-none');
 }
@@ -103,8 +115,6 @@ function addDisableAttributeBtn() {
 }
 
 function newTask() {
-    // let personDiv = document.getElementById('assign-person-div');
-    // let Imgs = personDiv.document.getElementsByTagName('img');
     let newTask = {
         "task-id": taskID++,
         "title": document.getElementById('titleInput').value,
@@ -112,8 +122,9 @@ function newTask() {
         "description": document.getElementById('descriptionInput').value,
         "due-date": document.getElementById('dateInput').value,
         "importance": document.getElementById('importanceInput').value,
-        //  "assigned-to": Imgs
+        "assigned-to": userID,
     }
+
     tasks.push(newTask)
 }
 
@@ -134,7 +145,7 @@ function cancelTask() {
     document.getElementById('dateInput').value = "";
     document.getElementById('importanceInput').value = ""
     document.getElementById('importanceOutput').innerHTML = "";
+    removePerson()
 }
 // ***** Cancel Task  - End *******
-
 

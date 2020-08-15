@@ -162,9 +162,18 @@
 .assign-person-div div {
     display: flex;
 }
+.assign-person-div div div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+}
+
 .assign-person-div img {
     margin-left: 4px;
     margin-right: 4px;
+    margin-bottom: 4px;
     height: 50px;
     width: 50px;
     object-fit: cover;
