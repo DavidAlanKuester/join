@@ -5,6 +5,7 @@
   "main": "overallApp.js",
   "dependencies": {
     "bootstrap": "^4.5.2",
+    "jslint": "^0.12.1",
     "serve": "^11.3.2"
   },
   "devDependencies": {},

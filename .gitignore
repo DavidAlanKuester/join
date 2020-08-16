@@ -6,3 +6,6 @@ package-lock.json
 
 # Files in progress of development #
 assigment.html
+
+# Files produced by jsdoc
+out/*

@@ -98,26 +98,16 @@
 
         
             
-<h4 class="name" id="currentUserTasks"><span class="type-signature"></span>currentUserTasks<span class="type-signature"> :Array</span></h4>
+<h4 class="name" id="MatrixIds"><span class="type-signature">(constant) </span>MatrixIds<span class="type-signature"></span></h4>
 
 
 
 
 <div class="description">
-    Holds the tasks created by the current user
+    Enum der IDs zum hinzufügen der task zu den Eisenhower Kategorien
 </div>
 
 
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">Array</span>
-
-
-        </li>
-    </ul>
 
 
 
@@ -152,151 +142,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="list.js.html">list.js</a>, <a href="list.js.html#line92">line 92</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-        
-            
-<h4 class="name" id="listContent"><span class="type-signature"></span>listContent<span class="type-signature"> :HTMLDivElement</span></h4>
-
-
-
-
-<div class="description">
-    - Div Container of the Generated HTML Code for a Task
-</div>
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">HTMLDivElement</span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="list.js.html">list.js</a>, <a href="list.js.html#line66">line 66</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-        
-            
-<h4 class="name" id="ONE_DAY_MILLISECONDS"><span class="type-signature">(constant) </span>ONE_DAY_MILLISECONDS<span class="type-signature"> :number</span></h4>
-
-
-
-
-<div class="description">
-    - constat number that represent one day in milliseconds
-</div>
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">number</span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="list.js.html">list.js</a>, <a href="list.js.html#line39">line 39</a>
+        <a href="matrix.js.html">matrix.js</a>, <a href="matrix.js.html#line4">line 4</a>
     </li></ul></dd>
     
 
@@ -324,7 +170,7 @@
     
 
     
-    <h4 class="name" id="calculateUrgency"><span class="type-signature"></span>calculateUrgency<span class="signature">(date)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+    <h4 class="name" id="addTaskToMatrix"><span class="type-signature"></span>addTaskToMatrix<span class="signature">(task, IdString)</span><span class="type-signature"></span></h4>
     
 
     
@@ -332,7 +178,7 @@
 
 
 <div class="description">
-    Calculates the urgency of a task.
+    This method creates an html task from a Json task and adds it to a provided ID
 </div>
 
 
@@ -364,325 +210,6 @@
     </thead>
 
     <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>date</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">ISO-8601 string date format YYYY-MM-DD</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="list.js.html">list.js</a>, <a href="list.js.html#line48">line 48</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    - true if the time difference between date and actual time is less then one day, else false
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">boolean</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="displayListOfAssigments"><span class="type-signature"></span>displayListOfAssigments<span class="signature">(currentUserId)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Initialise currentUserTasks array and listContent HTML element with the tasks to be displayed
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>currentUserId</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">used to initiate currentUserTasks Array with tasks created by the user with id same as given currentUserId</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="list.js.html">list.js</a>, <a href="list.js.html#line146">line 146</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="generateListItem"><span class="type-signature"></span>generateListItem<span class="signature">(user, task)</span><span class="type-signature"> &rarr; {string}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Generates HTML Code for a task
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>user</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Display image, name and email of the user</td>
-        </tr>
-
     
 
         <tr>
@@ -693,7 +220,7 @@
             <td class="type">
             
                 
-<span class="param-type">object</span>
+<span class="param-type">JSON.&lt;Object></span>
 
 
             
@@ -703,7 +230,30 @@
 
             
 
-            <td class="description last">Display task color, categorie and description</td>
+            <td class="description last">a task represented as a JSON object</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>IdString</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">a string representing the ID where to add the task</td>
         </tr>
 
     
@@ -744,7 +294,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="list.js.html">list.js</a>, <a href="list.js.html#line127">line 127</a>
+        <a href="matrix.js.html">matrix.js</a>, <a href="matrix.js.html#line88">line 88</a>
     </li></ul></dd>
     
 
@@ -769,28 +319,6 @@
 
 
 
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    multiline string HTML Code
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">string</span>
-
-
-    </dd>
-</dl>
-
-    
 
 
 
@@ -802,7 +330,7 @@
     
 
     
-    <h4 class="name" id="getEisenhowerCategorie"><span class="type-signature"></span>getEisenhowerCategorie<span class="signature">(important, dueDate)</span><span class="type-signature"> &rarr; {string}</span></h4>
+    <h4 class="name" id="adjustTaskSideColor"><span class="type-signature"></span>adjustTaskSideColor<span class="signature">(taskHtmlId, eisenhowerCategory)</span><span class="type-signature"></span></h4>
     
 
     
@@ -810,7 +338,7 @@
 
 
 <div class="description">
-    Calculates and returns Eisenhower Matrix Categorie based on the importance and dueDate of a task
+    This method changes the left side border color according to its Eisenhower category
 </div>
 
 
@@ -846,13 +374,13 @@
 
         <tr>
             
-                <td class="name"><code>important</code></td>
+                <td class="name"><code>taskHtmlId</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">number</span>
+<span class="param-type">String</span>
 
 
             
@@ -862,20 +390,20 @@
 
             
 
-            <td class="description last">Task Importance Level</td>
+            <td class="description last">The ID to an object in the html side</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>dueDate</code></td>
+                <td class="name"><code>eisenhowerCategory</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">string</span>
+<span class="param-type">String</span>
 
 
             
@@ -885,7 +413,7 @@
 
             
 
-            <td class="description last">Task Due Date</td>
+            <td class="description last">The Eisenhower category the task changes to</td>
         </tr>
 
     
@@ -926,7 +454,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="list.js.html">list.js</a>, <a href="list.js.html#line9">line 9</a>
+        <a href="matrix.js.html">matrix.js</a>, <a href="matrix.js.html#line195">line 195</a>
     </li></ul></dd>
     
 
@@ -951,28 +479,6 @@
 
 
 
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    - Eisenhower Matrix Categorie Name
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">string</span>
-
-
-    </dd>
-</dl>
-
-    
 
 
 
@@ -984,7 +490,7 @@
     
 
     
-    <h4 class="name" id="getUserById"><span class="type-signature"></span>getUserById<span class="signature">(id)</span><span class="type-signature"> &rarr; {object|undefined}</span></h4>
+    <h4 class="name" id="allowDrop"><span class="type-signature"></span>allowDrop<span class="signature">(ev)</span><span class="type-signature"></span></h4>
     
 
     
@@ -992,7 +498,144 @@
 
 
 <div class="description">
-    Returns user object with id value same as id parameter value
+    This method allows to drop an element over an area
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>ev</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">DataTransfer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The event created from an HTML5 drop down event</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="matrix.js.html">matrix.js</a>, <a href="matrix.js.html#line136">line 136</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="checkTask"><span class="type-signature"></span>checkTask<span class="signature">(id)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    This method is used for testing purposes of the dropdown functionality
 </div>
 
 
@@ -1044,7 +687,7 @@
 
             
 
-            <td class="description last">a number id to find the wanted user from  users array</td>
+            <td class="description last"></td>
         </tr>
 
     
@@ -1085,7 +728,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="list.js.html">list.js</a>, <a href="list.js.html#line115">line 115</a>
+        <a href="matrix.js.html">matrix.js</a>, <a href="matrix.js.html#line227">line 227</a>
     </li></ul></dd>
     
 
@@ -1110,31 +753,6 @@
 
 
 
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    user with id value same as id parameter value or undefinde if users array has no user that matches the id parameter value
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">object</span>
-|
-
-<span class="param-type">undefined</span>
-
-
-    </dd>
-</dl>
-
-    
 
 
 
@@ -1146,7 +764,7 @@
     
 
     
-    <h4 class="name" id="initiateListContent"><span class="type-signature"></span>initiateListContent<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="checkTasksForArrivingDueDate"><span class="type-signature"></span>checkTasksForArrivingDueDate<span class="signature">(matrixTasks)</span><span class="type-signature"></span></h4>
     
 
     
@@ -1154,7 +772,7 @@
 
 
 <div class="description">
-    Loops the currentUserTasks Arrary, for each task object and for each userId number in each task.assigned-to array,generates HTML Code and inserts the Code before the end of listContent HTMLElement.
+    This method iterates through all Json tasks and checks if a taskwith the property schedule has reached its due date.If the due date has been reached the task is set to Category do
 </div>
 
 
@@ -1163,6 +781,55 @@
 
 
 
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>matrixTasks</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;JSON></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">a list of Json tasks</td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
@@ -1198,7 +865,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="list.js.html">list.js</a>, <a href="list.js.html#line73">line 73</a>
+        <a href="matrix.js.html">matrix.js</a>, <a href="matrix.js.html#line45">line 45</a>
     </li></ul></dd>
     
 
@@ -1234,7 +901,7 @@
     
 
     
-    <h4 class="name" id="initiateUserTasksArray"><span class="type-signature"></span>initiateUserTasksArray<span class="signature">(userId)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="ConvertToEuropeanDateString"><span class="type-signature"></span>ConvertToEuropeanDateString<span class="signature">(dateString, delimiter)</span><span class="type-signature"></span></h4>
     
 
     
@@ -1242,7 +909,578 @@
 
 
 <div class="description">
-    Initialise currentUserTasks array
+    This function takes a date String and returns a string converted in the format DD-MM-YYYY.The delimiter between the date can be set to an arbitrary string.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>dateString</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">ISO 8601 string "YYYY-MM-DD"</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>delimiter</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">symbol between the date parts e.g. - in "MM-DD"</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="matrix.js.html">matrix.js</a>, <a href="matrix.js.html#line100">line 100</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="createMatrixTask"><span class="type-signature"></span>createMatrixTask<span class="signature">(task)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    This task accepts a task, creates a HTML object to represent that taskand returns the created task
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>task</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">JSON.&lt;Object></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">a task represented as a JSON object</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="matrix.js.html">matrix.js</a>, <a href="matrix.js.html#line114">line 114</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="dragTask"><span class="type-signature"></span>dragTask<span class="signature">(ev)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    This method saves the id of the element that is being dragged
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>ev</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">DataTransfer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The event created from an HTML5 drop down event</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="matrix.js.html">matrix.js</a>, <a href="matrix.js.html#line144">line 144</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="dropTask"><span class="type-signature"></span>dropTask<span class="signature">(ev)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    This method controls if drop is performed inside the correct area marked with "drop-area"
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>ev</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">DataTransfer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The event created from an HTML5 drop down event</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="matrix.js.html">matrix.js</a>, <a href="matrix.js.html#line153">line 153</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getMatrixTasks"><span class="type-signature"></span>getMatrixTasks<span class="signature">(userId)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    This method iterates through all tasks, checks if they are relevant to display in the matrix of the current user and returns them.
 </div>
 
 
@@ -1294,7 +1532,7 @@
 
             
 
-            <td class="description last">used to get only the tasks created by the user with id value same as userId from tasksDummy array</td>
+            <td class="description last">The ID of the user</td>
         </tr>
 
     
@@ -1335,7 +1573,715 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="list.js.html">list.js</a>, <a href="list.js.html#line100">line 100</a>
+        <a href="matrix.js.html">matrix.js</a>, <a href="matrix.js.html#line30">line 30</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="initializeMatrix"><span class="type-signature"></span>initializeMatrix<span class="signature">(currentUserId)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    This method loads the Matrix
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>currentUserId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">a number representing the ID of the current user</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="matrix.js.html">matrix.js</a>, <a href="matrix.js.html#line18">line 18</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="initializeTasksInMatrix"><span class="type-signature"></span>initializeTasksInMatrix<span class="signature">(matrixTasks)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    This method iterates through all tasks and adds the task to the matrixaccording to the display property of the task
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>matrixTasks</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;JSON></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">a list of Json tasks</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="matrix.js.html">matrix.js</a>, <a href="matrix.js.html#line56">line 56</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="isScheduleTask"><span class="type-signature"></span>isScheduleTask<span class="signature">(task)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    This task accepts a task and returns true if that task has the display property of schedule
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>task</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">JSON.&lt;Object></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">a task represented as a JSON object</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="matrix.js.html">matrix.js</a>, <a href="matrix.js.html#line239">line 239</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="performDropTask"><span class="type-signature"></span>performDropTask<span class="signature">(ev)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    This method performs drop of the dropdown and switches the task to its new place & calls the update function
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>ev</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">DataTransfer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The event created from an HTML5 drop down event</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="matrix.js.html">matrix.js</a>, <a href="matrix.js.html#line166">line 166</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="updateTask"><span class="type-signature"></span>updateTask<span class="signature">(id, eisenhowerCategory)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    This Method performs the updaing of a task by changing its display property and its side border color according to the provided eisenhower category
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The html ID of the object</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>eisenhowerCategory</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Represents one of the 4 Eisenhower categories</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="matrix.js.html">matrix.js</a>, <a href="matrix.js.html#line180">line 180</a>
     </li></ul></dd>
     
 
@@ -1381,13 +2327,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#calculateUrgency">calculateUrgency</a></li><li><a href="global.html#currentUserTasks">currentUserTasks</a></li><li><a href="global.html#displayListOfAssigments">displayListOfAssigments</a></li><li><a href="global.html#generateListItem">generateListItem</a></li><li><a href="global.html#getEisenhowerCategorie">getEisenhowerCategorie</a></li><li><a href="global.html#getUserById">getUserById</a></li><li><a href="global.html#initiateListContent">initiateListContent</a></li><li><a href="global.html#initiateUserTasksArray">initiateUserTasksArray</a></li><li><a href="global.html#listContent">listContent</a></li><li><a href="global.html#ONE_DAY_MILLISECONDS">ONE_DAY_MILLISECONDS</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addTaskToMatrix">addTaskToMatrix</a></li><li><a href="global.html#adjustTaskSideColor">adjustTaskSideColor</a></li><li><a href="global.html#allowDrop">allowDrop</a></li><li><a href="global.html#checkTask">checkTask</a></li><li><a href="global.html#checkTasksForArrivingDueDate">checkTasksForArrivingDueDate</a></li><li><a href="global.html#ConvertToEuropeanDateString">ConvertToEuropeanDateString</a></li><li><a href="global.html#createMatrixTask">createMatrixTask</a></li><li><a href="global.html#dragTask">dragTask</a></li><li><a href="global.html#dropTask">dropTask</a></li><li><a href="global.html#getMatrixTasks">getMatrixTasks</a></li><li><a href="global.html#initializeMatrix">initializeMatrix</a></li><li><a href="global.html#initializeTasksInMatrix">initializeTasksInMatrix</a></li><li><a href="global.html#isScheduleTask">isScheduleTask</a></li><li><a href="global.html#MatrixIds">MatrixIds</a></li><li><a href="global.html#performDropTask">performDropTask</a></li><li><a href="global.html#updateTask">updateTask</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.5</a> on Thu Aug 13 2020 21:12:18 GMT+0200 (GMT+02:00)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.5</a> on Sun Aug 16 2020 18:40:01 GMT+0200 (GMT+02:00)
 </footer>
 
 <script> prettyPrint(); </script>

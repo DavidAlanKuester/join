@@ -40,7 +40,7 @@ function getMatrixTasks(userId) {
  * This method iterates through all Json tasks and checks if a task
  * with the property schedule has reached its due date.
  * If the due date has been reached the task is set to Category do 
- * @param {Json arbitrary} matrixTasks - a list of Json tasks
+ * @param {Array<JSON>} matrixTasks - a list of Json tasks
  */
 function checkTasksForArrivingDueDate(matrixTasks) {
     matrixTasks.forEach(task => {
@@ -51,7 +51,7 @@ function checkTasksForArrivingDueDate(matrixTasks) {
 /**
  * This method iterates through all tasks and adds the task to the matrix
  * according to the display property of the task
- * @param {Json Array} matrixTasks - a list of Json tasks
+ * @param {Array<JSON>} matrixTasks - a list of Json tasks
  */
 function initializeTasksInMatrix(matrixTasks) {
     matrixTasks.forEach(task => {
@@ -82,7 +82,7 @@ function initializeTasksInMatrix(matrixTasks) {
 
 /**
  * This method creates an html task from a Json task and adds it to a provided ID
- * @param {Json object} task - a task represented as a JSON object 
+ * @param {JSON<Object>} task - a task represented as a JSON object 
  * @param {String} IdString - a string representing the ID where to add the task
  */
 function addTaskToMatrix(task, IdString, sidebarColorClassString) {
@@ -94,8 +94,8 @@ function addTaskToMatrix(task, IdString, sidebarColorClassString) {
 /**
  * This function takes a date String and returns a string converted in the format DD-MM-YYYY.
  * The delimiter between the date can be set to an arbitrary string.
- * @param {ISO 8601 string} dateString 
- * @param {string} delimiter 
+ * @param {String} dateString - ISO 8601 string "YYYY-MM-DD"
+ * @param {String} delimiter - symbol between the date parts e.g. - in "MM-DD"
  */
 function ConvertToEuropeanDateString(dateString, delimiter) {
     let date = new Date(dateString);
@@ -109,7 +109,7 @@ function ConvertToEuropeanDateString(dateString, delimiter) {
 /**
  * This task accepts a task, creates a HTML object to represent that task
  * and returns the created task
- * @param {Json object} task - a task represented as a JSON object 
+ * @param {JSON<Object>} task - a task represented as a JSON object 
  */
 function createMatrixTask(task, sidebarColorClassString) {
     return (`<div id="task-${task["task-id"]}" class="matrix-task-container ${sidebarColorClassString}" 
@@ -131,7 +131,7 @@ function storeMatrixTasksInLocalStorage(matrixTasks) {
 
 /**
  * This method allows to drop an element over an area
- * @param {HTML5 DropDOwnEvent} ev - The event created from an HTML5 drop down event
+ * @param {DataTransfer} ev - The event created from an HTML5 drop down event
  */
 function allowDrop(ev) {
     ev.preventDefault();
@@ -139,7 +139,7 @@ function allowDrop(ev) {
 
 /**
  * This method saves the id of the element that is being dragged
- * @param {HTML5 DropDOwnEvent} ev - The event created from an HTML5 drop down event
+ * @param {DataTransfer} ev - The event created from an HTML5 drop down event
  */
 function dragTask(ev) {
     ev.dataTransfer.setData("text", ev.target.id);
@@ -148,7 +148,7 @@ function dragTask(ev) {
 
 /**
  * This method controls if drop is performed inside the correct area marked with "drop-area"
- * @param {HTML5 DropDOwnEvent} ev - The event created from an HTML5 drop down event
+ * @param {DataTransfer} ev - The event created from an HTML5 drop down event
  */
 function dropTask(ev) {
     ev.target.classList.forEach(cssClass => {
@@ -161,7 +161,7 @@ function dropTask(ev) {
 /**
  * This method performs drop of the dropdown 
  * and switches the task to its new place & calls the update function
- * @param {HTML5 DropDownEvent} ev - The event created from an HTML5 drop down event
+ * @param {DataTransfer} ev - The event created from an HTML5 drop down event
  */
 function performDropTask(ev) {
     ev.preventDefault();
@@ -234,7 +234,7 @@ function checkTask(id) {
 
 /**
  * This task accepts a task and returns true if that task has the display property of schedule
- * @param {Json object} task - a task represented as a JSON object 
+ * @param {JSON<Object>} task - a task represented as a JSON object 
  */
 function isScheduleTask(task) {
     return (task["display"].toString() === eisenhowerMatrixCategrories.SCHEDULE.toString());
