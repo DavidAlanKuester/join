@@ -4,7 +4,7 @@
   "description": "Mihai First Commit Test",
   "main": "overallApp.js",
   "dependencies": {
-    "bootstrap": "^4.5.1",
+    "bootstrap": "^4.5.2",
     "serve": "^11.3.2"
   },
   "devDependencies": {},
