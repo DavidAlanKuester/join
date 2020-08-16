@@ -10,6 +10,9 @@ const MatrixIds =
 }
 Object.freeze(MatrixIds);
 
+let matrixTasks = [];
+
+
 /**
  * This method initially loads the Matrix
  * @param {number} currentUserId - a number representing the ID of the current user
@@ -18,7 +21,6 @@ function initializeMatrix(currentUserId) {
     /**
      * A list of Json tasks that should be represented in the matrix
      */
-    let matrixTasks = [];
     getMatrixTasks(tasksDummy, currentUserId, matrixTasks);
     checkTasksForArrivingDueDate(matrixTasks);
     initializeTasksInMatrix(matrixTasks);
@@ -34,33 +36,12 @@ function initializeMatrix(currentUserId) {
  */
 function getMatrixTasks(tasks, userId, matrixTasks) {
     tasks.forEach(task => {
-        if (isCurrentUserAssigneeInTask(task, userId) || isCreatorCurrentUserOfTask(task, userId)) {
+        if (task["assigned-to"].includes(userId) || task["creator"].toString() === userId.toString()) {
             matrixTasks.push(task);
         }
     });
 }
 
-/**
- * This method iterates through all assginees in a task 
- * and returns true if the provided userID is inside that list
- * @param {Json object} task - a task represented as a JSON object 
- * @param {number} userId - a number representing the user-ID
- */
-function isCurrentUserAssigneeInTask(task, userId) {
-    task["assigned-to"].forEach(assigneeId => {
-        if (assigneeId.toString() === userId.toString()) return true;
-    });
-    return false;
-}
-
-/**
- * This method returns true if the provided task belongs to te provided user-ID. False if not
- * @param {Json object} task - a task represented as a JSON object 
- * @param {number} userId - a number representing the user-ID
- */
-function isCreatorCurrentUserOfTask(task, userId) {
-    return (task["creator"].toString() === userId.toString());
-}
 
 /**
  * This method iterates through all Json tasks and checks if a task
@@ -150,26 +131,106 @@ function createMatrixTask(task, sidebarColorClassString) {
          </div>`);
 }
 
-
+/**
+ * This method allows to drop an element over an area
+ * @param {HTML5 DropDOwnEvent} ev - The event created from an HTML5 drop down event
+ */
 function allowDrop(ev) {
     ev.preventDefault();
 }
 
+/**
+ * This method saves the id of the element that is being dragged
+ * @param {HTML5 DropDOwnEvent} ev - The event created from an HTML5 drop down event
+ */
 function dragTask(ev) {
     ev.dataTransfer.setData("text", ev.target.id);
 }
 
 
+/**
+ * This method controls if drop is performed inside the correct area marked with "drop-area"
+ * @param {HTML5 DropDOwnEvent} ev - The event created from an HTML5 drop down event
+ */
 function dropTask(ev) {
     ev.target.classList.forEach(cssClass => {
         if (cssClass === 'drop-area') {
-            ev.preventDefault();
-            let id = ev.dataTransfer.getData("text");
-            ev.target.appendChild(document.getElementById(id));
+            performDropTask(ev);
         }
     });
 }
 
+/**
+ * This method performs drop of the dropdown 
+ * and switches the task to its new place & calls the update function
+ * @param {HTML5 DropDownEvent} ev - The event created from an HTML5 drop down event
+ */
+function performDropTask(ev) {
+    ev.preventDefault();
+    let id = ev.dataTransfer.getData("text");
+    ev.target.appendChild(document.getElementById(id));
+    updateTask(id, ev.target.getAttribute("data-eisenhower-category"));
+}
+
+
+/**
+ * This Method performs the updaing of a task by changing its display property 
+ * and its side border color according to the provided eisenhower category
+ * @param {String} id - The html ID of the object
+ * @param {String} eisenhowerCategory - Represents one of the 4 Eisenhower categories
+ */
+function updateTask(id, eisenhowerCategory) {
+    let taskId = id.toString().substr(5);
+    let updateTask = matrixTasks.filter(task => task["task-id"] === taskId);
+    updateTask[0]["display"] = eisenhowerCategory;
+    adjustTaskSideColor(id, eisenhowerCategory);
+}
+
+
+/**
+ * This method changes the left side border color according to its Eisenhower category
+ * @param {String} taskHtmlId - The ID to an object in the html side
+ * @param {String} eisenhowerCategory - The Eisenhower category the task changes to 
+ */
+function adjustTaskSideColor(taskHtmlId, eisenhowerCategory) {
+    let task = document.getElementById(taskHtmlId);
+    task.classList.remove(eisenhowerMatrixCategrories.DO, eisenhowerMatrixCategrories.SCHEDULE,
+        eisenhowerMatrixCategrories.DELEGATE, eisenhowerMatrixCategrories.ELIMINATE);
+    switch (eisenhowerCategory) {
+        case eisenhowerMatrixCategrories.DO:
+            task.classList.add(eisenhowerMatrixCategrories.DO);
+            break;
+
+        case eisenhowerMatrixCategrories.SCHEDULE:
+            task.classList.add(eisenhowerMatrixCategrories.SCHEDULE);
+            break;
+
+        case eisenhowerMatrixCategrories.DELEGATE:
+            task.classList.add(eisenhowerMatrixCategrories.DELEGATE);
+            break;
+
+        case eisenhowerMatrixCategrories.ELIMINATE:
+            task.classList.add(eisenhowerMatrixCategrories.ELIMINATE);
+            break;
+
+        default:
+            console.error("Error occured in adjustTaskSideColor")
+            break;
+    }
+
+}
+
+/**
+ * This method is used for testing purposes of the dropdown functionality
+ * @param {number} id 
+ */
+function checkTask(id) {
+    matrixTasks.forEach(task => {
+        if (task["task-id"] === id.toString()) {
+            console.log(task["display"]);
+        }
+    });
+}
 
 /**
  * This task accepts a task and returns true if that task has the display property of schedule
@@ -218,16 +279,6 @@ function AddTaskInEisenhowerCategory(
             console.error("Error in AddTaskInEisenhoverCategory");
             break;
     }
-}
-
-
-function loadTasksIntoCategories(doTasks, scheduleTasks, delegateTasks, eliminateTasks) {
-    tasks["user-tasks"].forEach(user => {
-        user.tasks.forEach(task => {
-            AddTaskInEisenhowerCategory(task,
-                doTasks, scheduleTasks, delegateTasks, eliminateTasks)
-        });
-    });
 }
 
 #######################################################################################################################

@@ -68,7 +68,7 @@
                                 DO
                             </div>
                             <div id="matrix-tasks-do-here" class="matrix-tasks-container bg-light-blue drop-area"
-                                ondragover="allowDrop(event)" ondrop="dropTask(event)">
+                                ondragover="allowDrop(event)" ondrop="dropTask(event)" data-eisenhower-category="do">
                             </div>
                         </div>
                         <!--    SCHEDULE    -->
@@ -78,7 +78,7 @@
                             </div>
                             <div id="matrix-tasks-schedule-here"
                                 class="matrix-tasks-container bg-light-blue float-left drop-area"
-                                ondragover="allowDrop(event)" ondrop="dropTask(event)">
+                                ondragover="allowDrop(event)" ondrop="dropTask(event)" data-eisenhower-category="schedule">
 
                             </div>
                         </div>
@@ -91,7 +91,7 @@
                                 DELEGATE
                             </div>
                             <div id="matrix-tasks-delegate-here" class="matrix-tasks-container bg-light-blue drop-area"
-                                ondragover="allowDrop(event)" ondrop="dropTask(event)">
+                                ondragover="allowDrop(event)" ondrop="dropTask(event)" data-eisenhower-category="delegate">
 
                             </div>
                         </div>
@@ -102,7 +102,7 @@
                             </div>
                             <div id="matrix-tasks-eliminate-here"
                                 class="matrix-tasks-container bg-light-blue float-left  drop-area"
-                                ondragover="allowDrop(event)" ondrop="dropTask(event)">
+                                ondragover="allowDrop(event)" ondrop="dropTask(event)" data-eisenhower-category="eliminate">
 
                             </div>
                         </div>
@@ -111,9 +111,8 @@
             </div>
         </div>
     </div>
-    <!--
-<button style="width: 50px; height: 50px;" onclick="initializeMatrix()">push see button</button>
--->
+    <button style="width: 50px; height: 50px; float: right;" onclick="checkTask(1)">push see button</button>    
+
 
 
 </body>
