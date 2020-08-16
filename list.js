@@ -1,17 +1,14 @@
 /**
- * 
+ *
  * Calculates and returns Eisenhower Matrix Categorie based on the importance and dueDate of a task
- * 
+ *
  * @param {number} important - Task Importance Level
  * @param {string} dueDate - Task Due Date
  * @returns {string} - Eisenhower Matrix Categorie Name
- */
+*/
 function getEisenhowerCategorie(important, dueDate) {
     /**
-     * 
-     * Result of the calculated urgency based on the task dueDate
-     * 
-     * @type {boolean}
+     * @type {boolean} - Result of the calculated urgency based on the task dueDate
      */
     let urgent = calculateUrgency(dueDate);
 
@@ -32,23 +29,23 @@ function getEisenhowerCategorie(important, dueDate) {
     }
 }
 
- /**
+/**
 *
-* @type {number} - constat number that represent one day in milliseconds
+* @type {number} - Constat number that represent one Day in milliseconds
 */
 const ONE_DAY_MILLISECONDS = 86400000;
 
 /**
- * 
- *  Calculates the urgency of a task.
- * 
-* @param {string} date - ISO-8601 string date format YYYY-MM-DD 
+*
+*  Calculates the urgency of a task.
+*
+* @param {string} date - ISO-8601 string date format YYYY-MM-DD
 * @returns {boolean} - true if the time difference between date and actual time is less then one day, else false
 */
 function calculateUrgency(date) {
-   /**
-    * @type {number} - actual time in milliseconds
-    */
+    /**
+     * @type {number} - actual time in milliseconds
+     */
     let time = new Date().getTime();
     /**
      * @type {number} - converted date from string to milliseconds
@@ -63,21 +60,21 @@ function calculateUrgency(date) {
 /**
 * @type { HTMLDivElement } - Div Container of the Generated HTML Code for a Task
 */
-let listContent; 
+let listContent;
 
 /**
- * 
+ *
  * Loops the currentUserTasks Arrary, for each task object and for each userId number in each task.assigned-to array,
  * generates HTML Code and inserts the Code before the end of listContent HTMLElement.
  */
-function initiateListContent(){
+function initiateListContent() {
 
-    listContent =  document.getElementById("list");
+    listContent = document.getElementById("list");
 
     currentUserTasks.forEach(task => {
         task["assigned-to"].forEach(userId => {
             /**
-             * @type {string} - Generated HTML Code 
+             * @type {string} - Generated HTML Code
              */
             let listItem = generateListItem(getUserById(userId), task);
             listContent.insertAdjacentHTML("beforeend", listItem);
@@ -92,10 +89,10 @@ function initiateListContent(){
 let currentUserTasks = [];
 
 /**
- * 
- * Initialise currentUserTasks array 
- * 
- * @param {number} userId - used to get only the tasks created by the user with id value same as userId from tasksDummy array 
+ *
+ * Initialise currentUserTasks Array
+ *
+ * @param {number} userId - Used to get only the tasks created by the user with id value same as userId from tasksDummy Array
  */
 function initiateUserTasksArray(userId) {
     tasksDummy.forEach(task => {
@@ -106,9 +103,9 @@ function initiateUserTasksArray(userId) {
 }
 
 /**
- * 
+ *
  * Returns user object with id value same as id parameter value
- * 
+ *
  * @param {number} id - a number id to find the wanted user from  users array
  * @returns {(object|undefined)} user with id value same as id parameter value or undefinde if users array has no user that matches the id parameter value
  */
@@ -117,9 +114,9 @@ function getUserById(id) {
 }
 
 /**
- * 
+ *
  * Generates HTML Code for a task
- * 
+ *
  * @param {object} user - Display image, name and email of the user
  * @param {object} task - Display task color, categorie and description
  * @returns {string}  multiline string HTML Code
@@ -138,10 +135,10 @@ function generateListItem(user, task) {
 }
 
 /**
- * 
+ *
  *  Initialise currentUserTasks array and listContent HTML element with the tasks to be displayed
- * 
- * @param {number} currentUserId - used to initiate currentUserTasks Array with tasks created by the user with id same as given currentUserId
+ *
+ * @param {number} currentUserId - Used to initiate currentUserTasks Array with tasks created by the user with id same as given currentUserId
  */
 function displayListOfAssigments(currentUserId) {
 
