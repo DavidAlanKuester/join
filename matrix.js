@@ -10,36 +10,29 @@ const MatrixIds =
 }
 Object.freeze(MatrixIds);
 
-let matrixTasks = [];
-
 
 /**
- * This method initially loads the Matrix
+ * This method loads the Matrix
  * @param {number} currentUserId - a number representing the ID of the current user
  */
 function initializeMatrix(currentUserId) {
-    /**
-     * A list of Json tasks that should be represented in the matrix
-     */
-    getMatrixTasks(tasksDummy, currentUserId, matrixTasks);
+    let matrixTasks = getMatrixTasks(currentUserId);
     checkTasksForArrivingDueDate(matrixTasks);
     initializeTasksInMatrix(matrixTasks);
+    storeMatrixTasksInLocalStorage(matrixTasks);
 }
 
 /**
- * This method iterates through all tasks and checks if they are relevant 
- * to display in the matrix of the current user.
- * and returns all relevant elements.
- * @param {Json Array} tasks - a Json array representing all taks 
- * @param {number} userId - a number representing a user Id
- * @param {Json Array} matrixTasks - a Json array representing all tasks relevant to display in the matrix
+ * This method iterates through all tasks, checks if they are relevant 
+ * to display in the matrix of the current user and returns them.
+ * @param {number} userId - The ID of the user
  */
-function getMatrixTasks(tasks, userId, matrixTasks) {
-    tasks.forEach(task => {
-        if (task["assigned-to"].includes(userId) || task["creator"].toString() === userId.toString()) {
-            matrixTasks.push(task);
-        }
-    });
+function getMatrixTasks(userId) {
+    let matrixTasks =
+        tasksDummy.filter(
+            task => (task["assigned-to"].includes(userId) || task["creator"].toString() === userId.toString())
+        )
+    return matrixTasks;
 }
 
 
@@ -131,6 +124,11 @@ function createMatrixTask(task, sidebarColorClassString) {
          </div>`);
 }
 
+
+function storeMatrixTasksInLocalStorage(matrixTasks) {
+    localStorage.setItem("matrixTasks", JSON.stringify(matrixTasks));
+}
+
 /**
  * This method allows to drop an element over an area
  * @param {HTML5 DropDOwnEvent} ev - The event created from an HTML5 drop down event
@@ -180,10 +178,12 @@ function performDropTask(ev) {
  * @param {String} eisenhowerCategory - Represents one of the 4 Eisenhower categories
  */
 function updateTask(id, eisenhowerCategory) {
-    let taskId = id.toString().substr(5);
+    let taskId = id.substr(5);
+    let matrixTasks = JSON.parse(localStorage.getItem("matrixTasks"));
     let updateTask = matrixTasks.filter(task => task["task-id"] === taskId);
     updateTask[0]["display"] = eisenhowerCategory;
     adjustTaskSideColor(id, eisenhowerCategory);
+    localStorage.setItem("matrixTasks", JSON.stringify(matrixTasks));
 }
 
 
@@ -225,7 +225,7 @@ function adjustTaskSideColor(taskHtmlId, eisenhowerCategory) {
  * @param {number} id 
  */
 function checkTask(id) {
-    matrixTasks.forEach(task => {
+    JSON.parse(localStorage.getItem("matrixTasks")).forEach(task => {
         if (task["task-id"] === id.toString()) {
             console.log(task["display"]);
         }
