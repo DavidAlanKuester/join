@@ -91,10 +91,13 @@ function selectCategory() {
     executeEnableButtonScript();
 }
 
+let importance;
+
 function selectImportance() {
     let importanceChoice = document.getElementById('importanceInput');
     let displayImportanceText = importanceChoice.options[importanceChoice.selectedIndex].text;
     document.getElementById('importanceOutput').innerHTML = displayImportanceText;
+    importance = document.getElementById('importanceInput').value;
 }
 // ***** Value Add from Select to P - End ******* 
 
@@ -102,9 +105,12 @@ function selectImportance() {
 let taskID = 0
 
 function createTask() {
+    defineUrgency();
+    defineMatrix();
     newTask();
     addDisableAttributeBtn();
     displaySucessAlert();
+
     setTimeout(function () {
         cancelTask();
     }, 1000);
@@ -122,8 +128,10 @@ function newTask() {
         "category": document.getElementById('categoryInput').value,
         "description": document.getElementById('descriptionInput').value,
         "due-date": document.getElementById('datePickerInput').value,
+        "urgency": urgency,
         "importance": document.getElementById('importanceInput').value,
         "assigned-to": userID,
+        "display": display,
     }
 
     tasks.push(newTask)
@@ -147,16 +155,46 @@ function cancelTask() {
     document.getElementById('importanceInput').value = ""
     document.getElementById('importanceOutput').innerHTML = "";
     removePerson()
+    urgency = "";
+    display = "";
 }
 // ***** Cancel Task  - End *******
 
 // datePicker 
-/*
-let selectedDate = [];
+
+let selectedDate;
+let dayTime = 86400000;
+let urgency;
+let display;
 
 function getDate(){
-    let taskDate = new Date(document.getElementById('datePickerInput').value);
-    selectedDate.push(taskDate);
+    selectedDate = new Date(document.getElementById('datePickerInput').value).getTime();
+
+    console.log(selectedDate);
     }
     
-    */
+function defineUrgency() {
+    let createdTaskTime = new Date().getTime();
+    let DueDatedifference = selectedDate - createdTaskTime;
+    
+    if (DueDatedifference < dayTime) {
+        urgency = "High";
+    } else {
+        urgency = "Low";
+    }
+    console.log(urgency);
+}
+
+function defineMatrix() {
+    if (importance == "High" && urgency == "High") {
+        display = "Do"; 
+    } else if (importance == "High" && urgency == "Low") {
+        display = "Schedule"; 
+    } else if (importance == "Low" && urgency == "High") {
+        display = "Delegate"; 
+    } else if (importance == "Low" && urgency == "Low") {
+        display = "Eliminate"; 
+    } 
+    console.log(display);
+}
+ 
