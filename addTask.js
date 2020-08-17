@@ -10,9 +10,9 @@ function enableBtns() {
 }
 
 function executeEnableButtonScript() {
-    if (titleInput.value.length > 0 && descriptionInput.value.length > 0 && dateInput.value.length > 0) {
+    if (titleInput.value.length > 0 && descriptionInput.value.length > 0) {
         createBtn.removeAttribute('disabled');
-    } else if (titleInput.value.length > 0 || descriptionInput.value.length > 0 || dateInput.value.length > 0) {
+    } else if (titleInput.value.length > 0 || descriptionInput.value.length > 0) {
         cancelBtn.removeAttribute('disabled');
     }
 }
@@ -40,7 +40,6 @@ function selectUser(id) {
     let user = users.find(function (u) {
         return u.id == id;
     });
-    console.log('Found user', user);
     selectedUsers.push(user);
 }
 
@@ -122,7 +121,7 @@ function newTask() {
         "title": document.getElementById('titleInput').value,
         "category": document.getElementById('categoryInput').value,
         "description": document.getElementById('descriptionInput').value,
-        "due-date": document.getElementById('dateInput').value,
+        "due-date": document.getElementById('datePickerInput').value,
         "importance": document.getElementById('importanceInput').value,
         "assigned-to": userID,
     }
@@ -144,10 +143,20 @@ function cancelTask() {
     document.getElementById('categoryInput').value = ""
     document.getElementById('categoryOutput').innerHTML = "";
     document.getElementById('descriptionInput').value = "";
-    document.getElementById('dateInput').value = "";
+    document.getElementById('datePickerInput').value = "";
     document.getElementById('importanceInput').value = ""
     document.getElementById('importanceOutput').innerHTML = "";
     removePerson()
 }
 // ***** Cancel Task  - End *******
 
+// datePicker 
+/*
+let selectedDate = [];
+
+function getDate(){
+    let taskDate = new Date(document.getElementById('datePickerInput').value);
+    selectedDate.push(taskDate);
+    }
+    
+    */
