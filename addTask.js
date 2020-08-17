@@ -25,7 +25,7 @@ function insertUsers() {
 
     users.forEach(function (user) {
         let htmlContent = `
-    <div class="user-picker-row" onclick="selectUser(${user.id})">
+    <div id="user-row" class="user-picker-row" onclick="selectUser(${user.id})">
     <img src="./${user.img}" style="width: 75px; height: 75px; padding: 8px;">
     ${user.name}
 </div>
@@ -35,6 +35,8 @@ function insertUsers() {
 }
 
 function selectUser(id) {
+    document.getElementById('user-row').classList.remove('user-picker-row');
+    document.getElementById('user-row').classList.add('user-picker-row-select');
     let user = users.find(function (u) {
         return u.id == id;
     });

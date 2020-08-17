@@ -244,6 +244,14 @@
     width: 100%;
 }
 
+.user-picker-row-select {
+    cursor: pointer;
+    background-color: #d4edda;
+    width: 100%;
+}
+
+
+
 .back-btn-container {
     height: 10vh;
     width: 80vw;
