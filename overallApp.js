@@ -192,8 +192,9 @@ function changeSideBarLinksToAddtask(){
 }
 
 function changeSideBarLinksToIndex(){
-    document.getElementById("app-links").style.display = "none";
-    document.getElementById("user").style.display = "none";
+    document.getElementById("app-links").classList.add("d-none");
+    document.getElementById("user").classList.add("d-none");
+    //document.getElementById("nav-bar").classList.add("w-100");
 }
 
 /**
