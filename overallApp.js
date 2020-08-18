@@ -164,8 +164,12 @@ function changeSideBarTo(site){
         case "addTask":
             changeSideBarLinksToAddtask();
             break;
+        case "index":
+            changeSideBarLinksToIndex();
+            break;
         default:
             console.error("ERROR:: unknown site "+site+" please check your site function includeHTML call attribute value to match one of the cases");
+            break;
     }
 }
 
@@ -185,6 +189,11 @@ function changeSideBarLinksToAddtask(){
     document.getElementById("matrix-link").classList.add("link-unselected");
     document.getElementById("list-link").classList.add("link-unselected");
     document.getElementById("list-link").innerHTML = "View List";
+}
+
+function changeSideBarLinksToIndex(){
+    document.getElementById("app-links").style.display = "none";
+    document.getElementById("user").style.display = "none";
 }
 
 /**
