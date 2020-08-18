@@ -7,14 +7,28 @@ function enableBtns() {
         executeEnableButtonScript();
     });
 
+
+    addTaskForm.addEventListener('select', () => {
+        executeEnableButtonScript();
+    });
+
 }
 
 function executeEnableButtonScript() {
-    if (titleInput.value.length > 0 && descriptionInput.value.length > 0) {
-        createBtn.removeAttribute('disabled');
-    } else if (titleInput.value.length > 0 || descriptionInput.value.length > 0) {
-        cancelBtn.removeAttribute('disabled');
+    console.log('Checking if form is filled');
+    if (fieldIsFilled(titleInput) 
+    && fieldIsFilled(descriptionInput) 
+    && fieldIsFilled(importanceInput) 
+    && fieldIsFilled(datePickerInput)   
+    && fieldIsFilled(categoryInput)) {
+        createBtn.disabled = false;
+    } else {
+        createBtn.disabled = true;
     }
+}
+
+function fieldIsFilled(field){
+    return field.value.length > 0;
 }
 // *************** Mode to enable Cancel & Create Button -End ************************
 
@@ -23,9 +37,10 @@ let persons = users;
 
 function insertUsers() {
 
+    document.getElementById('user-picker-container').innerHTML = '';
     users.forEach(function (user) {
         let htmlContent = `
-    <div id="user-row" class="user-picker-row" onclick="selectUser(${user.id})">
+    <div id="user-row-${user.id}" class="user-picker-row" onclick="selectUser(${user.id})">
     <img src="./${user.img}" style="width: 75px; height: 75px; padding: 8px;">
     ${user.name}
 </div>
@@ -68,14 +83,15 @@ function addPerson() {
     document.getElementById('addPersonBlend').classList.remove('d-none');
     if (selectedUsers <= 4) {
         let user = document.createElement('img');
-        let div = document.getElementById('assign-person-div');
         user.src = selectedUsers[3][img];
+
+        let div = document.getElementById('assign-person-div');
         div.appendChild(user);
     }
 
 }
 function removePerson() {
-    selectedUsers = 0;
+    selectedUsers = [];
     document.getElementById('assign-person-div').innerHTML = '';
     document.getElementById('remove-btn-div').classList.add('d-none');
 }
