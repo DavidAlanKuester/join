@@ -1,7 +1,7 @@
 /**
  * Enum der IDs zum hinzufügen der task zu den Eisenhower Kategorien 
  */
-const MatrixIds =
+const MatrixIds = // TODO: Refactor to MATRIX_IDs
 {
     ADD_Task_DO: "matrix-tasks-do-here",
     ADD_TASK_SCHEDULE: "matrix-tasks-schedule-here",
@@ -44,7 +44,9 @@ function getMatrixTasks(userId) {
  */
 function checkTasksForArrivingDueDate(matrixTasks) {
     matrixTasks.forEach(task => {
-        if (isScheduleTask(task) && isDue(task["due-date"])) setTaskCategoryToDo(task);
+        if (isScheduleTask(task) && isDue(task["due-date"])) {
+            setTaskCategoryToDo(task);
+        }
     });
 }
 
@@ -225,7 +227,8 @@ function adjustTaskSideColor(taskHtmlId, eisenhowerCategory) {
  * @param {number} id 
  */
 function checkTask(id) {
-    JSON.parse(localStorage.getItem("matrixTasks")).forEach(task => {
+    let matrixTasks = JSON.parse(localStorage.getItem("matrixTasks"));
+    matrixTasks.forEach(task => {
         if (task["task-id"] === id.toString()) {
             console.log(task["display"]);
         }

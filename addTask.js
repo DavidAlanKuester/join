@@ -33,12 +33,24 @@ function fieldIsFilled(field) {
 // *************** Mode to enable Cancel & Create Button -End ************************
 
 // *****Assigned To Section - Add Persons -Start *********
+<<<<<<< HEAD
 function insertUsers() {
+=======
+let persons = users;
+
+function updateUserSelection() {
+>>>>>>> 75e24da3c7777c66ec5fffd3ab1c1dace19c6e66
 
     document.getElementById('user-picker-container').innerHTML = '';
     users.forEach(function (user) {
+
+        let classes = 'user-picker-row';
+        if(selectedUsers.includes(user)){
+            classes += ' user-picker-row-select';
+        }
+
         let htmlContent = `
-    <div id="user-row-${user.id}" class="user-picker-row" onclick="selectUser(${user.id})">
+    <div id="user-row-${user.id}" class="${classes}" onclick="selectUser(${user.id})">
     <img src="./${user.img}" style="width: 75px; height: 75px; padding: 8px;">
     ${user.name}
 </div>
@@ -48,6 +60,7 @@ function insertUsers() {
 }
 
 function selectUser(id) {
+<<<<<<< HEAD
     let user = users.find(function (u) {
         return u.id == id;
     });
@@ -55,6 +68,28 @@ function selectUser(id) {
     document.getElementById('user-row-${user.' + id +'}').classList.add('d-none');
 
 
+=======
+    // document.getElementById('user-row').classList.remove('user-picker-row');
+    // document.getElementById('user-row').classList.add('user-picker-row-select');
+
+
+    let user = users.find(function (u) {
+        return u.id == id;
+    });
+    
+    if(selectedUsers.includes(user)) {
+        // Remove from array
+        selectedUsers = selectedUsers.filter(function(u){
+            return u.id !== user.id;
+        });
+        
+    } else {
+        selectedUsers.push(user);
+    }
+    console.log('selectedUsers:', selectedUsers);
+    
+    updateUserSelection();
+>>>>>>> 75e24da3c7777c66ec5fffd3ab1c1dace19c6e66
 }
 
 function back() {
