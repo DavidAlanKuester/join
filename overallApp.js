@@ -192,8 +192,11 @@ function changeSideBarLinksToAddtask(){
 }
 
 function changeSideBarLinksToIndex(){
-    document.getElementById("app-links").classList.add("d-none");
-    document.getElementById("user").classList.add("d-none");
+    document.getElementById("matrix-link").classList.add("link-unselected");
+    document.getElementById("list-link").classList.add("link-unselected");
+    document.getElementById("list-link").innerHTML = "View List";
+    //document.getElementById("app-links").classList.add("d-none");
+    //document.getElementById("user").classList.add("d-none");
     //document.getElementById("nav-bar").classList.add("w-100");
 }
 

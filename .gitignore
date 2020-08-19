@@ -4,13 +4,5 @@ package-lock.json
 # Visual Studio Code specific #
 .vscode/*
 
-# Files in progress of development #
-assigment.html
-
 # Files produced by jsdoc
 out/*
-
-#Files in Progress#
-index.css
-index.html
-index.js
