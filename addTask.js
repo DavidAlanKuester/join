@@ -16,25 +16,23 @@ function enableBtns() {
 
 function executeEnableButtonScript() {
     console.log('Checking if form is filled');
-    if (fieldIsFilled(titleInput) 
-    && fieldIsFilled(descriptionInput) 
-    && fieldIsFilled(importanceInput) 
-    && fieldIsFilled(datePickerInput)   
-    && fieldIsFilled(categoryInput)) {
+    if (fieldIsFilled(titleInput)
+        && fieldIsFilled(descriptionInput)
+        && fieldIsFilled(importanceInput)
+        && fieldIsFilled(datePickerInput)
+        && fieldIsFilled(categoryInput)) {
         createBtn.disabled = false;
     } else {
         createBtn.disabled = true;
     }
 }
 
-function fieldIsFilled(field){
+function fieldIsFilled(field) {
     return field.value.length > 0;
 }
 // *************** Mode to enable Cancel & Create Button -End ************************
 
 // *****Assigned To Section - Add Persons -Start *********
-let persons = users;
-
 function updateUserSelection() {
 
     document.getElementById('user-picker-container').innerHTML = '';
@@ -203,16 +201,16 @@ let dayTime = 86400000;
 let urgency;
 let display;
 
-function getDate(){
+function getDate() {
     selectedDate = new Date(document.getElementById('datePickerInput').value).getTime();
 
     console.log(selectedDate);
-    }
-    
+}
+
 function defineUrgency() {
     let createdTaskTime = new Date().getTime();
     let DueDatedifference = selectedDate - createdTaskTime;
-    
+
     if (DueDatedifference < dayTime) {
         urgency = "High";
     } else {
@@ -223,14 +221,14 @@ function defineUrgency() {
 
 function defineMatrix() {
     if (importance == "High" && urgency == "High") {
-        display = "Do"; 
+        display = "Do";
     } else if (importance == "High" && urgency == "Low") {
-        display = "Schedule"; 
+        display = "Schedule";
     } else if (importance == "Low" && urgency == "High") {
-        display = "Delegate"; 
+        display = "Delegate";
     } else if (importance == "Low" && urgency == "Low") {
-        display = "Eliminate"; 
-    } 
+        display = "Eliminate";
+    }
     console.log(display);
 }
- 
+
