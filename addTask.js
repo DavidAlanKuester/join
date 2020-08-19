@@ -33,13 +33,9 @@ function fieldIsFilled(field) {
 // *************** Mode to enable Cancel & Create Button -End ************************
 
 // *****Assigned To Section - Add Persons -Start *********
-<<<<<<< HEAD
-function insertUsers() {
-=======
 let persons = users;
 
 function updateUserSelection() {
->>>>>>> 75e24da3c7777c66ec5fffd3ab1c1dace19c6e66
 
     document.getElementById('user-picker-container').innerHTML = '';
     users.forEach(function (user) {
@@ -60,15 +56,6 @@ function updateUserSelection() {
 }
 
 function selectUser(id) {
-<<<<<<< HEAD
-    let user = users.find(function (u) {
-        return u.id == id;
-    });
-    selectedUsers.push(user);
-    document.getElementById('user-row-${user.' + id +'}').classList.add('d-none');
-
-
-=======
     // document.getElementById('user-row').classList.remove('user-picker-row');
     // document.getElementById('user-row').classList.add('user-picker-row-select');
 
@@ -89,40 +76,37 @@ function selectUser(id) {
     console.log('selectedUsers:', selectedUsers);
     
     updateUserSelection();
->>>>>>> 75e24da3c7777c66ec5fffd3ab1c1dace19c6e66
 }
 
 function back() {
     document.getElementById('addPersonBlend').classList.add('d-none');
     // Render selected users
     for (let i = 0; i < selectedUsers.length; i++) {
-        let user = selectedUsers[i];
+        let user = selectedUsers[0];
         let htmlContent = `<div><img src="${user.img}">${user.name}</div>`;
         document.getElementById('assign-person-div').insertAdjacentHTML("beforeend", htmlContent);
         if (i >= 0) {
             document.getElementById('remove-btn').classList.remove('d-none');
         }
-
-    }
+        
+    }   
 }
 
 function getUserID() {
-    for (let i = 0; i < selectedUsers.length; i++) {
+    for(let i=0; i < selectedUsers.length; i++){
         let user = selectedUsers[i];
         userID.push(user.id);
-    }
+      }
 }
 
 function addPerson() {
     document.getElementById('addPersonBlend').classList.remove('d-none');
-    for (let i = 0; i < selectedUsers.length; i++) {
-        if (selectedUsers <= 4) {
-            let user = document.createElement('img');
-            user.src = selectedUsers[i][img];
+    if (selectedUsers <= 4) {
+        let user = document.createElement('img');
+        user.src = selectedUsers[3][img];
 
-            let div = document.getElementById('assign-person-div');
-            div.appendChild(user);
-        }
+        let div = document.getElementById('assign-person-div');
+        div.appendChild(user);
     }
 
 }
