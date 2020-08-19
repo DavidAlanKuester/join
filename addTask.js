@@ -16,25 +16,23 @@ function enableBtns() {
 
 function executeEnableButtonScript() {
     console.log('Checking if form is filled');
-    if (fieldIsFilled(titleInput) 
-    && fieldIsFilled(descriptionInput) 
-    && fieldIsFilled(importanceInput) 
-    && fieldIsFilled(datePickerInput)   
-    && fieldIsFilled(categoryInput)) {
+    if (fieldIsFilled(titleInput)
+        && fieldIsFilled(descriptionInput)
+        && fieldIsFilled(importanceInput)
+        && fieldIsFilled(datePickerInput)
+        && fieldIsFilled(categoryInput)) {
         createBtn.disabled = false;
     } else {
         createBtn.disabled = true;
     }
 }
 
-function fieldIsFilled(field){
+function fieldIsFilled(field) {
     return field.value.length > 0;
 }
 // *************** Mode to enable Cancel & Create Button -End ************************
 
 // *****Assigned To Section - Add Persons -Start *********
-let persons = users;
-
 function insertUsers() {
 
     document.getElementById('user-picker-container').innerHTML = '';
@@ -50,43 +48,46 @@ function insertUsers() {
 }
 
 function selectUser(id) {
-    document.getElementById('user-row').classList.remove('user-picker-row');
-    document.getElementById('user-row').classList.add('user-picker-row-select');
     let user = users.find(function (u) {
         return u.id == id;
     });
     selectedUsers.push(user);
+    document.getElementById('user-row-${user.' + id +'}').classList.add('d-none');
+
+
 }
 
 function back() {
     document.getElementById('addPersonBlend').classList.add('d-none');
     // Render selected users
     for (let i = 0; i < selectedUsers.length; i++) {
-        let user = selectedUsers[0];
+        let user = selectedUsers[i];
         let htmlContent = `<div><img src="${user.img}">${user.name}</div>`;
         document.getElementById('assign-person-div').insertAdjacentHTML("beforeend", htmlContent);
         if (i >= 0) {
             document.getElementById('remove-btn').classList.remove('d-none');
         }
-        
-    }   
+
+    }
 }
 
 function getUserID() {
-    for(let i=0; i < selectedUsers.length; i++){
+    for (let i = 0; i < selectedUsers.length; i++) {
         let user = selectedUsers[i];
         userID.push(user.id);
-      }
+    }
 }
 
 function addPerson() {
     document.getElementById('addPersonBlend').classList.remove('d-none');
-    if (selectedUsers <= 4) {
-        let user = document.createElement('img');
-        user.src = selectedUsers[3][img];
+    for (let i = 0; i < selectedUsers.length; i++) {
+        if (selectedUsers <= 4) {
+            let user = document.createElement('img');
+            user.src = selectedUsers[i][img];
 
-        let div = document.getElementById('assign-person-div');
-        div.appendChild(user);
+            let div = document.getElementById('assign-person-div');
+            div.appendChild(user);
+        }
     }
 
 }
@@ -183,16 +184,16 @@ let dayTime = 86400000;
 let urgency;
 let display;
 
-function getDate(){
+function getDate() {
     selectedDate = new Date(document.getElementById('datePickerInput').value).getTime();
 
     console.log(selectedDate);
-    }
-    
+}
+
 function defineUrgency() {
     let createdTaskTime = new Date().getTime();
     let DueDatedifference = selectedDate - createdTaskTime;
-    
+
     if (DueDatedifference < dayTime) {
         urgency = "High";
     } else {
@@ -203,14 +204,14 @@ function defineUrgency() {
 
 function defineMatrix() {
     if (importance == "High" && urgency == "High") {
-        display = "Do"; 
+        display = "Do";
     } else if (importance == "High" && urgency == "Low") {
-        display = "Schedule"; 
+        display = "Schedule";
     } else if (importance == "Low" && urgency == "High") {
-        display = "Delegate"; 
+        display = "Delegate";
     } else if (importance == "Low" && urgency == "Low") {
-        display = "Eliminate"; 
-    } 
+        display = "Eliminate";
+    }
     console.log(display);
 }
- 
+
