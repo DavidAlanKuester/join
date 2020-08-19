@@ -35,12 +35,18 @@ function fieldIsFilled(field){
 // *****Assigned To Section - Add Persons -Start *********
 let persons = users;
 
-function insertUsers() {
+function updateUserSelection() {
 
     document.getElementById('user-picker-container').innerHTML = '';
     users.forEach(function (user) {
+
+        let classes = 'user-picker-row';
+        if(selectedUsers.includes(user)){
+            classes += ' user-picker-row-select';
+        }
+
         let htmlContent = `
-    <div id="user-row-${user.id}" class="user-picker-row" onclick="selectUser(${user.id})">
+    <div id="user-row-${user.id}" class="${classes}" onclick="selectUser(${user.id})">
     <img src="./${user.img}" style="width: 75px; height: 75px; padding: 8px;">
     ${user.name}
 </div>
@@ -50,12 +56,26 @@ function insertUsers() {
 }
 
 function selectUser(id) {
-    document.getElementById('user-row').classList.remove('user-picker-row');
-    document.getElementById('user-row').classList.add('user-picker-row-select');
+    // document.getElementById('user-row').classList.remove('user-picker-row');
+    // document.getElementById('user-row').classList.add('user-picker-row-select');
+
+
     let user = users.find(function (u) {
         return u.id == id;
     });
-    selectedUsers.push(user);
+    
+    if(selectedUsers.includes(user)) {
+        // Remove from array
+        selectedUsers = selectedUsers.filter(function(u){
+            return u.id !== user.id;
+        });
+        
+    } else {
+        selectedUsers.push(user);
+    }
+    console.log('selectedUsers:', selectedUsers);
+    
+    updateUserSelection();
 }
 
 function back() {
