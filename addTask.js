@@ -33,8 +33,6 @@ function fieldIsFilled(field) {
 // *************** Mode to enable Cancel & Create Button -End ************************
 
 // *****Assigned To Section - Add Persons -Start *********
-let persons = users;
-
 function updateUserSelection() {
 
     document.getElementById('user-picker-container').innerHTML = '';
