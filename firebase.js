@@ -10,7 +10,10 @@ const logInForm = document.querySelector('#login-form');
 //grab an input
 const inputSingUpEmail = singUpForm.querySelector('#new-email');
 const inputSingUpName = singUpForm.querySelector('#new-name');
+const inputNewPassword = singUpForm.querySelector('#new-password');
+const inputNewPassword2 = singUpForm.querySelector('#new-password2');
 const inputLogInName = logInForm.querySelector('#user-name');
+
 
 const firebaseConfig = {
     apiKey: "AIzaSyCRp6HOOvimVaOUUBZRQzEGWmqLSKVVZOw",
@@ -24,19 +27,34 @@ const firebaseConfig = {
 };
 
 
+function init(){
+        //prevents from breaking
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+        }
+}
+
 //create a functions to push
 function firebasePush(user) {
 
 
-    //prevents from braking
-    if (!firebase.apps.length) {
-        firebase.initializeApp(firebaseConfig);
-    }
+    console.log(' user.password is ',  user.password);
 
+    // Register new user
+    firebase.auth().createUserWithEmailAndPassword(user.email, user.password).catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+
+        console.log('user created?', errorCode, errorMessage);
+
+      });
+
+      
     //push itself
-    var userRef = firebase.database().ref('users').push().set(
-        user
-    );
+    // var userRef = firebase.database().ref('users').push().set(
+    //     user
+    // );
 
 }
 
@@ -44,8 +62,10 @@ function firebasePush(user) {
 if (singUpForm) {
     singUpForm.addEventListener('submit', function (evt) {
         evt.preventDefault();
+        // TODO: Compare if password == password2
         let user = {
             email: inputSingUpEmail.value,
+            password: inputNewPassword.value,
             name: inputSingUpName.value
         }
         firebasePush(user);
@@ -62,7 +82,7 @@ function firebaseGetUser(userName) {
     }
 
     //get all users
-    return firebase.database().ref('users').once('value').then(function (snapshot) {
+    return firebase.database().ref('users/').once('value').then(function (snapshot) {
 
         snapshot.forEach(childSnapshot => {
             if (childSnapshot.val().name == userName) {

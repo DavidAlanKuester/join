@@ -10,7 +10,7 @@
     <script src="overallApp.js"></script>
 </head>
 
-<body onload="includeHTML('index')">
+<body onload="includeHTML('index'); init();">
     <div class="index-page">
         <!-- INSIDE THIS DIV IS SIDEBAR INCLUDED USING THE INCLUDEHTML FUNCTION-->
         <div w3-include-html="sidebar.html"></div>
@@ -38,6 +38,14 @@
 
                     <label for="new-name"><b>Username</b></label>
                     <input id="new-name" type="text" placeholder="Enter Username" name="new-name" required>
+
+                    
+                    <label for="new-email"><b>Password</b></label>
+                    <input id="new-password" type="password" placeholder="Enter Password" name="new-password" required>
+
+
+                    <label for="new-email"><b>Repeat Password</b></label>
+                    <input id="new-password2" type="password" placeholder="Repeat Password" name="new-password2" required>
 
                     <label for="new-email"><b>Email</b></label>
                     <input id="new-email" type="text" placeholder="Enter Email" name="new-email" required>
