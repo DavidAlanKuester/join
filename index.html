@@ -3,138 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="overallStyle.css">
-    <link rel="stylesheet" href="index.css">
-    <script src="overallApp.js"></script>
+
+    <!-- *******************************************************************************************
+       * TODO(DEVELOPER): Paste the initialization snippet from:
+       * Firebase Console > Overview > Add Firebase to your web app. *
+       ***************************************************************************************** -->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-functions.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-database.js"></script>
+
+    <script type="text/javascript">
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyDRpOoUeyOqoVIZCiRIiwNj4pVFn8qgW2s",
+            authDomain: "join-a7169.firebaseapp.com",
+            databaseURL: "https://join-a7169.firebaseio.com",
+            projectId: "join-a7169",
+            storageBucket: "join-a7169.appspot.com",
+            messagingSenderId: "1033729031894",
+            appId: "1:1033729031894:web:22aaf4c9c0c2e8e2ee9377",
+            measurementId: "G-383YPV4VPK"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script>
+
+    <script src="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.css" />
+
+    <!--< script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js">
+        </script>
+        <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+        -->
+
+    <!--< script src="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth__{LANGUAGE_CODE}.js">
+        </script>
+        <link type="text/css" rel="stylesheet"
+            href="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.css" />-->
+    <!--https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth-rtl.css The supported right - to - left
+            languages are Arabic(ar), Farsi(fa), and Hebrew(iw).-->
+
+    <script type="text/javascript">
+        // FirebaseUI config.
+        var uiConfig = {
+            signInSuccessUrl: './addTask.html',
+            signInOptions: [
+                // Leave the lines as is for the providers you want to offer your users.
+                //firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+                //firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+                //firebase.auth.TwitterAuthProvider.PROVIDER_ID,
+                //firebase.auth.GithubAuthProvider.PROVIDER_ID,
+                firebase.auth.EmailAuthProvider.PROVIDER_ID,
+                //firebase.auth.PhoneAuthProvider.PROVIDER_ID,
+                //firebaseui.auth.AnonymousAuthProvider.PROVIDER_ID
+            ],
+            // tosUrl and privacyPolicyUrl accept either url string or a callback
+            // function.
+            // Terms of service url/callback.
+            tosUrl: '<your-tos-url>',
+            // Privacy policy url/callback.
+            privacyPolicyUrl: function () {
+                window.location.assign('<your-privacy-policy-url>');
+            }
+        };
+
+        // Initialize the FirebaseUI Widget using Firebase.
+        var ui = new firebaseui.auth.AuthUI(firebase.auth());
+        // The start method will wait until the DOM is loaded.
+        ui.start('#firebaseui-auth-container', uiConfig);
+    </script>
+
+    <script type="text/javascript">
+
+        firebase.auth().onAuthStateChanged(function (user) {
+            if (user) {
+                // User is signed in.
+                console.log(' User is signed in');
+                var metaData = firebase.auth().currentUser.metadata;
+                if (metaData.creationTime == metaData.lastSignInTime) {
+                    // The user is new, show them a fancy intro screen!
+                    console.log('NEW USER');
+
+                    firebase.database().ref('users/' + firebase.auth().currentUser.ui).set({
+                        username: firebase.auth().currentUser.displayName,
+                        email: firebase.auth().currentUser.email,
+                        profile_picture: './img/id0.png'
+                    });
+                } else {
+                    // This is an existing user, show them a welcome back screen.
+                    console.log('ALREADY A USER');
+                }
+
+            } else {
+                // No user is signed in.
+                console.log('No User is signed in');
+            }
+            //console.log(user);
+        });
+    </script>
+
+    <!--<script type="text/javascript">
+        window.onbeforeunload = closingCode;
+        function closingCode() {
+            // do something...
+            firebase.auth().signOut().then(function () {
+                // Sign-out successful.
+            }).catch(function (error) {
+                // An error happened.
+            });
+            console.log('SING OUT USER');
+            return null;
+        }
+    </script>-->
+
 </head>
 
-<body onload="includeHTML('index'); init();">
-    <div class="index-page">
-        <!-- INSIDE THIS DIV IS SIDEBAR INCLUDED USING THE INCLUDEHTML FUNCTION-->
-        <div w3-include-html="sidebar.html"></div>
-        <!--<div class="account-content">
-            <input id="email" type="email" placeholder="Enter Your Email Address:">
-            <input id="password" type="password" placeholder="Enter Your Password:">
-            <button>LOG IN</button> / <button>CREATE USER ACCOUNT</button>
-        </div>-->
+<body>
 
-        <!-- Button to open the modal -->
-        <button id="sing-up-modal" onclick="document.getElementById('id01').style.display='block'">Sign Up</button>
-        <!-- Button to open the modal login form -->
-        <button id="log-in-modal" onclick="document.getElementById('id02').style.display='block'">Login</button>
-
-
-        <!-- The Modal (contains the Sign Up form) -->
-        <div id="id01" class="modal">
-            <span onclick="document.getElementById('id01').style.display='none'" class="close"
-                title="Close Modal">times;</span>
-            <form id="singup-form" class="modal-content animate">
-                <div class="container">
-                    <h1>Sign Up</h1>
-                    <p>Please fill in this form to create an account.</p>
-                    <hr>
-
-                    <label for="new-name"><b>Username</b></label>
-                    <input id="new-name" type="text" placeholder="Enter Username" name="new-name" required>
-
-                    
-                    <label for="new-email"><b>Password</b></label>
-                    <input id="new-password" type="password" placeholder="Enter Password" name="new-password" required>
-
-
-                    <label for="new-email"><b>Repeat Password</b></label>
-                    <input id="new-password2" type="password" placeholder="Repeat Password" name="new-password2" required>
-
-                    <label for="new-email"><b>Email</b></label>
-                    <input id="new-email" type="text" placeholder="Enter Email" name="new-email" required>
-
-                    <!--<label for="psw"><b>Password</b></label>
-                    <input id="psw" type="password" placeholder="Enter Password" name="psw" required>-->
-
-                    <!--<label for="psw-repeat"><b>Repeat Password</b></label>
-                    <input type="password" placeholder="Repeat Password" name="psw-repeat" required>-->
-
-                    <label>
-                        <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
-                    </label>
-
-                    <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.
-                    </p>
-
-                    <div class="clearfix">
-                        <button type="button" onclick="document.getElementById('id01').style.display='none'"
-                            class="cancelbtn">Cancel</button>
-                        <button type="submit" class="signup">Sign Up</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-
-
-        <!-- The Modal -->
-        <div id="id02" class="modal">
-            <span onclick="document.getElementById('id02').style.display='none'" class="close"
-                title="Close Modal">&times;</span>
-
-            <!-- Modal Content -->
-            <form id="login-form" class="modal-content animate">
-                <div class="imgcontainer">
-                    <img src="img_avatar2.png" alt="Avatar" class="avatar">
-                </div>
-
-                <div class="container">
-                    <label for="user-name"><b>Username</b></label>
-                    <input id="user-name" type="text" placeholder="Enter Username" name="user-name" required>
-
-                    <!--<label for="psw"><b>Password</b></label>
-                    <input id="psw" type="password" placeholder="Enter Password" name="psw" required>-->
-
-                    <button type="submit">Login</button>
-                    <label>
-                        <input type="checkbox" checked="checked" name="remember"> Remember me
-                    </label>
-                </div>
-
-                <div class="container" style="background-color:#f1f1f1">
-                    <button type="button" onclick="document.getElementById('id02').style.display='none'"
-                        class="cancelbtn">Cancel</button>
-                    <span class="psw">Forgot <a href="#">password?</a></span>
-                </div>
-            </form>
-        </div>
-
-    </div>
-
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
-    <script src="./firebase.js"></script>
+    <!-- The surrounding HTML is left untouched by FirebaseUI.
+     Your app may use that space for branding, controls and other customizations.-->
+    <h1>Welcome to My Awesome App</h1>
+    <div id="firebaseui-auth-container"></div>
+    <div id="loader">Loading...</div>
 
 </body>
-
-<script>
-    // Get the modal
-    var modal1 = document.getElementById('id01');
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function (event) {
-        if (event.target == modal1) {
-            modal1.style.display = "none";
-        }
-    }
-</script>
-
-<script>
-    // Get the modal
-    var modal2 = document.getElementById('id02');
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function (event) {
-        if (event.target == modal2) {
-            modal2.style.display = "none";
-        }
-    }
-</script>
 
 </html>

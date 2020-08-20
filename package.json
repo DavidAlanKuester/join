@@ -2,10 +2,9 @@
   "name": "join",
   "version": "1.0.0",
   "description": "Mihai First Commit Test",
-  "main": "overallApp.js",
+  "main": ".index.js",
   "dependencies": {
     "bootstrap": "^4.5.2",
-    "firebase": "^7.18.0",
     "jslint": "^0.12.1",
     "serve": "^11.3.2"
   },
