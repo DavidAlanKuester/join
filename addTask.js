@@ -15,7 +15,6 @@ function enableBtns() {
 }
 
 function executeEnableButtonScript() {
-    console.log('Checking if form is filled');
     if (fieldIsFilled(titleInput)
         && fieldIsFilled(descriptionInput)
         && fieldIsFilled(importanceInput)
@@ -32,14 +31,18 @@ function fieldIsFilled(field) {
 }
 // *************** Mode to enable Cancel & Create Button -End ************************
 
-// *****Assigned To Section - Add Persons -Start *********
+/**
+ * Updates the user picker which is displayed in the dialog after pressing the "add" button.
+ * Selecetd users will be displayed with a green background-color.
+ * 
+ */
 function updateUserSelection() {
 
     document.getElementById('user-picker-container').innerHTML = '';
     users.forEach(function (user) {
 
         let classes = 'user-picker-row';
-        if(selectedUsers.includes(user)){
+        if (selectedUsers.includes(user)) {
             classes += ' user-picker-row-select';
         }
 
@@ -54,64 +57,67 @@ function updateUserSelection() {
 }
 
 function selectUser(id) {
-    // document.getElementById('user-row').classList.remove('user-picker-row');
-    // document.getElementById('user-row').classList.add('user-picker-row-select');
-
-
     let user = users.find(function (u) {
         return u.id == id;
     });
-    
-    if(selectedUsers.includes(user)) {
+
+    if (selectedUsers.includes(user)) {
         // Remove from array
-        selectedUsers = selectedUsers.filter(function(u){
+        selectedUsers = selectedUsers.filter(function (u) {
             return u.id !== user.id;
         });
-        
+
     } else {
         selectedUsers.push(user);
     }
     console.log('selectedUsers:', selectedUsers);
-    
+
     updateUserSelection();
 }
 
 function back() {
-    document.getElementById('addPersonBlend').classList.add('d-none');
+    hideDialog();
+    updateSelectedUserRow();
+
+    if (selectedUsers.length > 0) {// Show remove button
+
+        document.getElementById('remove-btn').classList.remove('d-none');
+    } else {
+        document.getElementById('remove-btn').classList.add('d-none');
+    }
+}
+
+function updateSelectedUserRow() {
+    document.getElementById('assign-person-div').innerHTML = '';
     // Render selected users
     for (let i = 0; i < selectedUsers.length; i++) {
-        let user = selectedUsers[0];
+        let user = selectedUsers[i];
         let htmlContent = `<div><img src="${user.img}">${user.name}</div>`;
         document.getElementById('assign-person-div').insertAdjacentHTML("beforeend", htmlContent);
-        if (i >= 0) {
-            document.getElementById('remove-btn').classList.remove('d-none');
-        }
-        
-    }   
+    }
+}
+
+function hideDialog() {
+    document.getElementById('addPersonBlend').classList.add('d-none');
 }
 
 function getUserID() {
-    for(let i=0; i < selectedUsers.length; i++){
+    for (let i = 0; i < selectedUsers.length; i++) {
         let user = selectedUsers[i];
         userID.push(user.id);
-      }
+    }
 }
 
 function addPerson() {
     document.getElementById('addPersonBlend').classList.remove('d-none');
-    if (selectedUsers <= 4) {
-        let user = document.createElement('img');
-        user.src = selectedUsers[3][img];
-
-        let div = document.getElementById('assign-person-div');
-        div.appendChild(user);
-    }
-
 }
+
 function removePerson() {
     selectedUsers = [];
-    document.getElementById('assign-person-div').innerHTML = '';
-    document.getElementById('remove-btn-div').classList.add('d-none');
+    updateSelectedUserRow();
+    updateUserSelection();
+
+    document.getElementById('remove-btn').classList.add('d-none');
 }
 // *****Assigned To Section - Add Persons - End *********
 
@@ -156,6 +162,18 @@ function addDisableAttributeBtn() {
 }
 
 function newTask() {
+
+    let selectedUsersIds = [];
+
+    //    for(let i=0; i < selectedUsers.length; i++) {
+    //        let user = selectedUsers[i];
+    //        selectedUsersIds.push(user.id);
+    //    }
+
+    selectedUsers.forEach(function (user) {
+        selectedUsersIds.push(user.id);
+    });
+
     let newTask = {
         "task-id": taskID++,
         "title": document.getElementById('titleInput').value,
@@ -164,7 +182,7 @@ function newTask() {
         "due-date": document.getElementById('datePickerInput').value,
         "urgency": urgency,
         "importance": document.getElementById('importanceInput').value,
-        "assigned-to": userID,
+        "assigned-to": selectedUsersIds,
         "display": display,
     }
 
@@ -203,8 +221,6 @@ let display;
 
 function getDate() {
     selectedDate = new Date(document.getElementById('datePickerInput').value).getTime();
-
-    console.log(selectedDate);
 }
 
 function defineUrgency() {
@@ -216,7 +232,6 @@ function defineUrgency() {
     } else {
         urgency = "Low";
     }
-    console.log(urgency);
 }
 
 function defineMatrix() {
@@ -229,6 +244,21 @@ function defineMatrix() {
     } else if (importance == "Low" && urgency == "Low") {
         display = "Eliminate";
     }
-    console.log(display);
+}
+
+function pickOnlyfutureDays() {
+    let today = new Date();
+    let dd = today.getDate();
+    let mm = today.getMonth() + 1; //January is 0!
+    let yyyy = today.getFullYear();
+    if (dd < 10) {
+        dd = '0' + dd
+    }
+    if (mm < 10) {
+        mm = '0' + mm
+    }
+
+    today = yyyy + '-' + mm + '-' + dd;
+    document.getElementById('datePickerInput').setAttribute('min', today);
 }
 

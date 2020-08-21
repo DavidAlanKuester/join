@@ -228,8 +228,9 @@
 
 #user-picker-container {
     height: 80vh;
+    overflow-y: auto;
     width: 80vw;
-    background-color: white;
+    background-color:  rgb(244, 243, 251);
     border-radius: 16px !important;
     padding: 16px;
     display: flex;
