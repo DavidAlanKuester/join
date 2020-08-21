@@ -103,7 +103,7 @@
                     // The user is new, show them a fancy intro screen!
                     console.log('NEW USER');
 
-                    firebase.database().ref('users/' + firebase.auth().currentUser.ui).set({
+                    firebase.database().ref('users/' + firebase.auth().currentUser.uid).set({
                         username: firebase.auth().currentUser.displayName,
                         email: firebase.auth().currentUser.email,
                         profile_picture: './img/id0.png'
