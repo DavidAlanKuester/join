@@ -14,7 +14,7 @@
     <title>Add Task</title>
 </head>
 
-<body onload="includeHTML('addTask'); updateUserSelection();">
+<body onload="includeHTML('addTask'), updateUserSelection(), pickOnlyfutureDays();">
     <div w3-include-html="sidebar.html"></div>
     <div class="addTask-page">
         <div class="title-div-container">
@@ -63,7 +63,7 @@
 
                         <div class="card-date-section">
                             <h3>Due Date</h3>
-                            <input onchange="getDate()" type="date" id="datePickerInput" name="datePickerInput">
+                            <input onchange="getDate()" type="date" id="datePickerInput" min='2020-01-01' name="datePickerInput">
                         </div>
 
                         <div class="card-importance-section">

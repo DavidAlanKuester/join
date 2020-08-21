@@ -15,7 +15,6 @@ function enableBtns() {
 }
 
 function executeEnableButtonScript() {
-    console.log('Checking if form is filled');
     if (fieldIsFilled(titleInput)
         && fieldIsFilled(descriptionInput)
         && fieldIsFilled(importanceInput)
@@ -85,7 +84,7 @@ function back() {
     updateSelectedUserRow();
 
     if (selectedUsers.length > 0) {// Show remove button
-        
+
         document.getElementById('remove-btn').classList.remove('d-none');
     } else {
         document.getElementById('remove-btn').classList.add('d-none');
@@ -170,12 +169,12 @@ function newTask() {
 
     let selectedUsersIds = [];
 
-//    for(let i=0; i < selectedUsers.length; i++) {
-//        let user = selectedUsers[i];
-//        selectedUsersIds.push(user.id);
-//    }
+    //    for(let i=0; i < selectedUsers.length; i++) {
+    //        let user = selectedUsers[i];
+    //        selectedUsersIds.push(user.id);
+    //    }
 
-    selectedUsers.forEach(function(user){
+    selectedUsers.forEach(function (user) {
         selectedUsersIds.push(user.id);
     });
 
@@ -226,8 +225,6 @@ let display;
 
 function getDate() {
     selectedDate = new Date(document.getElementById('datePickerInput').value).getTime();
-
-    console.log(selectedDate);
 }
 
 function defineUrgency() {
@@ -239,7 +236,6 @@ function defineUrgency() {
     } else {
         urgency = "Low";
     }
-    console.log(urgency);
 }
 
 function defineMatrix() {
@@ -252,6 +248,21 @@ function defineMatrix() {
     } else if (importance == "Low" && urgency == "Low") {
         display = "Eliminate";
     }
-    console.log(display);
+}
+
+function pickOnlyfutureDays() {
+    let today = new Date();
+    let dd = today.getDate();
+    let mm = today.getMonth() + 1; //January is 0!
+    let yyyy = today.getFullYear();
+    if (dd < 10) {
+        dd = '0' + dd
+    }
+    if (mm < 10) {
+        mm = '0' + mm
+    }
+
+    today = yyyy + '-' + mm + '-' + dd;
+    document.getElementById('datePickerInput').setAttribute('min', today);
 }
 
