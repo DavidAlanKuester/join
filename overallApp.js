@@ -1,4 +1,35 @@
 
+function writeUserData(userId, name, email, imageUrl) {
+    firebase.database().ref('users/' + userId).set({
+        username: name,
+        email: email,
+        profile_picture: imageUrl
+    });
+}
+
+firebase.auth().onAuthStateChanged(function (user) {
+    if (user) {
+        // User is signed in.
+        if (user.metadata.creationTime == user.metadata.lastSignInTime) {
+
+            user.updateProfile({
+                photoURL: "./img/id0.png"
+            }).then(function () {
+                // Update successful.
+            }).catch(function (error) {
+                // An error happened.
+            });
+
+            writeUserData(user.uid, user.displayName, user.email, user.photoURL);
+        }
+    } else {
+        // User is signed out.
+        ui.start('#firebaseui-auth-container', uiConfig);
+    }
+}, function (error) {
+    console.log(error);
+});
+
 let tasks = [];
 
 let createdTasks;
@@ -82,7 +113,7 @@ let tasksDummy = [
             "1"
         ],
         "display": "delegate"
-    },    
+    },
     {
         "task-id": "3",
         "creator": "0",
@@ -153,8 +184,8 @@ function includeHTML(site) {
  * 
  * @param {string} site - name of the site 
  */
-function changeSideBarTo(site){
-    switch(site){
+function changeSideBarTo(site) {
+    switch (site) {
         case "list":
             changeSideBarLinksToListSelected();
             break;
@@ -168,33 +199,41 @@ function changeSideBarTo(site){
             changeSideBarLinksToIndex();
             break;
         default:
-            console.error("ERROR:: unknown site "+site+" please check your site function includeHTML call attribute value to match one of the cases");
+            console.error("ERROR:: unknown site " + site + " please check your site function includeHTML call attribute value to match one of the cases");
             break;
     }
 }
 
-function changeSideBarLinksToListSelected(){
+function sidebarSetUserImg() {
+    //document.getElementById("user-img").src = firebase.auth().currentUser.photoURL;
+}
+
+function changeSideBarLinksToListSelected() {
     document.getElementById("matrix-link").classList.add("link-unselected");
     document.getElementById("list-link").classList.add("link-selected");
     document.getElementById("list-link").innerHTML = "List";
+    sidebarSetUserImg();
 }
 
-function changeSideBarLinksToMatrixSelected(){
+function changeSideBarLinksToMatrixSelected() {
     document.getElementById("matrix-link").classList.add("link-selected");
     document.getElementById("list-link").classList.add("link-unselected");
     document.getElementById("list-link").innerHTML = "List";
+    sidebarSetUserImg();
 }
 
-function changeSideBarLinksToAddtask(){
+function changeSideBarLinksToAddtask() {
     document.getElementById("matrix-link").classList.add("link-unselected");
     document.getElementById("list-link").classList.add("link-unselected");
     document.getElementById("list-link").innerHTML = "View List";
+    sidebarSetUserImg();
 }
 
-function changeSideBarLinksToIndex(){
+function changeSideBarLinksToIndex() {
     document.getElementById("matrix-link").classList.add("link-unselected");
     document.getElementById("list-link").classList.add("link-unselected");
     document.getElementById("list-link").innerHTML = "View List";
+    sidebarSetUserImg();
     //document.getElementById("app-links").classList.add("d-none");
     //document.getElementById("user").classList.add("d-none");
     //document.getElementById("nav-bar").classList.add("w-100");

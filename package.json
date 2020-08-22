@@ -2,15 +2,17 @@
   "name": "join",
   "version": "1.0.0",
   "description": "Mihai First Commit Test",
-  "main": ".index.js",
+  "main": ".init-firebase.js",
   "dependencies": {
     "bootstrap": "^4.5.2",
+    "firebase": "^7.19.0",
+    "firebaseui": "^4.6.1",
     "jslint": "^0.12.1",
     "serve": "^11.3.2"
   },
   "devDependencies": {},
   "scripts": {
-    "start": "serve ./",
+    "start": "serve ./index.html",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
