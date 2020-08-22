@@ -7,28 +7,31 @@ function writeUserData(userId, name, email, imageUrl) {
     });
 }
 
-firebase.auth().onAuthStateChanged(function (user) {
-    if (user) {
-        // User is signed in.
-        if (user.metadata.creationTime == user.metadata.lastSignInTime) {
+function initApp() {
+    firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+            // User is signed in.
 
-            user.updateProfile({
-                photoURL: "./img/id0.png"
-            }).then(function () {
-                // Update successful.
-            }).catch(function (error) {
-                // An error happened.
-            });
+            if (user.metadata.creationTime == user.metadata.lastSignInTime) {
+                user.updateProfile({
+                    photoURL: "./img/id0.png"
+                }).then(function () {
+                    // Update successful.
+                }).catch(function (error) {
+                    // An error happened.
+                });
 
-            writeUserData(user.uid, user.displayName, user.email, user.photoURL);
+                writeUserData(user.uid, user.displayName, user.email, user.photoURL);
+            }
+            sidebarSetUserImg();
+        } else {
+            // User is signed out.
+            //ui.start('#firebaseui-auth-container', uiConfig);
         }
-    } else {
-        // User is signed out.
-        ui.start('#firebaseui-auth-container', uiConfig);
-    }
-}, function (error) {
-    console.log(error);
-});
+    }, function (error) {
+        console.log(error);
+    });
+}
 
 let tasks = [];
 
@@ -205,35 +208,35 @@ function changeSideBarTo(site) {
 }
 
 function sidebarSetUserImg() {
-    //document.getElementById("user-img").src = firebase.auth().currentUser.photoURL;
+    document.getElementById("user-img").src = firebase.auth().currentUser.photoURL;
 }
 
 function changeSideBarLinksToListSelected() {
     document.getElementById("matrix-link").classList.add("link-unselected");
     document.getElementById("list-link").classList.add("link-selected");
     document.getElementById("list-link").innerHTML = "List";
-    sidebarSetUserImg();
+    //sidebarSetUserImg();
 }
 
 function changeSideBarLinksToMatrixSelected() {
     document.getElementById("matrix-link").classList.add("link-selected");
     document.getElementById("list-link").classList.add("link-unselected");
     document.getElementById("list-link").innerHTML = "List";
-    sidebarSetUserImg();
+    //sidebarSetUserImg();
 }
 
 function changeSideBarLinksToAddtask() {
     document.getElementById("matrix-link").classList.add("link-unselected");
     document.getElementById("list-link").classList.add("link-unselected");
     document.getElementById("list-link").innerHTML = "View List";
-    sidebarSetUserImg();
+    //sidebarSetUserImg();
 }
 
 function changeSideBarLinksToIndex() {
     document.getElementById("matrix-link").classList.add("link-unselected");
     document.getElementById("list-link").classList.add("link-unselected");
     document.getElementById("list-link").innerHTML = "View List";
-    sidebarSetUserImg();
+    //sidebarSetUserImg();
     //document.getElementById("app-links").classList.add("d-none");
     //document.getElementById("user").classList.add("d-none");
     //document.getElementById("nav-bar").classList.add("w-100");
