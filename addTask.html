@@ -4,21 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <script src="node_modules/firebase/firebase-app.js"></script>
-    <script src="node_modules/firebase/firebase-analytics.js"></script>
-    <script src="node_modules/firebase/firebase-auth.js"></script>
-    <script src="node_modules/firebase/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.19.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.19.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.19.0/firebase-database.js"></script>
+    <script src="init-firebase.js"></script>
 
-    <script  src="init-firebase.js"></script>
+    <script src="overallApp.js"></script>
+    <script src="addTask.js"></script>
 
     <link rel="stylesheet" href="overallStyle.css">
     <link rel="stylesheet" href="addTaskStyle.css">
-    <script src="overallApp.js"></script>
-    <script src="addTask.js"></script>
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css"
         integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"
         rel="stylesheet">
+
     <title>Add Task</title>
 </head>
 
@@ -60,10 +61,10 @@
 
                         </div>
 
-                        <div  class="card-description-section">
+                        <div class="card-description-section">
                             <h3>Description</h3>
                             <input onkeydown="enableBtns()" type="text" id="descriptionInput" name="description-input">
-                            
+
                         </div>
                     </div>
 
@@ -71,7 +72,8 @@
 
                         <div class="card-date-section">
                             <h3>Due Date</h3>
-                            <input onchange="getDate()" type="date" id="datePickerInput" min='2020-01-01' name="datePickerInput">
+                            <input onchange="getDate()" type="date" id="datePickerInput" min='2020-01-01'
+                                name="datePickerInput">
                         </div>
 
                         <div class="card-importance-section">
@@ -95,7 +97,7 @@
                                 <div id="assign-person-btn-div">
                                     <button onclick="addPerson()" id="plus-btn" type="button" class="btn btn-primary"
                                         style="background-color: rgb(30, 49, 144) !important; border-color: rgb(30, 49, 144) !important;"><b>Add</b></button>
-                                    <div  id="remove-btn-div">
+                                    <div id="remove-btn-div">
                                         <button onclick="removePerson()" id="remove-btn" type="button"
                                             class="btn btn-danger d-none"><b>Remove</b>
                                         </button>
@@ -110,7 +112,8 @@
                                     style="background-color: rgb(244, 243, 251) !important; color: rgb(30, 49, 144) !important; border-color: rgb(30, 49, 144) !important;"><b>Cancel</b></button>
                                 <button onclick="createTask()" id="createBtn" name="createBtn" type="button"
                                     disabled="disabled" class="btn btn-primary"
-                                    style="background-color: rgb(30, 49, 144) !important; border-color: rgb(30, 49, 144) !important;"><b>Create Task</b></button>
+                                    style="background-color: rgb(30, 49, 144) !important; border-color: rgb(30, 49, 144) !important;"><b>Create
+                                        Task</b></button>
                             </div>
 
                         </div>
@@ -126,16 +129,17 @@
         </div>
     </div>
 
-<div id="addPersonBlend" class="d-none">
-    <div class="user-picker" id="user-picker-blend">
-        <div id="user-picker-container">
+    <div id="addPersonBlend" class="d-none">
+        <div class="user-picker" id="user-picker-blend">
+            <div id="user-picker-container">
 
-        </div>
-        <div class="back-btn-container" id="back-btn">
-            <button onclick="back(), getUserID()" class="btn btn-primary"  style="background-color: rgb(30, 49, 144) !important; border-color: rgb(30, 49, 144) !important;">Back</button>
+            </div>
+            <div class="back-btn-container" id="back-btn">
+                <button onclick="back(), getUserID()" class="btn btn-primary"
+                    style="background-color: rgb(30, 49, 144) !important; border-color: rgb(30, 49, 144) !important;">Back</button>
+            </div>
         </div>
     </div>
-</div>
 </body>
 
 </html>
