@@ -1,3 +1,15 @@
+firebase.auth().onAuthStateChanged(function (user) {
+    if (user) {
+        // User is signed in.
+       
+    } else {
+        // User is signed out.
+        window.location.href = './index.html';
+    }
+}, function (error) {
+    console.log(error);
+});
+
 /**
  * Enum der IDs zum hinzufügen der task zu den Eisenhower Kategorien 
  */

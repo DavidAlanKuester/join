@@ -11,6 +11,7 @@ function writeUserData(userId, userName, userEmail, imageUrl) {
 function initApp() {
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
+            console.log(user);
             // User is signed in.
             if (user.metadata.creationTime == user.metadata.lastSignInTime) {
                 console.log("NEW USER LOGED IN :" + user + " UPDATE PROFILE PHOTOURL, AND WRITE USER DATA TO DATABASE");
@@ -26,7 +27,6 @@ function initApp() {
             sidebarSetUserImg();
         } else {
             // User is signed out.
-            //ui.start('#firebaseui-auth-container', uiConfig);
         }
     }, function (error) {
         console.log(error);
@@ -34,44 +34,31 @@ function initApp() {
 }
 
 let tasks = [];
+let users = [];
+
+firebase.database().ref('users').once('value').then(function (snapshot) {
+    snapshot.forEach(function (childSnapshot) {
+        users.push(childSnapshot.val());
+    })
+});
+console.log(users);
 
 let createdTasks;
 
-let users = [
-    {
-        'id': 0,
-        "img": "img/id0.png",
-        "name": "JSON0",
-        "eMail": "@JSON0.de"
-    },
-    {
-        'id': 1,
-        "img": "img/id0.png",
-        "name": "JSON0",
-        "eMail": "@JSON0.de"
-    },
-    {
+function saveUsersToLocalStorage() {
+   
+    firebase.database().ref('users').once('value').then(function (snapshot) {
+        snapshot.forEach(function (childSnapshot) {
+            users.push(childSnapshot.val());
+        })
+    });
+    console.log(users);
+    localStorage.setItem("users", JSON.stringify(users));
+}
 
-        "id": 2,
-        "img": "img/id1.png",
-        "name": "JSON1",
-        "eMail": "@JSON1.de"
-    },
-    {
-
-        "id": 3,
-        "img": "img/id2.png",
-        "name": "JSON2",
-        "eMail": "@JSON2.de"
-    },
-    {
-
-        "id": 4,
-        "img": "img/id3.png",
-        "name": "JSON3",
-        "eMail": "@JSON3.de"
-    }
-];
+function getUsersFromLocalStorage(){
+    return JSON.parse(localStorage.getItem("users"));
+}
 
 //presumed task object structure
 //due-date should have short date string format "MM/DAY/YEAR"

@@ -1,3 +1,15 @@
+firebase.auth().onAuthStateChanged(function (user) {
+    if (user) {
+        // User is signed in.
+       
+    } else {
+        // User is signed out.
+        window.location.href = './index.html';
+    }
+}, function (error) {
+    console.log(error);
+});
+
 let selectedUsers = [];
 let userID = [];
 
@@ -37,7 +49,8 @@ function fieldIsFilled(field) {
  * 
  */
 function updateUserSelection() {
-
+    //saveUsersToLocalStorage();
+    //let users = getUsersFromLocalStorage();
     document.getElementById('user-picker-container').innerHTML = '';
     users.forEach(function (user) {
 
