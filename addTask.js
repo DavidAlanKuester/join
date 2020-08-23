@@ -70,7 +70,6 @@ function selectUser(id) {
     } else {
         selectedUsers.push(user);
     }
-    console.log('selectedUsers:', selectedUsers);
 
     updateUserSelection();
 }
