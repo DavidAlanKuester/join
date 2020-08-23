@@ -1,4 +1,18 @@
-
+firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
+    .then(function () {
+        // Existing and future Auth states are now persisted in the current
+        // session only. Closing the window would clear any existing state even
+        // if a user forgets to sign out.
+        // ...
+        // New sign-in will be persisted with session persistence.
+        return; //firebase.auth().signInWithEmailAndPassword(email, password);
+    })
+    .catch(function (error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        console.error('persistence ' + errorCode + ' ' + errorMessage);
+    });
 
 // Initialize the FirebaseUI Widget using Firebase.
 var ui = new firebaseui.auth.AuthUI(firebase.auth());
@@ -13,12 +27,6 @@ var uiConfig = {
             var providerId = authResult.additionalUserInfo.providerId;
             var operationType = authResult.operationType;
             /*// Do something with the returned AuthResult.
-            if (isNewUser) {
-
-                writeUserData(user.uid, user.displayName, user.email, './img/id0.png');
-                return false;
-
-            }
             // Return type determines whether we continue the redirect automatically
             // or whether we leave that to developer to handle.*/
             return true;
@@ -43,18 +51,3 @@ var uiConfig = {
         window.location.assign('<your-privacy-policy-url>');
     }
 };
-
-
-firebase.auth().onAuthStateChanged(function (user) {
-    if (user) {
-        // User is signed in.
-     window.location.href = './addTask.html';
-      
-    } else {
-        // User is signed out.
-        ui.start('#firebaseui-auth-container', uiConfig);
-    }
-}, function (error) {
-    console.log(error);
-});
-

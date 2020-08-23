@@ -1,9 +1,10 @@
 
-function writeUserData(userId, name, email, imageUrl) {
+function writeUserData(userId, userName, userEmail, imageUrl) {
     firebase.database().ref('users/' + userId).set({
-        username: name,
-        email: email,
-        profile_picture: imageUrl
+        id: userId,
+        img: imageUrl,
+        name: userName,
+        email: userEmail
     });
 }
 
@@ -11,8 +12,8 @@ function initApp() {
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
             // User is signed in.
-
             if (user.metadata.creationTime == user.metadata.lastSignInTime) {
+                console.log("NEW USER LOGED IN :" + user + " UPDATE PROFILE PHOTOURL, AND WRITE USER DATA TO DATABASE");
                 user.updateProfile({
                     photoURL: "./img/id0.png"
                 }).then(function () {
@@ -20,7 +21,6 @@ function initApp() {
                 }).catch(function (error) {
                     // An error happened.
                 });
-
                 writeUserData(user.uid, user.displayName, user.email, user.photoURL);
             }
             sidebarSetUserImg();
