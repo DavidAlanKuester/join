@@ -234,17 +234,31 @@ function adjustTaskSideColor(taskHtmlId, eisenhowerCategory) {
 
 }
 
+let hello = [];
+let value;
 /**
  * This method is used for testing purposes of the dropdown functionality
  * @param {number} id 
  */
 function checkTask(id) {
-    let matrixTasks = JSON.parse(localStorage.getItem("matrixTasks"));
+    /*let matrixTasks = JSON.parse(localStorage.getItem("matrixTasks"));
     matrixTasks.forEach(task => {
         if (task["task-id"] === id.toString()) {
             console.log(task["display"]);
         }
+    });*/
+    let db = firebase.database();
+    value = db.ref("users").once('value').then(function(users){
+        users.forEach(user => {
+            hello.push(user);
+        });
     });
+    console.log(hello);
+}
+
+function logStuff() {
+    console.log(hello);
+    console.log(value);
 }
 
 /**
