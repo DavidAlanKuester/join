@@ -1,7 +1,7 @@
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
         // User is signed in.
-       
+
     } else {
         // User is signed out.
         window.location.href = './index.html';
@@ -12,6 +12,18 @@ firebase.auth().onAuthStateChanged(function (user) {
 
 let selectedUsers = [];
 let userID = [];
+let users = [];
+
+function getUsers() {
+   
+    var isDone = firebase.database().ref('users').once('value').then(function (snapshot) {
+        snapshot.forEach(function (childSnapshot) {
+            users.push(childSnapshot.val());
+        })
+    });
+
+    isDone.then(updateUserSelection);
+}
 
 // *************** Mode to enable Cancel & Create Button -Start ************************
 function enableBtns() {
@@ -49,9 +61,18 @@ function fieldIsFilled(field) {
  * 
  */
 function updateUserSelection() {
-    //saveUsersToLocalStorage();
-    //let users = getUsersFromLocalStorage();
     document.getElementById('user-picker-container').innerHTML = '';
+    /*firebase.database().ref('users').once('value').then(function (snapshot) {
+        snapshot.forEach(function (childSnapshot) {
+            let user = childSnapshot.val();
+            let classes = 'user-picker-row';
+            if (selectedUsers.includes(user)) {
+                classes += ' user-picker-row-select';
+            }
+            let htmlContent = generateHtml(classes, childSnapshot.val().id, childSnapshot.val().name, childSnapshot.val().img);
+            document.getElementById('user-picker-container').insertAdjacentHTML("beforeend", htmlContent);
+        })
+    });*/
     users.forEach(function (user) {
 
         let classes = 'user-picker-row';
@@ -60,7 +81,7 @@ function updateUserSelection() {
         }
 
         let htmlContent = `
-    <div id="user-row-${user.id}" class="${classes}" onclick="selectUser(${user.id})">
+    <div id="user-row-${user.id}" class="${classes}" onclick="selectUser('${user.id}')">
     <img src="./${user.img}" style="width: 75px; height: 75px; padding: 8px;">
     ${user.name}
 </div>
@@ -69,7 +90,31 @@ function updateUserSelection() {
     });
 }
 
+function generateHtml(classes, userId, userName, userImg) {
+    return `
+    <div id="user-row-${userId}" class="${classes}" onclick="selectUser('${userId}')">
+        <img src="./${userImg}" style="width: 75px; height: 75px; padding: 8px;">
+        ${userName}
+    </div>
+    `;
+}
+
 function selectUser(id) {
+
+    /*firebase.database().ref('/users/' + id).once('value').then(function (snapshot) {
+        // ...
+        let user = snapshot.val();
+        if (selectedUsers.includes(user)) {
+            // Remove from array
+            selectedUsers = selectedUsers.filter(function (u) {
+                return u.id !== user.id;
+            });
+
+        } else {
+            selectedUsers.push(user);
+        }
+    });*/
+
     let user = users.find(function (u) {
         return u.id == id;
     });

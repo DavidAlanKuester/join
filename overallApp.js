@@ -11,7 +11,7 @@ function writeUserData(userId, userName, userEmail, imageUrl) {
 function initApp() {
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
-            console.log(user);
+            //console.log(user);
             // User is signed in.
             if (user.metadata.creationTime == user.metadata.lastSignInTime) {
                 console.log("NEW USER LOGED IN :" + user + " UPDATE PROFILE PHOTOURL, AND WRITE USER DATA TO DATABASE");
@@ -33,15 +33,6 @@ function initApp() {
     });
 }
 
-let tasks = [];
-let users = [];
-
-firebase.database().ref('users').once('value').then(function (snapshot) {
-    snapshot.forEach(function (childSnapshot) {
-        users.push(childSnapshot.val());
-    })
-});
-console.log(users);
 
 let createdTasks;
 
