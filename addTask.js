@@ -13,9 +13,10 @@ firebase.auth().onAuthStateChanged(function (user) {
 let selectedUsers = [];
 let userID = [];
 let users = [];
+let tasks = [];
 
 function getUsers() {
-   
+
     var isDone = firebase.database().ref('users').once('value').then(function (snapshot) {
         snapshot.forEach(function (childSnapshot) {
             users.push(childSnapshot.val());
@@ -167,11 +168,11 @@ function getUserID() {
 
 function addPerson() {
     document.getElementById('addPersonBlend').classList.remove('d-none');
-    document.getElementById('overall-person-div').style.justifyContent ='space-between';
+    document.getElementById('overall-person-div').style.justifyContent = 'space-between';
 }
 
 function removePerson() {
-    document.getElementById('overall-person-div').style.justifyContent ='flex-start';
+    document.getElementById('overall-person-div').style.justifyContent = 'flex-start';
     selectedUsers = [];
     updateSelectedUserRow();
     updateUserSelection();
@@ -244,6 +245,20 @@ function newTask() {
         "assigned-to": selectedUsersIds,
         "display": display,
     }
+
+    firebase.database().ref('tasks/').set(
+        {
+            "task-id": taskID++,
+            "title": document.getElementById('titleInput').value,
+            "category": document.getElementById('categoryInput').value,
+            "description": document.getElementById('descriptionInput').value,
+            "due-date": document.getElementById('datePickerInput').value,
+            "urgency": urgency,
+            "importance": document.getElementById('importanceInput').value,
+            "assigned-to": toString(selectedUsersIds),
+            "display": display,
+        }
+    );
 
     tasks.push(newTask)
 }
