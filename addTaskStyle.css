@@ -262,3 +262,8 @@
     align-items: center;
 
 }
+
+#assign-person-div {
+    max-width: 50%;
+    overflow-x: scroll;
+}

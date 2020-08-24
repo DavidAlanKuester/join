@@ -149,7 +149,7 @@ function updateSelectedUserRow() {
     // Render selected users
     for (let i = 0; i < selectedUsers.length; i++) {
         let user = selectedUsers[i];
-        let htmlContent = `<div><img src="${user.img}">${user.name}</div>`;
+        let htmlContent = `<div><img src="${user.img}"></div>`;
         document.getElementById('assign-person-div').insertAdjacentHTML("beforeend", htmlContent);
     }
 }
@@ -167,9 +167,11 @@ function getUserID() {
 
 function addPerson() {
     document.getElementById('addPersonBlend').classList.remove('d-none');
+    document.getElementById('overall-person-div').style.justifyContent ='space-between';
 }
 
 function removePerson() {
+    document.getElementById('overall-person-div').style.justifyContent ='flex-start';
     selectedUsers = [];
     updateSelectedUserRow();
     updateUserSelection();
