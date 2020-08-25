@@ -166,7 +166,7 @@ function generateListItem(user, task) {
         <div>${user.name}<br>${user.email}</div>
     </div>
     <div class="category-content">${task.category}</div>
-    <div class="details-content">${task.title}</div>
+    <div class="details-content">${task.description}</div>
     </div>
 `;
 }
