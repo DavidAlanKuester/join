@@ -1,3 +1,17 @@
+firebase.auth().onAuthStateChanged(function (user) {
+    if (user) {
+        // User is signed in.
+
+        displayListOfAssigments(user.uid);
+
+    } else {
+        // User is signed out.
+        window.location.href = './index.html';
+    }
+}, function (error) {
+    console.log(error);
+});
+
 /**
  *
  * Calculates and returns Eisenhower Matrix Categorie based on the importance and dueDate of a task
@@ -71,13 +85,25 @@ function initiateListContent() {
 
     listContent = document.getElementById("list");
 
-    currentUserTasks.forEach(task => {
-        task["assigned-to"].forEach(userId => {
+    currentUserTasks.forEach((task) => {
+        task["assigned-to"].forEach((userId) => {
+
             /**
-             * @type {string} - Generated HTML Code
+             * @type {Object} - User, to whom the task was assign by the creator of the task aka, current user
              */
-            let listItem = generateListItem(getUserById(userId), task);
-            listContent.insertAdjacentHTML("beforeend", listItem);
+            let user;
+            let isDone = firebase.database().ref('users/' + userId).once('value').then(function (snapshot) {
+                user = snapshot.val();
+            });
+
+            isDone.then(function () {
+                /**
+                * @type {string} - Generated HTML Code
+                */
+                let listItem = generateListItem(user, task);
+                listContent.insertAdjacentHTML("beforeend", listItem);
+            });
+
         })
     });
 }
@@ -95,10 +121,13 @@ let currentUserTasks = [];
  * @param {number} userId - Used to get only the tasks created by the user with id value same as userId from tasksDummy Array
  */
 function initiateUserTasksArray(userId) {
-    tasksDummy.forEach(task => {
-        if (task.creator == userId) {
-            currentUserTasks.push(task);
-        }
+
+    return firebase.database().ref('tasks').once('value').then(function (snapshot) {
+        snapshot.forEach((chidSnapshot) => {
+            if (chidSnapshot.val().creator == userId) {
+                currentUserTasks.push(chidSnapshot.val());
+            }
+        });
     });
 }
 
@@ -110,7 +139,15 @@ function initiateUserTasksArray(userId) {
  * @returns {(object|undefined)} user with id value same as id parameter value or undefinde if users array has no user that matches the id parameter value
  */
 function getUserById(id) {
-    return users.find(user => user.id == id);
+    let user;
+    let isDone = firebase.database().ref('users/' + id).once('value').then(function (snapshot) {
+        user = snapshot.val();
+    });
+
+    isDone.then(function () {
+        return user;
+    })
+    //return users.find(user => user.id == id);
 }
 
 /**
@@ -126,7 +163,7 @@ function generateListItem(user, task) {
     <div class="list-item-content  ${task.display}">
     <div class="assigned-to-content">
         <img src="${user.img}" class="assigned-to-img rounded-circle">
-        <div>${user.name}<br>${user.eMail}</div>
+        <div>${user.name}<br>${user.email}</div>
     </div>
     <div class="category-content">${task.category}</div>
     <div class="details-content">${task.title}</div>
@@ -142,6 +179,8 @@ function generateListItem(user, task) {
  */
 function displayListOfAssigments(currentUserId) {
 
-    initiateUserTasksArray(currentUserId);
-    initiateListContent();
+    let isDone = initiateUserTasksArray(currentUserId);
+
+    isDone.then(initiateListContent);
+    //initiateListContent();
 }

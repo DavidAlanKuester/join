@@ -246,8 +246,9 @@ function newTask() {
         "display": display,
     }
 
-    firebase.database().ref('tasks/').set(
+    var isDone = firebase.database().ref('tasks/').push(
         {
+            "creator": firebase.auth().currentUser.uid,
             "task-id": taskID++,
             "title": document.getElementById('titleInput').value,
             "category": document.getElementById('categoryInput').value,
@@ -255,12 +256,12 @@ function newTask() {
             "due-date": document.getElementById('datePickerInput').value,
             "urgency": urgency,
             "importance": document.getElementById('importanceInput').value,
-            "assigned-to": toString(selectedUsersIds),
+            "assigned-to": selectedUsersIds,
             "display": display,
         }
     );
 
-    tasks.push(newTask)
+    isDone.then( tasks.push(newTask) );
 }
 
 function displaySucessAlert() {

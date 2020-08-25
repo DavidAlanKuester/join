@@ -19,10 +19,11 @@ function initApp() {
                     photoURL: "./img/id0.png"
                 }).then(function () {
                     // Update successful.
+                    writeUserData(user.uid, user.displayName, user.email, user.photoURL);
                 }).catch(function (error) {
                     // An error happened.
                 });
-                writeUserData(user.uid, user.displayName, user.email, user.photoURL);
+                // 
             }
             sidebarSetUserImg();
         } else {
@@ -37,7 +38,7 @@ function initApp() {
 let createdTasks;
 
 function saveUsersToLocalStorage() {
-   
+
     firebase.database().ref('users').once('value').then(function (snapshot) {
         snapshot.forEach(function (childSnapshot) {
             users.push(childSnapshot.val());
@@ -47,7 +48,7 @@ function saveUsersToLocalStorage() {
     localStorage.setItem("users", JSON.stringify(users));
 }
 
-function getUsersFromLocalStorage(){
+function getUsersFromLocalStorage() {
     return JSON.parse(localStorage.getItem("users"));
 }
 
