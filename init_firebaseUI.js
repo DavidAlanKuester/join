@@ -26,10 +26,24 @@ var uiConfig = {
             var isNewUser = authResult.additionalUserInfo.isNewUser;
             var providerId = authResult.additionalUserInfo.providerId;
             var operationType = authResult.operationType;
-            /*// Do something with the returned AuthResult.
-            // Return type determines whether we continue the redirect automatically
-            // or whether we leave that to developer to handle.*/
-            return true;
+            // Do something with the returned AuthResult.
+            if (isNewUser) {
+                user.updateProfile({
+                    photoURL: "./img/id0.png"
+                }).then(function () {
+                    // Update successful.
+                    let isDone = writeUserData(user.uid, user.displayName, user.email, user.photoURL);
+                    isDone.then(function () {
+                        window.location.href = './addTask.html';
+                    });
+                }).catch(function (error) {
+                    // An error happened.
+                });
+            } else {
+                // Return type determines whether we continue the redirect automatically
+                // or whether we leave that to developer to handle.
+                return true;
+            }
         },
         uiShown: function () {
             // The widget is rendered.

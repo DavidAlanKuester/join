@@ -1,39 +1,11 @@
-
 function writeUserData(userId, userName, userEmail, imageUrl) {
-    firebase.database().ref('users/' + userId).set({
+    return firebase.database().ref('users/' + userId).set({
         id: userId,
         img: imageUrl,
         name: userName,
         email: userEmail
     });
 }
-
-function initApp() {
-    firebase.auth().onAuthStateChanged(function (user) {
-        if (user) {
-            //console.log(user);
-            // User is signed in.
-            if (user.metadata.creationTime == user.metadata.lastSignInTime) {
-                console.log("NEW USER LOGED IN :" + user + " UPDATE PROFILE PHOTOURL, AND WRITE USER DATA TO DATABASE");
-                user.updateProfile({
-                    photoURL: "./img/id0.png"
-                }).then(function () {
-                    // Update successful.
-                    writeUserData(user.uid, user.displayName, user.email, user.photoURL);
-                }).catch(function (error) {
-                    // An error happened.
-                });
-                // 
-            }
-            sidebarSetUserImg();
-        } else {
-            // User is signed out.
-        }
-    }, function (error) {
-        console.log(error);
-    });
-}
-
 
 let createdTasks;
 

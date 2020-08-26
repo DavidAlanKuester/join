@@ -1,7 +1,7 @@
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
         // User is signed in.
-
+        sidebarSetUserImg();
     } else {
         // User is signed out.
         window.location.href = './index.html';
