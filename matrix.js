@@ -13,22 +13,22 @@ firebase.auth().onAuthStateChanged(function (user) {
 /**
  * Enum der IDs zum hinzufügen der task zu den Eisenhower Kategorien 
  */
-const MatrixIds = // TODO: Refactor to MATRIX_IDs
+const MATRIX_IDs = 
 {
     ADD_Task_DO: "matrix-tasks-do-here",
     ADD_TASK_SCHEDULE: "matrix-tasks-schedule-here",
     ADD_TASK_DELEGATE: "matrix-tasks-delegate-here",
     ADD_TASK_ELIMINATE: "matrix-tasks-eliminate-here"
 }
-Object.freeze(MatrixIds);
+Object.freeze(MATRIX_IDs);
 
 
 /**
  * This method loads the Matrix
- * @param {number} currentUserId - a number representing the ID of the current user
+ * @param {JSON} currentUser - the current user represented as a JSON
  */
-function initializeMatrix(currentUserId) {
-    let matrixTasks = getMatrixTasks(currentUserId);
+async function initializeMatrix(currentUser) {
+    let matrixTasks = await getMatrixTasks(currentUser.uid);
     checkTasksForArrivingDueDate(matrixTasks);
     initializeTasksInMatrix(matrixTasks);
     storeMatrixTasksInLocalStorage(matrixTasks);
@@ -37,14 +37,28 @@ function initializeMatrix(currentUserId) {
 /**
  * This method iterates through all tasks, checks if they are relevant 
  * to display in the matrix of the current user and returns them.
- * @param {number} userId - The ID of the user
+ * @param {string} userId - The ID of the user
  */
-function getMatrixTasks(userId) {
-    let matrixTasks =
-        tasksDummy.filter(
+ async function getMatrixTasks(userId) {
+    let allTasks = [];
+    allTasks = await getAllTasks(allTasks);
+    let matrixTasks = [];
+    matrixTasks =
+        allTasks.filter(
             task => (task["assigned-to"].includes(userId) || task["creator"].toString() === userId.toString())
         )
     return matrixTasks;
+}
+
+
+function getAllTasks(allTasks) {
+    let db = firebase.database();
+    value = db.ref("tasks").once('value').then(function(tasks){
+        tasks.forEach(task => {
+            allTasks.push(task.toJSON());
+        });
+    });
+    return allTasks;
 }
 
 
@@ -58,9 +72,22 @@ function checkTasksForArrivingDueDate(matrixTasks) {
     matrixTasks.forEach(task => {
         if (isScheduleTask(task) && isDue(task["due-date"])) {
             setTaskCategoryToDo(task);
+            // update task in firebase to do
+            firebase.database().ref("tasks/" + task["task-id"])
+                .update({
+                    "display" : eisenhowerMatrixCategrories.DO
+                }, function(error) {
+                    if (error) {
+                        console.error("Error while saving task in");
+                    } else {
+                        console.log("success");
+                    }
+                }
+            );
         }
     });
 }
+
 
 /**
  * This method iterates through all tasks and adds the task to the matrix
@@ -71,19 +98,19 @@ function initializeTasksInMatrix(matrixTasks) {
     matrixTasks.forEach(task => {
         switch (task["display"]) {
             case eisenhowerMatrixCategrories.DO:
-                addTaskToMatrix(task, MatrixIds.ADD_Task_DO, "do");
+                addTaskToMatrix(task, MATRIX_IDs.ADD_Task_DO, "do");
                 break;
 
             case eisenhowerMatrixCategrories.SCHEDULE:
-                addTaskToMatrix(task, MatrixIds.ADD_TASK_SCHEDULE, "schedule");
+                addTaskToMatrix(task, MATRIX_IDs.ADD_TASK_SCHEDULE, "schedule");
                 break;
 
             case eisenhowerMatrixCategrories.DELEGATE:
-                addTaskToMatrix(task, MatrixIds.ADD_TASK_DELEGATE, "delegate");
+                addTaskToMatrix(task, MATRIX_IDs.ADD_TASK_DELEGATE, "delegate");
                 break;
 
             case eisenhowerMatrixCategrories.ELIMINATE:
-                addTaskToMatrix(task, MatrixIds.ADD_TASK_ELIMINATE, "eliminate");
+                addTaskToMatrix(task, MATRIX_IDs.ADD_TASK_ELIMINATE, "eliminate");
                 break;
 
             default:
@@ -234,6 +261,12 @@ function adjustTaskSideColor(taskHtmlId, eisenhowerCategory) {
 
 }
 
+
+function getCurrentUserFromSession() {
+    return firebase.auth().currentUser
+}
+
+
 let hello = [];
 let value;
 /**
@@ -248,9 +281,9 @@ function checkTask(id) {
         }
     });*/
     let db = firebase.database();
-    value = db.ref("users").once('value').then(function(users){
-        users.forEach(user => {
-            hello.push(user);
+    value = db.ref("tasks").once('value').then(function(tasks){
+        tasks.forEach(task => {
+            hello.push(task.toJSON());
         });
     });
     console.log(hello);
@@ -260,6 +293,21 @@ function logStuff() {
     console.log(hello);
     console.log(value);
 }
+
+// update task in firebase to do
+function updateFireBase() {
+    let taskReference = firebase.database().ref("tasks/" + "MFkpzQEnn3s9t1MZwY3");
+    taskReference.update({
+        "description" : "Description 11"
+    });
+    // tasksReference.update({
+    //     "MFkpzQEnn3s9t1MZwY3": {
+    //         "description" : "Description 3"
+    //     }
+    // })
+    console.log("fo");
+}
+
 
 /**
  * This task accepts a task and returns true if that task has the display property of schedule
