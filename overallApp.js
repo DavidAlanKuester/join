@@ -24,6 +24,7 @@ function getUsersFromLocalStorage() {
     return JSON.parse(localStorage.getItem("users"));
 }
 
+
 //presumed task object structure
 //due-date should have short date string format "MM/DAY/YEAR"
 let tasksDummy = [
