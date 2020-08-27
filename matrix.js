@@ -13,14 +13,14 @@ firebase.auth().onAuthStateChanged(function (user) {
 /**
  * Enum der IDs zum hinzufügen der task zu den Eisenhower Kategorien 
  */
-const MatrixIds = // TODO: Refactor to MATRIX_IDs
+const MATRIX_IDs = // TODO: Refactor to MATRIX_IDs
 {
     ADD_Task_DO: "matrix-tasks-do-here",
     ADD_TASK_SCHEDULE: "matrix-tasks-schedule-here",
     ADD_TASK_DELEGATE: "matrix-tasks-delegate-here",
     ADD_TASK_ELIMINATE: "matrix-tasks-eliminate-here"
 }
-Object.freeze(MatrixIds);
+Object.freeze(MATRIX_IDs);
 
 
 /**
@@ -71,19 +71,19 @@ function initializeTasksInMatrix(matrixTasks) {
     matrixTasks.forEach(task => {
         switch (task["display"]) {
             case eisenhowerMatrixCategrories.DO:
-                addTaskToMatrix(task, MatrixIds.ADD_Task_DO, "do");
+                addTaskToMatrix(task, MATRIX_IDs.ADD_Task_DO, "do");
                 break;
 
             case eisenhowerMatrixCategrories.SCHEDULE:
-                addTaskToMatrix(task, MatrixIds.ADD_TASK_SCHEDULE, "schedule");
+                addTaskToMatrix(task, MATRIX_IDs.ADD_TASK_SCHEDULE, "schedule");
                 break;
 
             case eisenhowerMatrixCategrories.DELEGATE:
-                addTaskToMatrix(task, MatrixIds.ADD_TASK_DELEGATE, "delegate");
+                addTaskToMatrix(task, MATRIX_IDs.ADD_TASK_DELEGATE, "delegate");
                 break;
 
             case eisenhowerMatrixCategrories.ELIMINATE:
-                addTaskToMatrix(task, MatrixIds.ADD_TASK_ELIMINATE, "eliminate");
+                addTaskToMatrix(task, MATRIX_IDs.ADD_TASK_ELIMINATE, "eliminate");
                 break;
 
             default:
