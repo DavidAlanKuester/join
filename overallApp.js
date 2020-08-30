@@ -88,10 +88,10 @@ let tasksDummy = [
 
 const eisenhowerMatrixCategrories =
 {
-    DO: "do",
-    SCHEDULE: "schedule",
-    DELEGATE: "delegate",
-    ELIMINATE: "eliminate"
+    DO: "Do",
+    SCHEDULE: "Schedule",
+    DELEGATE: "Delegate",
+    ELIMINATE: "Eliminate"
 }
 Object.freeze(eisenhowerMatrixCategrories);
 

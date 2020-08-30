@@ -21,7 +21,7 @@
     <title>Matrix</title>
 </head>
 
-<body onload="includeHTML('matrix'), initializeMatrix(getCurrentUserFromSession())">
+<body onload="includeHTML('matrix'), initializeMatrix()">
     <div class="bg-container">
         <div w3-include-html="sidebar.html"></div>
 
@@ -123,7 +123,7 @@
             </div>
         </div>
     </div>
-    <button style="width: 120px; height: 120px; float: right;" onclick="checkTask(1)">CheckTask</button>
+    <button style="width: 120px; height: 120px; float: right;" onclick="loadTasks()">CheckTask</button>
     <button style="width: 120px; height: 120px; float: right;" onclick="logStuff()">log</button>
     <button style="width: 120px; height: 120px; float: right;" onclick="updateFireBase()">update</button>
 

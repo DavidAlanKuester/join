@@ -2,6 +2,7 @@ firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
         // User is signed in.
         sidebarSetUserImg();
+        saveUidFromCurrentUserInLocalStorage();
     } else {
         // User is signed out.
         window.location.href = './index.html';
@@ -13,7 +14,7 @@ firebase.auth().onAuthStateChanged(function (user) {
 /**
  * Enum der IDs zum hinzufügen der task zu den Eisenhower Kategorien 
  */
-const MATRIX_IDs = 
+const MATRIX_IDs =
 {
     ADD_Task_DO: "matrix-tasks-do-here",
     ADD_TASK_SCHEDULE: "matrix-tasks-schedule-here",
@@ -25,40 +26,66 @@ Object.freeze(MATRIX_IDs);
 
 /**
  * This method loads the Matrix
- * @param {JSON} currentUser - the current user represented as a JSON
  */
-async function initializeMatrix(currentUser) {
-    let matrixTasks = await getMatrixTasks(currentUser.uid);
+async function initializeMatrix() {
+    let allTasks = [];
+    let matrixTasks = [];
+    await getAllTasks(allTasks);
+    getMatrixTasks(matrixTasks, allTasks);
     checkTasksForArrivingDueDate(matrixTasks);
     initializeTasksInMatrix(matrixTasks);
     storeMatrixTasksInLocalStorage(matrixTasks);
 }
 
-/**
- * This method iterates through all tasks, checks if they are relevant 
- * to display in the matrix of the current user and returns them.
- * @param {string} userId - The ID of the user
- */
- async function getMatrixTasks(userId) {
-    let allTasks = [];
-    allTasks = await getAllTasks(allTasks);
-    let matrixTasks = [];
-    matrixTasks =
-        allTasks.filter(
-            task => (task["assigned-to"].includes(userId) || task["creator"].toString() === userId.toString())
-        )
-    return matrixTasks;
+
+async function getAllTasks(allTasks) {
+    try {
+        let db = firebase.database();
+        await db.ref("tasks").once('value')
+            .then(function (tasks) {
+                return tasks.forEach(task => {
+                    allTasks.push(task.toJSON());
+                });
+            });
+    } catch (error) {
+        console.error(error + "Error occured when loading all tasks from firebase" + result);
+    }
 }
 
 
-function getAllTasks(allTasks) {
-    let db = firebase.database();
-    value = db.ref("tasks").once('value').then(function(tasks){
-        tasks.forEach(task => {
-            allTasks.push(task.toJSON());
-        });
+/**
+ * This method iterates through all tasks, checks if they are relevant 
+ * to display in the matrix of the current user and returns them.
+ */
+function getMatrixTasks(matrixTasks, allTasks) {
+    let userId = localStorage.getItem("curUserUid");
+    allTasks.forEach(task => {
+        if (
+            task["creator"].toString() === userId.toString() ||
+            isAssignedToCurrentUser(task, userId)
+        ) {
+            matrixTasks.push(task);
+        }
+
     });
-    return allTasks;
+    /*matrixTasks = allTasks.filter(
+        task => (
+            task["creator"].toString() === userId.toString() ||
+            isAssignedToCurrentUser(task, userId)
+        )
+    )*/
+    //return matrixTasks;
+}
+
+
+function isAssignedToCurrentUser(task, curUserId) {
+    const object = task["assigned-to"];
+    for (const key in object) {
+        if (object[key].toString() === curUserId.toString()) {
+            return true;
+        }
+    }
+    return false;
 }
 
 
@@ -75,15 +102,15 @@ function checkTasksForArrivingDueDate(matrixTasks) {
             // update task in firebase to do
             firebase.database().ref("tasks/" + task["task-id"])
                 .update({
-                    "display" : eisenhowerMatrixCategrories.DO
-                }, function(error) {
+                    "display": eisenhowerMatrixCategrories.DO
+                }, function (error) {
                     if (error) {
                         console.error("Error while saving task in");
                     } else {
                         console.log("success");
                     }
                 }
-            );
+                );
         }
     });
 }
@@ -262,18 +289,15 @@ function adjustTaskSideColor(taskHtmlId, eisenhowerCategory) {
 }
 
 
-function getCurrentUserFromSession() {
-    return firebase.auth().currentUser
+function saveUidFromCurrentUserInLocalStorage() {
+    localStorage.setItem("curUserUid", firebase.auth().currentUser.uid);
 }
 
 
 let hello = [];
 let value;
-/**
- * This method is used for testing purposes of the dropdown functionality
- * @param {number} id 
- */
-function checkTask(id) {
+
+function loadTasks() {
     /*let matrixTasks = JSON.parse(localStorage.getItem("matrixTasks"));
     matrixTasks.forEach(task => {
         if (task["task-id"] === id.toString()) {
@@ -281,12 +305,13 @@ function checkTask(id) {
         }
     });*/
     let db = firebase.database();
-    value = db.ref("tasks").once('value').then(function(tasks){
+    value = db.ref("tasks").once('value').then(function (tasks) {
         tasks.forEach(task => {
             hello.push(task.toJSON());
         });
     });
     console.log(hello);
+    console.log(value);
 }
 
 function logStuff() {
@@ -296,9 +321,9 @@ function logStuff() {
 
 // update task in firebase to do
 function updateFireBase() {
-    let taskReference = firebase.database().ref("tasks/" + "MFkpzQEnn3s9t1MZwY3");
+    let taskReference = firebase.database().ref("tasks/" + "-MFpRmAgcS4NaUw5cgVQ");
     taskReference.update({
-        "description" : "Description 11"
+        "description": "Calculate the Business Vodoo matrix111"
     });
     // tasksReference.update({
     //     "MFkpzQEnn3s9t1MZwY3": {

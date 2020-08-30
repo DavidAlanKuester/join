@@ -6,3 +6,6 @@ package-lock.json
 
 # Files produced by jsdoc
 out/*
+
+#
+launch.json
