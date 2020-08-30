@@ -242,7 +242,6 @@ function updateTask(id, eisenhowerCategory) {
     let taskId = id.substr(5);
     let matrixTasks = JSON.parse(localStorage.getItem("matrixTasks"));
     let updateTask = matrixTasks.filter(task => task["task-id"] === taskId);
-    // update Task in Firebase
     updateDisplayStatusOfTask(id, taskId, eisenhowerCategory, updateTask, matrixTasks);
 }
 
