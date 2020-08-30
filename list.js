@@ -27,19 +27,19 @@ function getEisenhowerCategorie(important, dueDate) {
     let urgent = calculateUrgency(dueDate);
 
     if (urgent && important) {
-        return eisenhowerMatrixCategrories.DO;
+        return EISENHOWER_MATRIX_CATEGORIES.DO;
     }
 
     if (important && !urgent) {
-        return eisenhowerMatrixCategrories.SCHEDULE;
+        return EISENHOWER_MATRIX_CATEGORIES.SCHEDULE;
     }
 
     if (urgent && !important) {
-        return eisenhowerMatrixCategrories.DELEGATE;
+        return EISENHOWER_MATRIX_CATEGORIES.DELEGATE;
     }
 
     if (!urgent && !important) {
-        return eisenhowerMatrixCategrories.ELIMINATE;
+        return EISENHOWER_MATRIX_CATEGORIES.ELIMINATE;
     }
 }
 

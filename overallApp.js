@@ -86,14 +86,14 @@ let tasksDummy = [
 
 ];
 
-const eisenhowerMatrixCategrories =
+const EISENHOWER_MATRIX_CATEGORIES =
 {
     DO: "Do",
     SCHEDULE: "Schedule",
     DELEGATE: "Delegate",
     ELIMINATE: "Eliminate"
 }
-Object.freeze(eisenhowerMatrixCategrories);
+Object.freeze(EISENHOWER_MATRIX_CATEGORIES);
 
 /**
  * 
@@ -199,7 +199,7 @@ function changeSideBarLinksToIndex() {
  * @param {Json object} task - a task represented as a JSON object
  */
 function setTaskCategoryToDo(task) {
-    task["display"] = eisenhowerMatrixCategrories.DO;
+    task["display"] = EISENHOWER_MATRIX_CATEGORIES.DO;
 }
 
 /**

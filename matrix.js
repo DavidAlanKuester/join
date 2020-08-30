@@ -112,20 +112,20 @@ function checkTasksForArrivingDueDate(matrixTasks) {
 function initializeTasksInMatrix(matrixTasks) {
     matrixTasks.forEach(task => {
         switch (task["display"]) {
-            case eisenhowerMatrixCategrories.DO:
-                addTaskToMatrix(task, MATRIX_IDs.ADD_Task_DO, eisenhowerMatrixCategrories.DO);
+            case EISENHOWER_MATRIX_CATEGORIES.DO:
+                addTaskToMatrix(task, MATRIX_IDs.ADD_Task_DO, EISENHOWER_MATRIX_CATEGORIES.DO);
                 break;
 
-            case eisenhowerMatrixCategrories.SCHEDULE:
-                addTaskToMatrix(task, MATRIX_IDs.ADD_TASK_SCHEDULE, eisenhowerMatrixCategrories.SCHEDULE);
+            case EISENHOWER_MATRIX_CATEGORIES.SCHEDULE:
+                addTaskToMatrix(task, MATRIX_IDs.ADD_TASK_SCHEDULE, EISENHOWER_MATRIX_CATEGORIES.SCHEDULE);
                 break;
 
-            case eisenhowerMatrixCategrories.DELEGATE:
-                addTaskToMatrix(task, MATRIX_IDs.ADD_TASK_DELEGATE, eisenhowerMatrixCategrories.DELEGATE);
+            case EISENHOWER_MATRIX_CATEGORIES.DELEGATE:
+                addTaskToMatrix(task, MATRIX_IDs.ADD_TASK_DELEGATE, EISENHOWER_MATRIX_CATEGORIES.DELEGATE);
                 break;
 
-            case eisenhowerMatrixCategrories.ELIMINATE:
-                addTaskToMatrix(task, MATRIX_IDs.ADD_TASK_ELIMINATE, eisenhowerMatrixCategrories.ELIMINATE);
+            case EISENHOWER_MATRIX_CATEGORIES.ELIMINATE:
+                addTaskToMatrix(task, MATRIX_IDs.ADD_TASK_ELIMINATE, EISENHOWER_MATRIX_CATEGORIES.ELIMINATE);
                 break;
 
             default:
@@ -270,23 +270,23 @@ function updateDisplayStatusOfTask(id, taskId, eisenhowerCategory, updateTask, m
  */
 function adjustTaskSideColor(taskHtmlId, eisenhowerCategory) {
     let task = document.getElementById(taskHtmlId);
-    task.classList.remove(eisenhowerMatrixCategrories.DO, eisenhowerMatrixCategrories.SCHEDULE,
-        eisenhowerMatrixCategrories.DELEGATE, eisenhowerMatrixCategrories.ELIMINATE);
+    task.classList.remove(EISENHOWER_MATRIX_CATEGORIES.DO, EISENHOWER_MATRIX_CATEGORIES.SCHEDULE,
+        EISENHOWER_MATRIX_CATEGORIES.DELEGATE, EISENHOWER_MATRIX_CATEGORIES.ELIMINATE);
     switch (eisenhowerCategory) {
-        case eisenhowerMatrixCategrories.DO:
-            task.classList.add(eisenhowerMatrixCategrories.DO);
+        case EISENHOWER_MATRIX_CATEGORIES.DO:
+            task.classList.add(EISENHOWER_MATRIX_CATEGORIES.DO);
             break;
 
-        case eisenhowerMatrixCategrories.SCHEDULE:
-            task.classList.add(eisenhowerMatrixCategrories.SCHEDULE);
+        case EISENHOWER_MATRIX_CATEGORIES.SCHEDULE:
+            task.classList.add(EISENHOWER_MATRIX_CATEGORIES.SCHEDULE);
             break;
 
-        case eisenhowerMatrixCategrories.DELEGATE:
-            task.classList.add(eisenhowerMatrixCategrories.DELEGATE);
+        case EISENHOWER_MATRIX_CATEGORIES.DELEGATE:
+            task.classList.add(EISENHOWER_MATRIX_CATEGORIES.DELEGATE);
             break;
 
-        case eisenhowerMatrixCategrories.ELIMINATE:
-            task.classList.add(eisenhowerMatrixCategrories.ELIMINATE);
+        case EISENHOWER_MATRIX_CATEGORIES.ELIMINATE:
+            task.classList.add(EISENHOWER_MATRIX_CATEGORIES.ELIMINATE);
             break;
 
         default:
@@ -307,7 +307,7 @@ function saveUidFromCurrentUserInLocalStorage() {
  * @param {JSON<Object>} task - a task represented as a JSON object 
  */
 function isScheduleTask(task) {
-    return (task["display"].toString() === eisenhowerMatrixCategrories.SCHEDULE.toString());
+    return (task["display"].toString() === EISENHOWER_MATRIX_CATEGORIES.SCHEDULE.toString());
 }
 
 /*  #######################################################################################################################
@@ -316,15 +316,15 @@ function isScheduleTask(task) {
 function getEisenhowerCategory(task) {
     // criteria for DO-Task
     if (isTaskImportant(task) && isDue(task["due-date"])) {
-        return eisenhowerMatrixCategrories.DO;
+        return EISENHOWER_MATRIX_CATEGORIES.DO;
     }
     //criteria for schedule task
     if (isTaskImportant(task)) {
-        return eisenhowerMatrixCategrories.SCHEDULE;
+        return EISENHOWER_MATRIX_CATEGORIES.SCHEDULE;
     }
     // criteria for delegate task
     if (!isTaskImportant(task)) {
-        return eisenhowerMatrixCategrories.DELEGATE;
+        return EISENHOWER_MATRIX_CATEGORIES.DELEGATE;
     }
 }
 
@@ -333,15 +333,15 @@ function AddTaskInEisenhowerCategory(
     task, doTasks, scheduleTasks, delegateTasks, eliminateTasks) {
     let category = getEisenhowerCategory(task);
     switch (category) {
-        case eisenhowerMatrixCategrories.DO:
+        case EISENHOWER_MATRIX_CATEGORIES.DO:
             doTasks.push(task);
             break;
 
-        case eisenhowerMatrixCategrories.SCHEDULE:
+        case EISENHOWER_MATRIX_CATEGORIES.SCHEDULE:
             scheduleTasks.push(task);
             break;
 
-        case eisenhowerMatrixCategrories.DELEGATE:
+        case EISENHOWER_MATRIX_CATEGORIES.DELEGATE:
             delegateTasks.push(task);
             break;
 
