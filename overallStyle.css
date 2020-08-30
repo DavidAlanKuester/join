@@ -110,3 +110,11 @@ body {
 .eliminate {
     border-left-color: blue;
 }
+
+#profileImgInput{
+    position: fixed;
+    background-color: greenyellow;
+    top: 50%;
+    left: 50%;
+    right: 50%;
+}

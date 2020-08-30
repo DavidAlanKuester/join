@@ -19,6 +19,7 @@ function getUsers() {
 
     var isDone = firebase.database().ref('users').once('value').then(function (snapshot) {
         snapshot.forEach(function (childSnapshot) {
+            console.log(childSnapshot.val().img);
             users.push(childSnapshot.val());
         })
     });
@@ -83,7 +84,7 @@ function updateUserSelection() {
 
         let htmlContent = `
     <div id="user-row-${user.id}" class="${classes}" onclick="selectUser('${user.id}')">
-    <img src="./${user.img}" style="width: 75px; height: 75px; padding: 8px;">
+    <img src="${user.img}" style="width: 75px; height: 75px; padding: 8px;">
     ${user.name}
 </div>
 `;
