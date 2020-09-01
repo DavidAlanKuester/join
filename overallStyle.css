@@ -199,16 +199,63 @@ body {
         /*box-shadow's h-offset parameter same as the padding of sidebar so that the shadow line lies over the padding*/
         color: white;
     }
-    /********************SIDE_BAR_RELATED_SETTINGS_END (RESPONSIVE)********************/
-    /********************KEY_FRAMES_ANIMATIONS (RESPONSIVE)********************/
-    @keyframes showSidebar {
-        from {
-            top: -20%;
-            /*should match the positive left position value of sidebar*/
+        /********************KEY_FRAMES_ANIMATIONS (RESPONSIVE)********************/
+        @keyframes showSidebar {
+            from {
+                top: -20%;
+                /*should match the positive left position value of sidebar*/
+            }
+            to {
+                top: 0%;
+            }
         }
-        to {
-            top: 0%;
-        }
-    }
-    /********************KEY_FRAMES_ANIMATIONS_END (RESPONSIVE)********************/
+        /********************KEY_FRAMES_ANIMATIONS_END (RESPONSIVE)********************/
 }
+@media (max-width: 480px) {
+    .custom-alert p {
+        font-size: 24px;
+        margin: 0;
+    }
+    .menu-link {
+        text-align: center;
+        text-decoration: none;
+        color: gray;
+        font-size: 12px;
+    }
+    .menu-img {
+        border: 6px;
+        width: 52px;
+        height: 52px;
+        object-fit: contain;
+    }
+}
+
+@media (max-width: 360px) {
+    .side-bar {
+        width: 100%;
+        height: 20%;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        padding-right: 8px;
+        padding-left: 0px;
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        background-color: #1E3190;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        z-index: 2;
+        animation: showSidebar 2s ease;
+    }
+    .links-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+    /********************SIDE_BAR_RELATED_SETTINGS_END (RESPONSIVE)********************/
