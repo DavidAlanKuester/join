@@ -153,6 +153,14 @@ function changeSideBarTo(site) {
         case "index":
             changeSideBarLinksToIndex();
             break;
+        case "imprint":
+            changeSideBarLinksToImprint();
+            break;
+        case "data-protection":
+            changeSideBarLinksToDataProtection();
+            break;
+        case "help":
+            changeSideBarLinksToHelp();
         default:
             console.error("ERROR:: unknown site " + site + " please check your site function includeHTML call attribute value to match one of the cases");
             break;
@@ -165,33 +173,77 @@ function sidebarSetUserImg() {
 
 function changeSideBarLinksToListSelected() {
     document.getElementById("matrix-link").classList.add("link-unselected");
+    document.getElementById("addTask-link").classList.add("link-unselected");
     document.getElementById("list-link").classList.add("link-selected");
     document.getElementById("list-link").innerHTML = "List";
+    document.getElementById("imprint-link").classList.add("link-unselected");
+    document.getElementById("data-protection-link").classList.add("link-unselected");
+    document.getElementById("help-link").classList.add("link-unselected");
     //sidebarSetUserImg();
 }
 
 function changeSideBarLinksToMatrixSelected() {
     document.getElementById("matrix-link").classList.add("link-selected");
+    document.getElementById("addTask-link").classList.add("link-unselected");
     document.getElementById("list-link").classList.add("link-unselected");
     document.getElementById("list-link").innerHTML = "List";
+    document.getElementById("imprint-link").classList.add("link-unselected");
+    document.getElementById("data-protection-link").classList.add("link-unselected");
+    document.getElementById("help-link").classList.add("link-unselected");
     //sidebarSetUserImg();
 }
 
 function changeSideBarLinksToAddtask() {
     document.getElementById("matrix-link").classList.add("link-unselected");
     document.getElementById("list-link").classList.add("link-unselected");
+    document.getElementById("addTask-link").classList.add("link-selected");
     document.getElementById("list-link").innerHTML = "View List";
+    document.getElementById("imprint-link").classList.add("link-unselected");
+    document.getElementById("data-protection-link").classList.add("link-unselected");
+    document.getElementById("help-link").classList.add("link-unselected");
     //sidebarSetUserImg();
 }
 
 function changeSideBarLinksToIndex() {
     // document.getElementById("matrix-link").classList.add("link-unselected");
     // document.getElementById("list-link").classList.add("link-unselected");
+    // document.getElementById("addTask-link").classList.add("link-unselected");
     // document.getElementById("list-link").innerHTML = "View List";
     //sidebarSetUserImg();
     document.getElementById("app-links").classList.add("d-none");
+    document.getElementById("docs-links").classList.add("d-none");
     document.getElementById("user").classList.add("d-none");
     //document.getElementById("nav-bar").classList.add("w-100");
+}
+
+function changeSideBarLinksToImprint(){
+    document.getElementById("matrix-link").classList.add("link-unselected");
+    document.getElementById("list-link").classList.add("link-unselected");
+    document.getElementById("addTask-link").classList.add("link-unselected");
+    document.getElementById("list-link").innerHTML = "View List";
+    document.getElementById("imprint-link").classList.add("link-selected");
+    document.getElementById("data-protection-link").classList.add("link-unselected");
+    document.getElementById("help-link").classList.add("link-unselected");
+}
+
+function changeSideBarLinksToDataProtection(){
+    document.getElementById("matrix-link").classList.add("link-unselected");
+    document.getElementById("list-link").classList.add("link-unselected");
+    document.getElementById("addTask-link").classList.add("link-unselected");
+    document.getElementById("list-link").innerHTML = "View List";
+    document.getElementById("imprint-link").classList.add("link-unselected");
+    document.getElementById("data-protection-link").classList.add("link-selected");
+    document.getElementById("help-link").classList.add("link-unselected");
+}
+
+function changeSideBarLinksToHelp(){
+    document.getElementById("matrix-link").classList.add("link-unselected");
+    document.getElementById("list-link").classList.add("link-unselected");
+    document.getElementById("addTask-link").classList.add("link-unselected");
+    document.getElementById("list-link").innerHTML = "View List";
+    document.getElementById("imprint-link").classList.add("link-unselected");
+    document.getElementById("data-protection-link").classList.add("link-unselected");
+    document.getElementById("help-link").classList.add("link-selected");
 }
 
 /**

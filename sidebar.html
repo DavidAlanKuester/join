@@ -4,14 +4,23 @@
             <img class="menu-img " src="img/logo.png" alt="">
         </a>
         <div id="app-links" class="links-container">
+            <a id="addTask-link" class="menu-link " href="addTask.html">Add Task</a>
             <a id="matrix-link" class="menu-link " href="matrix.html">Matrix</a>
             <a id="list-link" class="menu-link " href="list.html"></a>
         </div>
     </div>
 
-    <div onclick="changeProfileImg()" id="user" class="link-img" href="addTask.html">
-        <img id="user-img" class="menu-img rounded-circle border border-white" src= 'img/id1.png' alt="">
-         <!-- add the input field and area for uploaded images to be displayed -->
-         <input id="profileImgInput" accept="image/*" name="file" type="file" class="d-none">
+    <div class="menu">
+        <div onclick="changeProfileImg()" id="user" class="link-img">
+            <img id="user-img" class="menu-img rounded-circle border border-white" src='img/id1.png' alt="">
+            <!-- add the input field and area for uploaded images to be displayed -->
+            <input id="profileImgInput" accept="image/*" name="file" type="file" class="d-none">
+        </div>
+        <div id="docs-links" class="links-container">
+            <a id="imprint-link" class="menu-link " href="imprint.html">Imprint</a>
+            <a id="help-link" class="menu-link " href="#">Help</a>
+            <a id="data-protection-link" class="menu-link " href="data-protection.html">Data Protection</a>
+        </div>
     </div>
+
 </nav>
