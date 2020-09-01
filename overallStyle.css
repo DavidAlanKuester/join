@@ -37,7 +37,7 @@ body {
 }
 
 .menu {
-    height: 45%;
+    height: 30%;
     /*adjust the value to position the links-container, up or down*/
     display: flex;
     flex-direction: column;
@@ -153,12 +153,12 @@ body {
         animation: showSidebar 2s ease;
     }
     .menu {
-        width: 90%;
+        width: unset;
         /*adjust the value to position the links-container, up or down*/
         height: 100%;
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
+        justify-content: start;
     }
     .link-img {
         display: flex;
