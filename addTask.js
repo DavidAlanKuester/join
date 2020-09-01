@@ -235,8 +235,10 @@ function newTask() {
         selectedUsersIds.push(user.id);
     });
 
+    var newTaskId = firebase.database().ref('tasks/').push().key;
+
     let newTask = {
-        "task-id": taskID++,
+        "task-id": newTaskId,
         "title": document.getElementById('titleInput').value,
         "category": document.getElementById('categoryInput').value,
         "description": document.getElementById('descriptionInput').value,
@@ -247,10 +249,10 @@ function newTask() {
         "display": display,
     }
 
-    var isDone = firebase.database().ref('tasks/').push(
+    var isDone = firebase.database().ref('tasks/'+newTaskId).set(
         {
             "creator": firebase.auth().currentUser.uid,
-            "task-id": taskID++,
+            "task-id": newTaskId,
             "title": document.getElementById('titleInput').value,
             "category": document.getElementById('categoryInput').value,
             "description": document.getElementById('descriptionInput').value,
