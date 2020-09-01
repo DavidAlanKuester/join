@@ -12,6 +12,7 @@ body {
 }
 
 /********************SIDE_BAR_RELATED_SETTINGS********************/
+
 .side-bar {
     width: 10%;
     /*if the width of sidebar is to be change, left position atribute of title-list-content class must be at least the same as the width of sidebar,
@@ -29,13 +30,14 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    z-index: 2; /*for debug purpose*/
+    z-index: 2;
+    /*for debug purpose*/
     /*draw over the list-content-container*/
     animation: showSidebar 2s ease;
 }
 
 .menu {
-    height: 30%;
+    height: 45%;
     /*adjust the value to position the links-container, up or down*/
     display: flex;
     flex-direction: column;
@@ -82,19 +84,25 @@ body {
     /*box-shadow's h-offset parameter same as the padding of sidebar so that the shadow line lies over the padding*/
     color: white;
 }
+
 /********************SIDE_BAR_RELATED_SETTINGS_END********************/
 
 /********************KEY_FRAMES_ANIMATIONS********************/
-@keyframes showSidebar{
-    from{
-        left: -11%;/*should match the positive left position value of sidebar*/
-    }to{
-        left: 0%; 
+
+@keyframes showSidebar {
+    from {
+        left: -11%;
+        /*should match the positive left position value of sidebar*/
+    }
+    to {
+        left: 0%;
     }
 }
+
 /********************KEY_FRAMES_ANIMATIONS_END********************/
 
 /*colors for the list-item-content depending of the eisenhowerMatrixCategorie value of the assigment inside list.js*/
+
 .do {
     border-left-color: orange;
 }
@@ -111,10 +119,96 @@ body {
     border-left-color: blue;
 }
 
-#profileImgInput{
+#profileImgInput {
     position: fixed;
     background-color: greenyellow;
     top: 50%;
     left: 50%;
     right: 50%;
+}
+
+@media (max-width: 1000px) {
+    /********************SIDE_BAR_RELATED_SETTINGS (RESPONSIVE)********************/
+    .side-bar {
+        width: 100%;
+        /*if the width of sidebar is to be change, left position atribute of title-list-content class must be at least the same as the width of sidebar,
+    * so that the two elements, side-bar and title-list-content, do not overlap*/
+        height: 20%;
+        padding-top: 5px;
+        /*same as the positive box-shadow's h-offset value of link-selected class, so that the shadow line lies over the padding*/
+        padding-bottom: 5px;
+        padding-right: 30px;
+        padding-left: 30px;
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        background-color: #1E3190;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        z-index: 2;
+        /*for debug purpose*/
+        /*draw over the list-content-container*/
+        animation: showSidebar 2s ease;
+    }
+    .menu {
+        width: 90%;
+        /*adjust the value to position the links-container, up or down*/
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .link-img {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 8px;
+    }
+    .menu-img {
+        border: 6px;
+        /*width: 100%;*/
+        width: 80px;
+        height: 80px;
+        object-fit: contain;
+    }
+    .links-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .menu-link {
+        padding-right: 8px;
+        padding-left: 8px;
+        text-align: center;
+        text-decoration: none;
+        color: gray;
+    }
+    .menu a:hover {
+        text-decoration: none;
+        color: white;
+    }
+    .link-unselected {
+        color: gray;
+    }
+    .link-selected {
+        box-shadow: unset;
+        border-bottom: 2px solid white;
+        /*box-shadow's h-offset parameter same as the padding of sidebar so that the shadow line lies over the padding*/
+        color: white;
+    }
+    /********************SIDE_BAR_RELATED_SETTINGS_END (RESPONSIVE)********************/
+    /********************KEY_FRAMES_ANIMATIONS (RESPONSIVE)********************/
+    @keyframes showSidebar {
+        from {
+            top: -20%;
+            /*should match the positive left position value of sidebar*/
+        }
+        to {
+            top: 0%;
+        }
+    }
+    /********************KEY_FRAMES_ANIMATIONS_END (RESPONSIVE)********************/
 }
