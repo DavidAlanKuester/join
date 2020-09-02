@@ -170,7 +170,7 @@ function ConvertToEuropeanDateString(dateString, delimiter) {
  * @param {JSON<Object>} task - a task represented as a JSON object 
  */
 function createMatrixTask(task, sidebarColorClassString) {
-    return (`<div id="task#${task["task-id"]}" class="matrix-task-container ${sidebarColorClassString}" 
+    return (`<div id="task#${task["task-id"]}" class="matrix-task-container ${sidebarColorClassString.toLowerCase()}" 
             draggable="true" ondragstart="dragTask(event)">
          <div class="matrix-task-date"> ${ConvertToEuropeanDateString(task['due-date'], '.')} </div>
          <div class="matrix-task-title"> ${task['title']} </div>
