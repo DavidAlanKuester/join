@@ -37,7 +37,7 @@ body {
 }
 
 .menu {
-    height: 30%;
+    /*height: 30%;*/
     /*adjust the value to position the links-container, up or down*/
     display: flex;
     flex-direction: column;
@@ -159,6 +159,7 @@ body {
         display: flex;
         flex-direction: row;
         justify-content: start;
+        align-items: center;
     }
     .link-img {
         display: flex;
@@ -199,18 +200,19 @@ body {
         /*box-shadow's h-offset parameter same as the padding of sidebar so that the shadow line lies over the padding*/
         color: white;
     }
-        /********************KEY_FRAMES_ANIMATIONS (RESPONSIVE)********************/
-        @keyframes showSidebar {
-            from {
-                top: -20%;
-                /*should match the positive left position value of sidebar*/
-            }
-            to {
-                top: 0%;
-            }
+    /********************KEY_FRAMES_ANIMATIONS (RESPONSIVE)********************/
+    @keyframes showSidebar {
+        from {
+            top: -20%;
+            /*should match the positive left position value of sidebar*/
         }
-        /********************KEY_FRAMES_ANIMATIONS_END (RESPONSIVE)********************/
+        to {
+            top: 0%;
+        }
+    }
+    /********************KEY_FRAMES_ANIMATIONS_END (RESPONSIVE)********************/
 }
+
 @media (max-width: 480px) {
     .custom-alert p {
         font-size: 24px;
@@ -227,6 +229,18 @@ body {
         width: 52px;
         height: 52px;
         object-fit: contain;
+    }
+    #log-out-btn {
+        font-size: 12px !important;
+    }
+    .link-unselected {
+        color: gray;
+    }
+    .link-selected {
+        box-shadow: unset;
+        border-bottom: 2px solid white;
+        /*box-shadow's h-offset parameter same as the padding of sidebar so that the shadow line lies over the padding*/
+        color: white;
     }
 }
 
@@ -258,4 +272,5 @@ body {
         padding-right: 0;
     }
 }
-    /********************SIDE_BAR_RELATED_SETTINGS_END (RESPONSIVE)********************/
+
+/********************SIDE_BAR_RELATED_SETTINGS_END (RESPONSIVE)********************/

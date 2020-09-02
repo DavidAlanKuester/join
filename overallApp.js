@@ -1,16 +1,16 @@
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
         // User is signed in.
-        document.getElementById("log-out-btn").classList.remove("d-none");
+       
     } else {
         // User is signed out.
-        document.getElementById("log-out-btn").classList.add("d-none");
+       
     }
 }, function (error) {
     console.log(error);
 });
 
-function logUserOut(){
+function logUserOut() {
     firebase.auth().signOut();
 }
 
@@ -177,6 +177,7 @@ function changeSideBarTo(site) {
             break;
         case "help":
             changeSideBarLinksToHelp();
+            break;
         default:
             console.error("ERROR:: unknown site " + site + " please check your site function includeHTML call attribute value to match one of the cases");
             break;
@@ -195,7 +196,6 @@ function changeSideBarLinksToListSelected() {
     document.getElementById("imprint-link").classList.add("link-unselected");
     document.getElementById("data-protection-link").classList.add("link-unselected");
     document.getElementById("help-link").classList.add("link-unselected");
-    //sidebarSetUserImg();
 }
 
 function changeSideBarLinksToMatrixSelected() {
@@ -206,7 +206,6 @@ function changeSideBarLinksToMatrixSelected() {
     document.getElementById("imprint-link").classList.add("link-unselected");
     document.getElementById("data-protection-link").classList.add("link-unselected");
     document.getElementById("help-link").classList.add("link-unselected");
-    //sidebarSetUserImg();
 }
 
 function changeSideBarLinksToAddtask() {
@@ -217,52 +216,108 @@ function changeSideBarLinksToAddtask() {
     document.getElementById("imprint-link").classList.add("link-unselected");
     document.getElementById("data-protection-link").classList.add("link-unselected");
     document.getElementById("help-link").classList.add("link-unselected");
-    //sidebarSetUserImg();
 }
 
 function changeSideBarLinksToIndex() {
-    // document.getElementById("matrix-link").classList.add("link-unselected");
-    // document.getElementById("list-link").classList.add("link-unselected");
-    // document.getElementById("addTask-link").classList.add("link-unselected");
-    // document.getElementById("list-link").innerHTML = "View List";
-    //sidebarSetUserImg();
-    document.getElementById("app-links").classList.add("d-none");
-    document.getElementById("docs-links").classList.add("d-none");
-    document.getElementById("user").classList.add("d-none");
-    //document.getElementById("nav-bar").classList.add("w-100");
+    firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+            // User is signed in.
+            document.getElementById("app-links").classList.remove("d-none");
+            document.getElementById("user").classList.remove("d-none");
+            document.getElementById("log-out-btn").classList.remove("d-none");
+            document.getElementById("list-link").innerHTML = 'View List';
+        } else {
+            // User is signed out.
+            document.getElementById("app-links").classList.add("d-none");
+            document.getElementById("user").classList.add("d-none");
+            document.getElementById("log-out-btn").classList.add("d-none");
+            ui.start('#firebaseui-auth-container', uiConfig);
+        }
+    }, function (error) {
+        console.log(error);
+    });
+    document.getElementById("imprint-link").classList.add("link-unselected");
+    document.getElementById("data-protection-link").classList.add("link-unselected");
+    document.getElementById("help-link").classList.add("link-unselected");
 }
 
-function changeSideBarLinksToImprint(){
-    document.getElementById("matrix-link").classList.add("link-unselected");
-    document.getElementById("list-link").classList.add("link-unselected");
-    document.getElementById("addTask-link").classList.add("link-unselected");
-    document.getElementById("list-link").innerHTML = "View List";
+function changeSideBarLinksToImprint() {
+
+    firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+            // User is signed in.
+            document.getElementById("app-links").classList.remove("d-none");
+            document.getElementById("user").classList.remove("d-none");
+            document.getElementById("log-out-btn").classList.remove("d-none");
+            document.getElementById("matrix-link").classList.add("link-unselected");
+            document.getElementById("list-link").classList.add("link-unselected");
+            document.getElementById("addTask-link").classList.add("link-unselected");
+            document.getElementById("list-link").innerHTML = 'View List';
+            sidebarSetUserImg();
+        } else {
+            // User is signed out.
+            document.getElementById("app-links").classList.add("d-none");
+            document.getElementById("user").classList.add("d-none");
+            document.getElementById("log-out-btn").classList.add("d-none");
+        }
+    }, function (error) {
+        console.log(error);
+    });
     document.getElementById("imprint-link").classList.add("link-selected");
     document.getElementById("data-protection-link").classList.add("link-unselected");
     document.getElementById("help-link").classList.add("link-unselected");
-    document.getElementById("user").classList.add("d-none");
 }
 
-function changeSideBarLinksToDataProtection(){
-    document.getElementById("matrix-link").classList.add("link-unselected");
-    document.getElementById("list-link").classList.add("link-unselected");
-    document.getElementById("addTask-link").classList.add("link-unselected");
-    document.getElementById("list-link").innerHTML = "View List";
+function changeSideBarLinksToDataProtection() {
+    firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+            // User is signed in.
+            document.getElementById("app-links").classList.remove("d-none");
+            document.getElementById("user").classList.remove("d-none");
+            document.getElementById("log-out-btn").classList.remove("d-none");
+            document.getElementById("matrix-link").classList.add("link-unselected");
+            document.getElementById("list-link").classList.add("link-unselected");
+            document.getElementById("addTask-link").classList.add("link-unselected");
+            document.getElementById("list-link").innerHTML = 'View List';
+            sidebarSetUserImg();
+        } else {
+            // User is signed out.
+            document.getElementById("app-links").classList.add("d-none");
+            document.getElementById("user").classList.add("d-none");
+            document.getElementById("log-out-btn").classList.add("d-none");
+        }
+    }, function (error) {
+        console.log(error);
+    });
     document.getElementById("imprint-link").classList.add("link-unselected");
     document.getElementById("data-protection-link").classList.add("link-selected");
     document.getElementById("help-link").classList.add("link-unselected");
-    document.getElementById("user").classList.add("d-none");
 }
 
-function changeSideBarLinksToHelp(){
-    document.getElementById("matrix-link").classList.add("link-unselected");
-    document.getElementById("list-link").classList.add("link-unselected");
-    document.getElementById("addTask-link").classList.add("link-unselected");
-    document.getElementById("list-link").innerHTML = "View List";
+function changeSideBarLinksToHelp() {
+    firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+            // User is signed in.
+            document.getElementById("app-links").classList.remove("d-none");
+            document.getElementById("user").classList.remove("d-none");
+            document.getElementById("log-out-btn").classList.remove("d-none");
+            document.getElementById("matrix-link").classList.add("link-unselected");
+            document.getElementById("list-link").classList.add("link-unselected");
+            document.getElementById("addTask-link").classList.add("link-unselected");
+            document.getElementById("list-link").innerHTML = 'View List';
+            sidebarSetUserImg();
+        } else {
+            // User is signed out.
+            document.getElementById("app-links").classList.add("d-none");
+            document.getElementById("user").classList.add("d-none");
+            document.getElementById("log-out-btn").classList.add("d-none");
+        }
+    }, function (error) {
+        console.log(error);
+    });
     document.getElementById("imprint-link").classList.add("link-unselected");
     document.getElementById("data-protection-link").classList.add("link-unselected");
     document.getElementById("help-link").classList.add("link-selected");
-    document.getElementById("user").classList.add("d-none");
 }
 
 /**
