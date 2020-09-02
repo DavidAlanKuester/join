@@ -1,3 +1,19 @@
+firebase.auth().onAuthStateChanged(function (user) {
+    if (user) {
+        // User is signed in.
+        document.getElementById("log-out-btn").classList.remove("d-none");
+    } else {
+        // User is signed out.
+        document.getElementById("log-out-btn").classList.add("d-none");
+    }
+}, function (error) {
+    console.log(error);
+});
+
+function logUserOut(){
+    firebase.auth().signOut();
+}
+
 function writeUserData(userId, userName, userEmail, imageUrl) {
     return firebase.database().ref('users/' + userId).set({
         id: userId,
@@ -224,6 +240,7 @@ function changeSideBarLinksToImprint(){
     document.getElementById("imprint-link").classList.add("link-selected");
     document.getElementById("data-protection-link").classList.add("link-unselected");
     document.getElementById("help-link").classList.add("link-unselected");
+    document.getElementById("user").classList.add("d-none");
 }
 
 function changeSideBarLinksToDataProtection(){
@@ -234,6 +251,7 @@ function changeSideBarLinksToDataProtection(){
     document.getElementById("imprint-link").classList.add("link-unselected");
     document.getElementById("data-protection-link").classList.add("link-selected");
     document.getElementById("help-link").classList.add("link-unselected");
+    document.getElementById("user").classList.add("d-none");
 }
 
 function changeSideBarLinksToHelp(){
@@ -244,6 +262,7 @@ function changeSideBarLinksToHelp(){
     document.getElementById("imprint-link").classList.add("link-unselected");
     document.getElementById("data-protection-link").classList.add("link-unselected");
     document.getElementById("help-link").classList.add("link-selected");
+    document.getElementById("user").classList.add("d-none");
 }
 
 /**
