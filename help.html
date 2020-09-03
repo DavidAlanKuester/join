@@ -1,4 +1,5 @@
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,16 +9,17 @@
     <script src="https://www.gstatic.com/firebasejs/7.19.0/firebase-database.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.19.0/firebase-storage.js"></script>
     <script src="init-firebase.js"></script>
-    
+
     <script src="overallApp.js"></script>
     <link rel="stylesheet" href="help.css">
     <link rel="stylesheet" href="overallStyle.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"
-    rel="stylesheet">
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        rel="stylesheet">
     <link rel="shortcut icon" type="image/x-icon" href="./img/logo.png">
 </head>
+
 <body onload="includeHTML('help')">
     <div w3-include-html="sidebar.html"></div>
     <div class="help-page">
@@ -28,9 +30,31 @@
             </div>
         </div>
         <div class="help-content-container">
-            <div class="card custom-card"></div>
+            <div class="card custom-card">
+                <div class="inner-custom-card">
+                    <div class="explain-addTask-section">
+                        <h3>How do you add a new task?</h3>
+                        <img src="./img/explain_addTask_img.png">
+                        <div class="explain-text-field">
+                            <p>1. In this section you can enter the title of your new task.</p>
+                            <p>2. Here you can select a category for your task. Click on the select button and choose
+                                one of the tasks.</p>
+                            <p>3. In this section you can describe the task in more detail.</p>
+                            <p>4. Set a deadline for your task here. The date influences the urgency.</p>
+                            <p>5. Here you can choose if your task is of high or low importance.</p>
+                            <p>6. Press the Add button to assign users to your task. You can select several.
+                                The task will be displayed in each users list and matrix.</p>
+                            <p>7. Press the Create button to create the task. It is now displayed in your list and
+                                matrix.
+                                Please fill in each field to enable the create-button. Use the cancel button to clear
+                                all fields.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    
+
 </body>
+
 </html>
