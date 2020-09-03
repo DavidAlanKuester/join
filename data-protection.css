@@ -14,3 +14,32 @@
     width: 70%;
     height: 80%;
 }
+
+@media (max-width: 1000px) {
+    .data-page {
+        width: 100%;
+        top: 20%;
+        position: relative;
+        left: unset;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .data-div {
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+        height: 90%;
+        font-size: 16px;
+    }
+    .data-div h1 {
+        font-size: 28px;
+    }
+    .data-div h2 {
+        font-size: 24px;
+    }
+    .data-div h3 {
+        font-size: 20px;
+    }
+
+}
