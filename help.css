@@ -67,15 +67,17 @@
     margin-top: 16px;
 }
 
-
 .explain-addTask-section {
     display: flex;
     flex-direction: column;
     width: 100%;
+    height: 150vh;
+}
+.explain-addTask-section h2 {
+    height: 5%;
 }
 
-.explain-addTask-section img {
-    height: 380px;
+.addTask-img {
     width: 100%;
     object-fit: cover;
     border: 5px solid rgb(175, 22, 22);
@@ -83,4 +85,6 @@
 
 .explain-text-field {
     margin-top: 16px;
+    height: 55%;
+    width: 100%;
 }
