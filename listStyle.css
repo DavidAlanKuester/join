@@ -1,11 +1,12 @@
-
 /*all pages containers should be set to the same values*/
+
 .list-page {
     width: 100vw;
     height: 100vh;
 }
 
 /********************TITLE_LIST_CONTENT_RELATED_SETTINGS********************/
+
 .title-list-content {
     position: relative;
     top: 0;
@@ -59,14 +60,15 @@
     font-size: 12px;
     color: rgb(30, 49, 144);
 }
+
 /********************TITLE_LIST_CONTENT_RELATED_SETTINGS_END********************/
 
-
 /********************LIST_CONTENT_RELATED_SETTINGS********************/
-/*still in development*/
+
 .list-content {
     position: relative;
     top: 25%;
+    font-size: 14px;
     /*must be at least the same as title-container´s height and list-item-details sum so that they do not overlap*/
     /*height: 70%;*/
     /*a greater value will give the title-list-content class some left margin and disturbt visual output making it to scroll left and right*/
@@ -85,67 +87,73 @@
     color: rgb(30, 49, 144);
 }
 
-.list-item-description p{
+.list-item-description p {
     margin-bottom: 0 !important;
     font-weight: 700;
     font-size: 15px;
 }
 
 /*settings to descriptions-text to match the coresponding  list-item-content*/
-#assigned-p{
+
+#assigned-p {
     width: 25%;
+    min-width: 230px;
+    overflow: auto;
 }
 
-#category-p{
+#category-p {
     width: 25%;
+    min-width: 70px;
+    overflow: auto;
     text-align: center;
 }
 
-#details-p{
+#details-p {
     width: 50%;
     text-align: end;
 }
 
-.list-item-content{
+.list-item-content {
     display: flex;
     /*justify-content: space-between;*/
     align-items: center;
-    height: 10%;
+    height: 90px;
     /*width: 100%;*/
     background-color: #F4F3FB;
     margin-bottom: 10px;
     border-radius: 5px;
     border-left-style: solid;
-    
     border-left-width: 5px;
 }
 
 /*colors for the list-item-content depending of the eisenhowerMatrixCategorie value of the assigment inside list.js*/
-.do{
+
+.do {
     border-left-color: orange;
 }
 
-.schedule{
+.schedule {
     border-left-color: purple;
 }
 
-.delegate{
+.delegate {
     border-left-color: green;
 }
 
-.eliminate{
+.eliminate {
     border-left-color: blue;
 }
 
-
-.assigned-to-content{
+.assigned-to-content {
     width: 25%;
+    min-width: 230px;
+    overflow: auto;
     /*height: 100%;*/
     display: flex;
     align-items: center;
 }
 
-.assigned-to-img{
+.assigned-to-img {
     margin-left: 10px;
     margin-right: 10px;
     width: 40px;
@@ -153,25 +161,127 @@
     object-fit: contain;
 }
 
-.category-content{
+.category-content {
     width: 25%;
+    min-width: 70px;
+    overflow: auto;
     /*height: 100%;*/
     text-align: center;
 }
 
-.details-content{
+.details-content {
     width: 50%;
     /*height: 100%;*/
     max-height: 100%;
-    overflow: hidden;
-   padding: 5px;
+    overflow-y: scroll;
+    padding: 5px;
 }
+
 /********************LIST_CONTENT_RELATED_SETTINGS_END********************/
 
-
 /*a feature to scale the item as pointer is over it*/
+
 /*.list-item:hover{
     transform: scaleX(1.2);
     transform: scaleY(1.2);
 }*/
 
+@media (max-width: 1000px) {
+    /********************TITLE_LIST_CONTENT_RELATED_SETTINGS********************/
+    .title-list-content {
+        position: relative;
+        /*top: 20%;*/
+        left: 2%;
+        /*if the left position of title-list-content is to be change, width of sidebar class must be at least the same as this left position,
+        * so that the two elements, side-bar and title-list-content, do not overlap*/
+        width: 96%;
+        max-width: 96%;
+        overflow-x: hidden;
+        /*if the left position is to be changed this should be change as well to sum up to at most 100% to keep same visual aspect*/
+        height: 100%;
+    }
+    .title-div-container, .empty-div-container {
+        position: fixed;
+        top: 20%;
+        width: 96%;
+        /*becasue of possition fixed we need to set the width, if the width of sidebar is to be change, this should be change as well to sum up to 100% to keep same visual aspect*/
+        height: 20%;
+        display: flex;
+        align-items: center;
+        /*justify-content: center;*/
+        max-width: 100%;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 1;
+        /*draw over the list-content-container*/
+        background-color: white;
+        /**/
+    }
+    /********************TITLE_LIST_CONTENT_RELATED_SETTINGS_END********************/
+    /********************LIST_CONTENT_RELATED_SETTINGS********************/
+    .list-content {
+        position: relative;
+        top: 45%;
+        /*must be at least the same as title-container´s height and list-item-details sum so that they do not overlap*/
+        /*height: 70%;*/
+        /*a greater value will give the title-list-content class some left margin and disturbt visual output making it to scroll left and right*/
+    }
+    .list-item-description {
+        background-color: white;
+        position: fixed;
+        top: 40%;
+        /*must be at least the same as title-container´s height so that they do not overlap*/
+        width: 96%;
+        /*if the width of sidebar is to be change, this should be change as well to sum up to 100% to keep same visual aspect*/
+        /*height: 10%;*/
+        display: flex;
+        /*justify-content: space-between;*/
+        color: rgb(30, 49, 144);
+    }
+    /********************LIST_CONTENT_RELATED_SETTINGS_END********************/
+}
+
+@media (max-width: 600px) {
+    .list-item-content {
+        display: flex;
+        /*justify-content: space-between;*/
+        align-items: center;
+        height: 60px;
+        /*width: 100%;*/
+        background-color: #F4F3FB;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        border-left-style: solid;
+        border-left-width: 5px;
+    }
+
+    .list-content {
+        position: relative;
+        top: 45%;
+        font-size: 12px;
+        /* height: 70%;*/
+    }
+
+    .assigned-to-content {
+        width: 25%;
+        min-width: 190px;
+        overflow: auto;
+        /*height: 100%;*/
+        display: flex;
+        align-items: center;
+    }
+
+    #assigned-p {
+        width: 25%;
+        min-width: 190px;
+        overflow: auto;
+    }
+    
+}
+
+@media (max-width: 480px) {
+  
+}
+
+@media (max-width: 360px) {}
