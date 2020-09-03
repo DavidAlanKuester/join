@@ -45,7 +45,8 @@ function executeEnableButtonScript() {
         && fieldIsFilled(descriptionInput)
         && fieldIsFilled(importanceInput)
         && fieldIsFilled(datePickerInput)
-        && fieldIsFilled(categoryInput)) {
+        && fieldIsFilled(categoryInput)
+        && selectedUsers.length > 0) {
         createBtn.disabled = false;
     } else {
         createBtn.disabled = true;
@@ -137,6 +138,7 @@ function selectUser(id) {
 function back() {
     hideDialog();
     updateSelectedUserRow();
+    executeEnableButtonScript();
 
     if (selectedUsers.length > 0) {// Show remove button
 
@@ -177,6 +179,8 @@ function removePerson() {
     selectedUsers = [];
     updateSelectedUserRow();
     updateUserSelection();
+    executeEnableButtonScript();
+
 
     document.getElementById('remove-btn').classList.add('d-none');
 }
@@ -209,7 +213,6 @@ function createTask() {
     defineUrgency();
     defineMatrix();
     newTask();
-    addDisableAttributeBtn();
     displaySucessAlert();
 
     setTimeout(function () {
@@ -217,10 +220,7 @@ function createTask() {
     }, 1000);
 }
 
-function addDisableAttributeBtn() {
-    cancelBtn.disabled = true;
-    createBtn.disabled = true;
-}
+
 
 function newTask() {
 

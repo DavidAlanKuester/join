@@ -233,10 +233,6 @@
     background-color:  rgb(244, 243, 251);
     border-radius: 16px !important;
     padding: 16px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: space-around;
 }
 
 .user-picker-row:hover {
