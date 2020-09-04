@@ -35,6 +35,23 @@
      Your app may use that space for branding, controls and other customizations.-->
 
     <div id="firebaseui-auth-container"></div>
+    <div id="user-profile-container" class="d-none">
+	  <div class="user-data">
+		<img id="user-img2" class="menu-img rounded-circle border border-white" src='img/id0.png' alt="">
+	  </div>
+	  <div class="user-data">
+		<div class="data-label">Name:</div>
+		<div id="user-name" class="data-value"></div>
+	  </div>
+	  <div class="user-data">
+		<div class="data-label">E-mail:</div>
+		<div id="user-email" class="data-value"></div>
+	  </div>
+	  <div id="user-profile-modify" class="user-data">
+		<div class="btn btn-danger">Delete Account</div>
+		<div class="btn btn-dark">Change Profile Picture</div>
+	  </div>
+	</div>
     <div id="loader">Loading...</div>
 
 </body>
