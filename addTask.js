@@ -11,7 +11,7 @@ firebase.auth().onAuthStateChanged(function (user) {
 });
 
 let selectedUsers = [];
-let userID = [];
+// let userID = [];
 let users = [];
 let tasks = [];
 
@@ -93,14 +93,15 @@ function updateUserSelection() {
     });
 }
 
-function generateHtml(classes, userId, userName, userImg) {
-    return `
-    <div id="user-row-${userId}" class="${classes}" onclick="selectUser('${userId}')">
-        <img src="./${userImg}" style="width: 75px; height: 75px; padding: 8px;">
-        ${userName}
-    </div>
-    `;
-}
+// function generateHtml(classes, userId, userName, userImg) {
+//     return `
+//     <div id="user-row-${userId}" class="${classes}" onclick="selectUser('${userId}')">
+//         <img src="./${userImg}" style="width: 75px; height: 75px; padding: 8px;">
+//         ${userName}
+//     </div>
+//     `;
+// }
+// console.log(generateHtml())
 
 function selectUser(id) {
 
@@ -162,12 +163,12 @@ function hideDialog() {
     document.getElementById('addPersonBlend').classList.add('d-none');
 }
 
-function getUserID() {
-    for (let i = 0; i < selectedUsers.length; i++) {
-        let user = selectedUsers[i];
-        userID.push(user.id);
-    }
-}
+// function getUserID() {
+//     for (let i = 0; i < selectedUsers.length; i++) {
+//         let user = selectedUsers[i];
+//         userID.push(user.id);
+//     }
+// }
 
 function addPerson() {
     document.getElementById('addPersonBlend').classList.remove('d-none');
@@ -249,7 +250,7 @@ function newTask() {
         "display": display,
     }
 
-    var isDone = firebase.database().ref('tasks/'+newTaskId).set(
+    var isDone = firebase.database().ref('tasks/' + newTaskId).set(
         {
             "creator": firebase.auth().currentUser.uid,
             "task-id": newTaskId,
@@ -264,7 +265,7 @@ function newTask() {
         }
     );
 
-    isDone.then( tasks.push(newTask) );
+    isDone.then(tasks.push(newTask));
 }
 
 function displaySucessAlert() {
