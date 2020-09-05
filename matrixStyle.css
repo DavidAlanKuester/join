@@ -55,7 +55,7 @@
     background: black;
     margin: 0;
     position: absolute;
-    top: 50%;
+    top: 49px;
     left: 5px;
     right: 0;
     z-index: -0;
@@ -70,7 +70,7 @@
     border-width: 5px 10px 5px 0;
     border-color: transparent black transparent transparent;
     position: absolute;
-    top: 46%;
+    top: 45px;
     left: 0;
 }
 
@@ -126,16 +126,16 @@
 .importance-vertical-line {
     border-left: 2px solid black;
     position: absolute;
-    top: 0;
+    top: 5px;
     bottom: 0;
-    left: 50%;
+    left: 57px;
     z-index: 0;
 }
 
 .arrow-top {
     position: absolute;
     top: 0;
-    left: 47%;
+    left: 53px;
     border-style: solid;
     border-width: 0px 5px 10px 5;
     border-color: transparent transparent black transparent;
@@ -183,32 +183,43 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    overflow: auto;
 }
 
 .matrix-task-container {
     left: 5%;
     position: relative;
-    width: 82%;
+    width: 87%;
     background-color: white;
     border-radius: 5px;
     border-left-style: solid;
     border-left-width: 5px;
-    padding: 12px;
+    padding: 8px;
+    margin-bottom: 1%;
 }
 
 .matrix-task-date {
-    font-size: 0.6em;
+    font-size: 0.5em;
     color: gray;
 }
 
 .matrix-task-title {
-    font-size: 1.2em;
+    font-size: 1em;
     color: black;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    height: 20px;
+    margin-bottom: 1%;
 }
 
 .matrix-task-description {
     font-size: 0.8em;
-    margin-bottom: 5%;
+    margin-bottom: 1%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    height: 40px;
 }
 
 .matrix-task-category-img-container {
@@ -226,9 +237,12 @@
     padding: 8px;
     border-radius: 5px;
     color: white;
-    font-size: 0.6em;
-    min-width: 25%;
+    font-size: 0.5em;
+    width: 15%;
+    height: 5%;
     text-align: center;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .float-left {
