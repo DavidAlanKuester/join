@@ -321,7 +321,7 @@ function defineMatrix() {
     } else if (importance == "Low" && urgency == "High") {
         display = "Delegate";
     } else if (importance == "Low" && urgency == "Low") {
-        display = "Eliminate";
+        display = "Delegate";
     }
 }
 
