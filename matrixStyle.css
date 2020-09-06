@@ -126,16 +126,16 @@
 .importance-vertical-line {
     border-left: 2px solid black;
     position: absolute;
-    top: 5px;
+    top: 10px;
     bottom: 0;
-    left: 57px;
+    left: 48%;
     z-index: 0;
 }
 
 .arrow-top {
     position: absolute;
     top: 0;
-    left: 53px;
+    left: 45%;
     border-style: solid;
     border-width: 0px 5px 10px 5;
     border-color: transparent transparent black transparent;
@@ -251,4 +251,11 @@
 
 .font-headlines {
     font-size: 1.5em;
+}
+
+@media (max-width: 1000px) {
+    .outer-matrix-container {
+        left: 6%;
+        top: 20%;
+    }
 }
