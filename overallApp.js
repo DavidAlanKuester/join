@@ -1,10 +1,10 @@
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
         // User is signed in.
-       
+
     } else {
         // User is signed out.
-       
+
     }
 }, function (error) {
     console.log(error);
@@ -25,6 +25,10 @@ function writeUserData(userId, userName, userEmail, imageUrl) {
 
 let createdTasks;
 
+
+/**
+ * This method calls firebase and saves all users to the local storage
+ */
 function saveUsersToLocalStorage() {
 
     firebase.database().ref('users').once('value').then(function (snapshot) {
@@ -36,72 +40,16 @@ function saveUsersToLocalStorage() {
     localStorage.setItem("users", JSON.stringify(users));
 }
 
+/**
+ * This method retrieves all users from the local storage
+ */
 function getUsersFromLocalStorage() {
     return JSON.parse(localStorage.getItem("users"));
 }
 
-
-//presumed task object structure
-//due-date should have short date string format "MM/DAY/YEAR"
-let tasksDummy = [
-    {
-        "task-id": "0",
-        "creator": "0",
-        "title": "Create Marketing presentation",
-        "due-date": "2020-08-12",
-        "category": "Other",
-        "importance": "1",
-        "description": "",
-        "assigned-to": [
-            "0"
-        ],
-        "display": "do"
-    },
-    {
-        "task-id": "1",
-        "creator": "0",
-        "title": "Organize Business Party",
-        "due-date": "2020-08-25",
-        "category": "Other",
-        "importance": "1",
-        "description": "",
-        "assigned-to": [
-            "0",
-            "1"
-        ],
-        "display": "schedule"
-    },
-    {
-        "task-id": "2",
-        "creator": "0",
-        "title": "Pick up package",
-        "due-date": "2020-08-31",
-        "category": "Other",
-        "importance": "1",
-        "description": "",
-        "assigned-to": [
-            "0",
-            "1"
-        ],
-        "display": "delegate"
-    },
-    {
-        "task-id": "3",
-        "creator": "0",
-        "title": "HR Meeting Alignment",
-        "due-date": "2020-09-15",
-        "category": "HR",
-        "importance": "1",
-        "description": "",
-        "assigned-to": [
-            "0",
-            "1"
-        ],
-        "display": "eliminate"
-    }
-
-];
-
+/**
+ * This Enums defines the names of the Eisenhower Category
+ */
 const EISENHOWER_MATRIX_CATEGORIES =
 {
     DO: "Do",
@@ -241,8 +189,8 @@ function changeSideBarLinksToIndex() {
     document.getElementById("help-link").classList.add("link-unselected");
 }
 
-function changeSideBarLinksToImprint() {
 
+function changeSideBarLinksToImprint() {
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
             // User is signed in.
@@ -267,6 +215,7 @@ function changeSideBarLinksToImprint() {
     document.getElementById("data-protection-link").classList.add("link-unselected");
     document.getElementById("help-link").classList.add("link-unselected");
 }
+
 
 function changeSideBarLinksToDataProtection() {
     firebase.auth().onAuthStateChanged(function (user) {
@@ -294,6 +243,7 @@ function changeSideBarLinksToDataProtection() {
     document.getElementById("help-link").classList.add("link-unselected");
 }
 
+
 function changeSideBarLinksToHelp() {
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
@@ -319,6 +269,7 @@ function changeSideBarLinksToHelp() {
     document.getElementById("data-protection-link").classList.add("link-unselected");
     document.getElementById("help-link").classList.add("link-selected");
 }
+
 
 /**
  * This method accepts a task and sets the display property of that task to "do"
@@ -347,6 +298,7 @@ function isDue(dateString) {
     let dueDate = new Date(dateString);
     return dueDate.getTime() <= today;
 }
+
 
 function changeProfileImg() {
     console.log('CHANGE CURRENT USER PROFILE IMG');

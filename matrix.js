@@ -2,7 +2,7 @@ firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
         // User is signed in.
         sidebarSetUserImg();
-        saveUidFromCurrentUserInLocalStorage();
+        saveCurrentUserinLocalStorage();
     } else {
         // User is signed out.
         window.location.href = './index.html';
@@ -31,22 +31,24 @@ async function initializeMatrix() {
     let allTasks = [];
     let matrixTasks = [];
     await getAllTasks(allTasks);
-    matrixTasks = getMatrixTasks(matrixTasks, allTasks);
+    matrixTasks = getMatrixTasks(allTasks);
     checkTasksForArrivingDueDate(matrixTasks);
     initializeTasksInMatrix(matrixTasks);
     storeMatrixTasksInLocalStorage(matrixTasks);
 }
 
-
+/**
+ * Calls Firebase toretrieve all Tasks from all users 
+ * and adds them in an Array called allTasks
+ * @param {Array<JSON>} allTasks - a Array that will hold the tasks of all users
+ */
 async function getAllTasks(allTasks) {
     try {
         let db = firebase.database();
-        await db.ref("tasks").once('value')
-            .then(function (tasks) {
-                return tasks.forEach(task => {
-                    allTasks.push(task.toJSON());
-                });
-            });
+        let tasks = await db.ref("tasks").once('value');
+        tasks.forEach(task => {
+            allTasks.push(task.toJSON());
+        });
     } catch (error) {
         console.error(error + "Error occured when loading all tasks from firebase" + result);
     }
@@ -56,9 +58,10 @@ async function getAllTasks(allTasks) {
 /**
  * This method iterates through all tasks, checks if they are relevant 
  * to display in the matrix of the current user and returns them.
+ * @param {Array<JSON>} allTasks - an Array of Json tasks
  */
-function getMatrixTasks(matrixTasks, allTasks) {
-    let userId = localStorage.getItem("curUserUid");
+function getMatrixTasks(allTasks) {
+    let userId = localStorage.getItem("curUserId");
     return allTasks.filter(
         task => (
             task["creator"].toString() === userId.toString() ||
@@ -67,7 +70,11 @@ function getMatrixTasks(matrixTasks, allTasks) {
     )
 }
 
-
+/**
+ * This methods checks if a task is assgined to the current User
+ * @param {JSON} task - a JSON object represented as a task
+ * @param {string} curUserId - the current ID of a user
+ */
 function isAssignedToCurrentUser(task, curUserId) {
     const object = task["assigned-to"];
     for (const key in object) {
@@ -141,10 +148,36 @@ function initializeTasksInMatrix(matrixTasks) {
  * This method creates an html task from a Json task and adds it to a provided ID
  * @param {JSON<Object>} task - a task represented as a JSON object 
  * @param {String} IdString - a string representing the ID where to add the task
+ * @param {String} sidebarColorClassString - a string that defines the color of the task
  */
-function addTaskToMatrix(task, IdString, sidebarColorClassString) {
-    let taskHtmlString = createMatrixTask(task, sidebarColorClassString);
+async function addTaskToMatrix(task, IdString, sidebarColorClassString) {
+    let curUserId = localStorage.getItem("curUserId");
+    let assignees = Object.values(task["assigned-to"]);
+    let userImgSource = await getUserImgSource(curUserId, assignees);
+    let taskHtmlString = createMatrixTask(task, sidebarColorClassString, userImgSource);
     document.getElementById(IdString).insertAdjacentHTML("beforeend", taskHtmlString);
+}
+
+/**
+ * This method checks of the current user is an assignee in a task
+ * if not the picture of the first assignee is used
+ * @param {string} curUserId - id of the current user 
+ * @param {JSON} assignees - all assignees of the Task
+ */
+async function getUserImgSource(curUserId, assignees) {
+    if (!assignees.includes(curUserId)) {
+        try {
+            let db = firebase.database();
+            let snapshot = await db.ref("users/FumFBvYctqPMmgimbLvk4APx4px1/img").once("value");
+            //let imgSource = await db.ref("users/" + assignees[0] + "/img").once("value");
+            return snapshot.val();
+        } catch (error) {
+            console.error(error + " |  Error occured in getUserImgSource");
+        }
+    } else { 
+        let val = localStorage.getItem("curUserImgSource");
+        return val;
+    }
 }
 
 
@@ -169,20 +202,23 @@ function ConvertToEuropeanDateString(dateString, delimiter) {
  * and returns the created task
  * @param {JSON<Object>} task - a task represented as a JSON object 
  */
-function createMatrixTask(task, sidebarColorClassString) {
+function createMatrixTask(task, sidebarColorClassString, userImgSource) {
     return (`<div id="task#${task["task-id"]}" class="matrix-task-container ${sidebarColorClassString.toLowerCase()}" 
             draggable="true" ondragstart="dragTask(event)">
-         <div class="matrix-task-date"> ${ConvertToEuropeanDateString(task['due-date'], '.')} </div>
-         <div class="matrix-task-title"> ${task['title']} </div>
-         <div class="matrix-task-description"> ${task['description']} </div>
+         <div class="matrix-task-date"> ${ConvertToEuropeanDateString(task["due-date"], '.')} </div>
+         <div class="matrix-task-title"> ${task["title"]} </div>
+         <div class="matrix-task-description"> ${task["description"]} </div>
          <div class="matrix-task-category-img-container">
-         <div class="matrix-task-category"> ${task['category']} </div>
-         <div><img src="img/id0.png" class="matrix-task-img"></div>
+         <div class="matrix-task-category"> ${task["category"]} </div>
+         <div><img src="${userImgSource}" class="matrix-task-img"></div>
          </div>
          </div>`);
 }
 
-
+/**
+ * This function saves all Matrix Tasks to Local Storage
+ * @param {Array<JSON>} matrixTasks - An Array representing JSON tasks
+ */
 function storeMatrixTasksInLocalStorage(matrixTasks) {
     localStorage.setItem("matrixTasks", JSON.stringify(matrixTasks));
 }
@@ -245,7 +281,14 @@ function updateTask(id, eisenhowerCategory) {
     updateDisplayStatusOfTask(id, taskId, eisenhowerCategory, updateTask, matrixTasks);
 }
 
-
+/**
+ * Updates the display status of a task to firebase when a 'drop' in drag 'n drop was done
+ * @param {string} id - HTML ID of a task
+ * @param {string} taskId - ID of a task 
+ * @param {string} eisenhowerCategory - a string with the category the task will change to
+ * @param {JSON} updateTask - A JSON for saving the task locally 
+ * @param {Array<JSON>} matrixTasks - All taks to save locally after the update
+ */
 function updateDisplayStatusOfTask(id, taskId, eisenhowerCategory, updateTask, matrixTasks) {
     try {
         let taskRef = firebase.database().ref("tasks/" + taskId);
@@ -293,12 +336,14 @@ function adjustTaskSideColor(taskHtmlId, eisenhowerCategory) {
             console.error(error + "| Error occured in adjustTaskSideColor")
             break;
     }
-
 }
 
-
-function saveUidFromCurrentUserInLocalStorage() {
-    localStorage.setItem("curUserUid", firebase.auth().currentUser.uid);
+/**
+ * This method calls the auth() method from firebase and saves the current user into Local Storage
+ */
+function saveCurrentUserinLocalStorage() {
+    localStorage.setItem("curUserId", firebase.auth().currentUser.uid);
+    localStorage.setItem("curUserImgSource", firebase.auth().currentUser.photoURL);
 }
 
 
