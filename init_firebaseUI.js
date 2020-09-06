@@ -48,6 +48,7 @@ var uiConfig = {
         uiShown: function () {
             // The widget is rendered.
             // Hide the loader.
+            document.getElementById("user-profile-container").classList.add("d-none");
             document.getElementById('loader').style.display = 'none';
         }
     },
