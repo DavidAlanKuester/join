@@ -321,7 +321,7 @@ function uploadFile(file) {
     };
 
     // use Firebase push call to upload file to Firebase
-    var uploadTask = storageRef.child('images/' + firebase.auth().currentUser.uid + '/' + file.name).put(file, metadata);
+    var uploadTask = storageRef.child('images/' + firebase.auth().currentUser.uid + '/profileImg').put(file, metadata);
 
     // monitor Firebase upload progress and catch errors
     uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
@@ -359,7 +359,7 @@ function uploadFile(file) {
         }, function () {
             // on success, display the uploaded image on the page
             document.getElementById("profileImgInput").classList.add("d-none");
-            storageRef.child('images/' + firebase.auth().currentUser.uid + '/' + file.name).getDownloadURL()
+            storageRef.child('images/' + firebase.auth().currentUser.uid + '/profileImg').getDownloadURL()
                 .then(function (uri) {
                     console.log('the image uploaded and can be found at ' + uri);
                     firebase.auth().currentUser.updateProfile({
