@@ -85,7 +85,7 @@ function updateUserSelection() {
 
         let htmlContent = `
     <div id="user-row-${user.id}" class="${classes}" onclick="selectUser('${user.id}')">
-    <img src="${user.img}" style="width: 75px; height: 75px; padding: 8px;">
+    <img src="${user.img}" style="width: 75px; height: 75px; padding: 8px; object-fit: cover">
     ${user.name}
 </div>
 `;
