@@ -64,7 +64,7 @@ function deleteUserTasks(userId) {
     return firebase.database().ref('tasks').once('value').then(function (snapshot) {
         snapshot.forEach(childSnapshot => {
             if (childSnapshot.child('creator').val() == userId) {
-                 firebase.database().ref('tasks/' + childSnapshot.key).remove().then(function () {
+                firebase.database().ref('tasks/' + childSnapshot.key).remove().then(function () {
                     console.log('DATABASE USER TASK DELETED');
                 }).catch(function (error) {
                     console.error('ERROR DELETING DATABASE USER TASK. ', error);
@@ -82,15 +82,21 @@ function deleteUserFromAssigne(userId) {
             var childData = childSnapshot.child('assigned-to').val();
             childData.forEach((id, index) => {
                 if (id == userId) {
-                     firebase.database().ref('tasks/' + childSnapshot.key + '/assigned-to/' + index).remove().then(function () {
-                        console.log('DATABASE USER FROM TASK DELETED');
-                    }).catch(function (error) {
-                        console.error('ERROR DELETING DATABASE USER FROM TASK. ', error);
-                    });
+                    //  firebase.database().ref('tasks/' + childSnapshot.key + '/assigned-to/' + index).remove().then(function () {
+                    //     console.log('DATABASE USER FROM TASK DELETED');
+                    // }).catch(function (error) {
+                    //     console.error('ERROR DELETING DATABASE USER FROM TASK. ', error);
+                    // });
+                    // childData.splice(index, 1);
+                    // firebase.database().ref('tasks/' + childSnapshot.key + '/assigned-to/').update(childData).then(function () {
+                    //     console.log('DATABASE USER FROM TASK DELETED');
+                    // }).catch(function (error) {
+                    //     console.error('ERROR DELETING DATABASE USER FROM TASK. ', error);
+                    // });
                 }
             });
         });
-    }).catch(function(error){
+    }).catch(function (error) {
         console.log('ERROR DELETING DATABSE USER FROM TASKS');
     });
 }
