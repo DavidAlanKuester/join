@@ -19,7 +19,7 @@ function getUsers() {
 
     var isDone = firebase.database().ref('users').once('value').then(function (snapshot) {
         snapshot.forEach(function (childSnapshot) {
-            console.log(childSnapshot.val().img);
+            //console.log(childSnapshot.val().img);
             users.push(childSnapshot.val());
         })
     });

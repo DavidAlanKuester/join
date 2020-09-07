@@ -30,7 +30,6 @@ function deleteUser() {
     var user = firebase.auth().currentUser;
     return user.delete().then(function () {
         // User deleted.
-        deleteUserImg(user.uid);
         console.log('USER DELETED', user);
 
     }).catch(function (error) {
