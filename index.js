@@ -82,21 +82,26 @@ function deleteUserFromAssigne(userId) {
             var childData = childSnapshot.child('assigned-to').val();
             childData.forEach((id, index) => {
                 if (id == userId) {
-                    //  firebase.database().ref('tasks/' + childSnapshot.key + '/assigned-to/' + index).remove().then(function () {
-                    //     console.log('DATABASE USER FROM TASK DELETED');
-                    // }).catch(function (error) {
-                    //     console.error('ERROR DELETING DATABASE USER FROM TASK. ', error);
-                    // });
-                    // childData.splice(index, 1);
-                    // firebase.database().ref('tasks/' + childSnapshot.key + '/assigned-to/').update(childData).then(function () {
-                    //     console.log('DATABASE USER FROM TASK DELETED');
-                    // }).catch(function (error) {
-                    //     console.error('ERROR DELETING DATABASE USER FROM TASK. ', error);
-                    // });
+					childData.splice(index, 1);
+					var newAssigneObj = getNewObjFromArray(childData);
+					firebase.database().ref('tasks/' + childSnapshot.key + '/assigned-to/').set(newAssigneObj).then(function () {
+                         console.log('DATABASE USER FROM TASK DELETED');
+                     }).catch(function (error) {
+                         console.error('ERROR DELETING DATABASE USER FROM TASK. ', error);
+                     });
                 }
             });
         });
     }).catch(function (error) {
         console.log('ERROR DELETING DATABSE USER FROM TASKS');
     });
+}
+
+function getNewObjFromArray( array ){
+	var obj = {};
+	array.forEach( (element, index ) =>{
+		obj[index] = element;
+	});
+	
+	return obj;
 }
