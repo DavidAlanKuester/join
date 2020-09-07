@@ -41,7 +41,7 @@
 
 .help-content-container {
     width: 100%;
-    height: 330vh;
+    height: 400vh;
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -63,6 +63,7 @@
     width: 90%;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     color: rgb(30, 49, 144);
     margin-top: 16px;
 }
@@ -70,20 +71,20 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 110vh;
+    height: 120vh;
 }
  .explain-list-section {
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 80vh;
+    height: 90vh;
 }
 
 .explain-matrix-section {
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 100vh;
+    height: 120vh;
 }
 .explain-addTask-section h2, .explain-matrix-section h2, .explain-list-section h2  {
     height: 5%;
