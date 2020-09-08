@@ -3,7 +3,6 @@
     position: relative;
     left: 11%;
     height: 100vh;
-
 }
 
 .title-div-container {
@@ -30,7 +29,8 @@
 .title-text-container h2 {
     margin: 0;
     font-size: 32px;
-    color: rgb(30, 49, 144);;
+    color: rgb(30, 49, 144);
+    ;
 }
 
 .title-text-container p {
@@ -49,6 +49,7 @@
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
 }
+
 .custom-card {
     height: 90%;
     width: 90%;
@@ -58,6 +59,7 @@
     justify-content: center;
     align-items: center;
 }
+
 .inner-custom-card {
     height: 100%;
     width: 90%;
@@ -67,13 +69,15 @@
     color: rgb(30, 49, 144);
     margin-top: 16px;
 }
+
 .explain-addTask-section {
     display: flex;
     flex-direction: column;
     width: 100%;
     height: 33%;
 }
- .explain-list-section {
+
+.explain-list-section {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -86,7 +90,8 @@
     width: 100%;
     height: 33%;
 }
-.explain-addTask-section h2, .explain-matrix-section h2, .explain-list-section h2  {
+
+.explain-addTask-section h2, .explain-matrix-section h2, .explain-list-section h2 {
     height: 5%;
 }
 
@@ -100,4 +105,43 @@
     margin-top: 16px;
     height: 55%;
     width: 100%;
+    text-align: justify;
+}
+
+@media (max-width: 1000px) {
+    .help-page {
+        height: 80%;
+        position: relative;
+        top: 20%;
+        width: 100vw;
+        left: unset;
+    }
+    .inner-custom-card {
+        justify-content: flex-start;
+    }
+    .help-content-container {
+        width: 100%;
+        height: 350vh;
+    }
+    .explain-addTask-section, .explain-list-section, .explain-matrix-section {
+        height: unset;
+    }
+}
+
+@media (max-width: 600px) {
+    .help-content-container {
+        height: 330vh;
+    }
+}
+
+@media (max-width: 440px) {
+    .explain-addTask-section h3, .explain-list-section h3, .explain-matrix-section h3 {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 360px) {
+    .explain-text-field p {
+        font-size: 14px;
+    }
 }
