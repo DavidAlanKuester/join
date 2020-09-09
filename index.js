@@ -11,6 +11,7 @@ firebase.auth().onAuthStateChanged(function (user) {
     } else {
         // User is signed out.
         document.getElementById("user-profile-container").classList.add("d-none");
+        document.getElementById("firebaseui-auth-container").classList.remove("d-none");
         ui.start('#firebaseui-auth-container', uiConfig);
     }
 }, function (error) {

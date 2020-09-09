@@ -11,7 +11,10 @@ firebase.auth().onAuthStateChanged(function (user) {
 });
 
 function logUserOut() {
-    firebase.auth().signOut();
+  if(firebase.auth().currentUser.isAnonymous){
+    deleteProfile();
+  }
+  firebase.auth().signOut();
 }
 
 function writeUserData(userId, userName, userEmail, imageUrl) {
