@@ -4,6 +4,7 @@ firebase.auth().onAuthStateChanged(function (user) {
         sidebarSetUserImg();
         document.getElementById('loader').style.display = 'none';
         document.getElementById("user-profile-container").classList.remove("d-none");
+        document.getElementById("firebaseui-auth-container").classList.add("d-none");
         document.getElementById("user-name").innerHTML = user.displayName;
         document.getElementById("user-email").innerHTML = user.email;
         document.getElementById("user-img2").src = user.photoURL;
