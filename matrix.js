@@ -23,7 +23,7 @@ const MATRIX_IDs =
 }
 Object.freeze(MATRIX_IDs);
 
-
+let deleteIconSrc = "https://firebasestorage.googleapis.com/v0/b/join-a7169.appspot.com/o/images%2Fdelete-icon.png?alt=media&token=bf0c915f-383c-4510-8e9a-2398d9b228dc";
 /**
  * This method loads the Matrix
  */
@@ -174,7 +174,7 @@ async function getUserImgSource(curUserId, assignees) {
         } catch (error) {
             console.error(error + " |  Error occured in getUserImgSource");
         }
-    } else { 
+    } else {
         let val = localStorage.getItem("curUserImgSource");
         return val;
     }
@@ -205,14 +205,18 @@ function ConvertToEuropeanDateString(dateString, delimiter) {
 function createMatrixTask(task, sidebarColorClassString, userImgSource) {
     return (`<div id="task#${task["task-id"]}" class="matrix-task-container ${sidebarColorClassString.toLowerCase()}" 
             draggable="true" ondragstart="dragTask(event)">
-         <div class="matrix-task-date"> ${ConvertToEuropeanDateString(task["due-date"], '.')} </div>
+         <div class="matrix-task-top">
+            <div class="matrix-task-date">${ConvertToEuropeanDateString(task["due-date"], '.')}</div>
+            <img src="${deleteIconSrc}" onclick="deleteTask('task#${task["task-id"]}')">
+         </div>
          <div class="matrix-task-title"> ${task["title"]} </div>
          <div class="matrix-task-description"> ${task["description"]} </div>
          <div class="matrix-task-category-img-container">
          <div class="matrix-task-category"> ${task["category"]} </div>
          <div><img src="${userImgSource}" class="matrix-task-img"></div>
          </div>
-         </div>`);
+         </div>`
+    );
 }
 
 /**
@@ -353,4 +357,22 @@ function saveCurrentUserinLocalStorage() {
  */
 function isScheduleTask(task) {
     return (task["display"].toString() === EISENHOWER_MATRIX_CATEGORIES.SCHEDULE.toString());
+}
+
+
+/**
+ * 
+ * @param {string} id - id of a task to eb deleted in firbase and in the app
+ */
+function deleteTask(id) {
+    let taskId = id.substr(5);
+    let matrixTasks = JSON.parse(localStorage.getItem("matrixTasks"));
+    let taskRef = firebase.database().ref("tasks/" + taskId);
+    taskRef.remove()
+        .then(() => {
+            let taskIndex = matrixTasks.findIndex((task) => task["task-id"] === taskId);
+            matrixTasks.splice(taskIndex, 1);
+            document.getElementById(id).remove();
+        }
+        ).catch(console.error("Error occured in deleteTask"));
 }

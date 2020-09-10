@@ -14,7 +14,17 @@ Information will be available here soon.
 ### List
 Information will be available here soon.
 ### Matrix
-Information will be available here soon.
+Matrix loads all tasks from firebase and filters those task that are relevant to the current user.
+Additionally, all tasks with the display property "schedule" are checked for an arriving due-date.
+If the due-date has arrived their display property is changed to "do".
+After this all tasks that are relevant to the user are created as HTML objects and displayed to the user.
+Furthermore, it is possible to change the type of a task by drag and dropping a task in the matrix user interface
+from one category to another. If the "drop" of drag and drop is performed the display property of the task is
+being updated to firebase. When the call was successfull, we also update the task in the user interface and display
+it to its new category.
+Apart of changing a task we can also deleting a task by clicking on a garbage can. If a garbage can on a task is clicked 
+a asynchronous call is send to firebase to delete the task. If the task is deleted successfully the task is also deleted
+in the user interface.
 
 ## Creators
 This application was created by David Küster, Mihai-Andrei Neacsu and Eric Bruch. You can find our contact details on our page under imprint.
