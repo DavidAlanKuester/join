@@ -11,6 +11,17 @@ body {
   align-items: center;
 }
 
+#delete-account-dialog{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.buttons-container{
+  margin-top: 20px;
+}
+
 .user-data {
   margin-top: 6px;
   margin-bottom: 6px;

@@ -46,7 +46,14 @@ body {
 
 .link-img {
     display: flex;
-    justify-content: center
+    justify-content: center;
+    cursor: pointer;
+    transition: all 125ms ease-in-out;
+}
+
+.link-img:hover{
+    filter: brightness(1.2);
+    transform: scale(1.05);
 }
 
 .menu-img {
