@@ -18,6 +18,44 @@ firebase.auth().onAuthStateChanged(function (user) {
     console.log(error);
 });
 
+function openDeleteAccountDialog() {
+    document.getElementById("user-profile-container").classList.add("d-none");
+    document.getElementById("delete-account-dialog").classList.remove("d-none");
+}
+
+function closeDeleteAccountDialog() {
+    document.getElementById("delete-account-dialog").classList.add("d-none");
+    document.getElementById("user-profile-container").classList.remove("d-none");
+}
+
+async function checkCredential() {
+    var user = firebase.auth().currentUser;
+    var providedPassword = document.getElementById("psw").value;
+    var credential = firebase.auth.EmailAuthProvider.credential(
+        user.email,
+        providedPassword
+    );
+    // Prompt the user to re-provide their sign-in credentials
+    await firebase.auth().signInWithEmailAndPassword(user.email, providedPassword).catch(function (error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // ...
+        console.error(error);
+    });
+
+    await user.reauthenticateWithCredential(credential).then(function () {
+        // User re-authenticated.
+        console.log("USER REAUTH");
+        deleteProfile();
+    }).catch(function (error) {
+        // An error happened.
+        console.error(error);
+    });
+
+    closeDeleteAccountDialog();
+}
+
 async function deleteProfile() {
     var user = firebase.auth().currentUser;
     await deleteUserTasks(user.uid);
@@ -83,13 +121,13 @@ function deleteUserFromAssigne(userId) {
             var childData = childSnapshot.child('assigned-to').val();
             childData.forEach((id, index) => {
                 if (id == userId) {
-					childData.splice(index, 1);
-					var newAssigneObj = getNewObjFromArray(childData);
-					firebase.database().ref('tasks/' + childSnapshot.key + '/assigned-to/').set(newAssigneObj).then(function () {
-                         console.log('DATABASE USER FROM TASK DELETED');
-                     }).catch(function (error) {
-                         console.error('ERROR DELETING DATABASE USER FROM TASK. ', error);
-                     });
+                    childData.splice(index, 1);
+                    var newAssigneObj = getNewObjFromArray(childData);
+                    firebase.database().ref('tasks/' + childSnapshot.key + '/assigned-to/').set(newAssigneObj).then(function () {
+                        console.log('DATABASE USER FROM TASK DELETED');
+                    }).catch(function (error) {
+                        console.error('ERROR DELETING DATABASE USER FROM TASK. ', error);
+                    });
                 }
             });
         });
@@ -98,11 +136,11 @@ function deleteUserFromAssigne(userId) {
     });
 }
 
-function getNewObjFromArray( array ){
-	var obj = {};
-	array.forEach( (element, index ) =>{
-		obj[index] = element;
-	});
-	
-	return obj;
+function getNewObjFromArray(array) {
+    var obj = {};
+    array.forEach((element, index) => {
+        obj[index] = element;
+    });
+
+    return obj;
 }

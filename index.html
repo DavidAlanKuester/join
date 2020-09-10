@@ -48,10 +48,23 @@
       <div id="user-email" class="data-value"></div>
     </div>
 
-    <div onclick="deleteProfile()" class="btn btn-danger">Delete Account</div>
+    <div onclick="openDeleteAccountDialog()" class="btn btn-danger">Delete Account</div>
 
   </div>
   <div id="loader">Loading...</div>
+
+  <div id="delete-account-dialog" class="d-none">
+    <p>Do you really want to delete the account?</p>
+
+    Enter your password!
+    <input id="psw" type="password" placeholder="Enter Password" name="psw" required>
+
+    <div class="buttons-container">
+      <div onclick="checkCredential()" type="submit" class="btn btn-danger">OK</div>
+      <div onclick="closeDeleteAccountDialog()" class="btn btn-dark">Cancel</div>
+    </div>
+
+  </div>
 
 </body>
 
