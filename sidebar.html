@@ -1,4 +1,8 @@
 <nav id="nav-bar" class="side-bar">
+    <!-- Background screen of the open menu for responsive version - start   -->
+    <div id="blackbendjava" onclick="removeMenu()" class="black-blend d-none">
+    </div>
+    <!-- Background screen of the open menu for responsive version -  end -->
     <div class="menu">
         <a class="link-img" href="index.html">
             <img id="logo-img" class="menu-img " src="img/logo.png" alt="">
@@ -21,6 +25,37 @@
             <a id="help-link" class="menu-link " href="help.html">Help</a>
             <a id="data-protection-link" class="menu-link " href="data-protection.html">Data Protection</a>
         </div>
-        <div id="log-out-btn" onclick="logUserOut()" class="btn btn-dark" style="height: fit-content; margin-top: 8px;">Log Out</div>
+        <div class="log-out-div">
+            <div id="log-out-btn" onclick="logUserOut()" class="btn btn-dark"
+                style="height: fit-content; margin-top: 8px;">
+                Log Out</div>
+        </div>
     </div>
+    <!-- Menu for responsive version - start -->
+    <div class="menu menu-symbol-display-normal">
+        <img class="menu-symbol" id="menu-white" onclick="showMenu()" src="img/menu-white.png"
+            style="position: absolute;">
+    </div>
+    </div>
+    <div id="responsive-menu-click" class="responsive-menu hide-menu">
+        <div class="menu-logo-div">
+            <img src="img/logo.png" class="menu-logo">
+        </div>
+        <div class="menu-links-div">
+            <a id="addTask-link" href="addTask.html">Add Task</a>
+            <a id="matrix-link" href="matrix.html">Matrix</a>
+            <a id="list-link" href="list.html">List</a>
+            <a id="imprint-link" href="imprint.html">Imprint</a>
+            <a id="help-link" href="help.html">Help</a>
+            <a id="data-protection-link" href="data-protection.html">Data Protection</a>
+            <div id="log-out-btn" onclick="logUserOut()" class="btn btn-dark"
+                style="height: fit-content; margin-top: 8px;">
+                Log Out</div>
+        </div>
+        <div class="exit">
+            <img class="exit-img" onclick="removeMenu()" src="img/exit_white.png">
+        </div>
+    </div>
+    </div>
+    <!-- Menu for responsive version - end -->
 </nav>

@@ -1,3 +1,15 @@
+// ******* Responsive Menu- start ******* 
+function showMenu() {
+    document.getElementById('responsive-menu-click').classList.remove('hide-menu');
+    document.getElementById('blackbendjava').classList.remove('d-none');
+}
+
+function removeMenu() {
+    document.getElementById('responsive-menu-click').classList.add('hide-menu');
+    document.getElementById('blackbendjava').classList.add('d-none');
+}
+// ******* Responsive Menu- end ******* 
+
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
         // User is signed in.
@@ -369,4 +381,5 @@ function uploadFile(file) {
                     });
                 });
         })
+
 }

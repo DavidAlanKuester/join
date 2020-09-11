@@ -56,12 +56,12 @@ body {
     height: 60px;
 }
 
-#logo-img{
-  object-fit: contain;
+#logo-img {
+    object-fit: contain;
 }
 
-#user-img{
-  object-fit: cover;
+#user-img {
+    object-fit: cover;
 }
 
 .links-container {
@@ -134,6 +134,23 @@ body {
     right: 50%;
 }
 
+.menu-symbol-display-normal {
+    display: none;
+
+}
+.menu-symbol {
+    display: none;
+}
+
+.responsive-menu {
+    display: none;
+}
+.log-out-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 @media (max-width: 1000px) {
     /********************SIDE_BAR_RELATED_SETTINGS (RESPONSIVE)********************/
     .side-bar {
@@ -181,12 +198,7 @@ body {
         height: 80px;
     }
     .links-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding-left: 8px;
-        padding-right: 8px;
+        display: none;
     }
     .menu-link {
         text-align: center;
@@ -206,6 +218,97 @@ body {
         /*box-shadow's h-offset parameter same as the padding of sidebar so that the shadow line lies over the padding*/
         color: white;
     }
+    /* Responsive-Menu - start */
+    .menu {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 120px;
+        height: 132px;
+    }
+    .menu-symbol {
+        display: flex;
+        height: 80px;
+        width: 80px;
+        object-fit: cover;
+        cursor: pointer;
+    }
+    .responsive-menu {
+        z-index: 4;
+        position: fixed;
+        width: 370px;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        background-color: #1E3190;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        transition: all 225ms ease;
+        border-left: 2px solid white;
+    }
+    .menu-logo {
+        height: 150px;
+        width: 120px;
+        object-fit: cover;
+    }
+    .menu-logo-div {
+        width: 240px;
+        height: 360px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-bottom: 1px solid white;
+    }
+    .responsive-menu a {
+        color: white;
+        font-size: 20px;
+        text-decoration: none;
+        border-bottom: 1px solid transparent;
+        margin: 8px;
+    }
+    .menu-links-div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 370px;
+        margin-top: 32px;
+    }
+    .black-blend {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        background-color: black;
+        opacity: 0.7;
+        z-index: 3 !important;
+        cursor: pointer;
+    }
+    .exit-img {
+        object-fit: cover;
+        height: 100px;
+        width: 100px;
+        cursor: pointer;
+    }
+    .exit {
+        width: 370px;
+        height: 370px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .hide-menu {
+        transform: translateX(720px);
+    }
+    .navigationbar-links {
+        display: none;
+    }
+    .log-out-div {
+        display: none;
+    }
+    /* Responsive-Menu - end */
     /********************KEY_FRAMES_ANIMATIONS (RESPONSIVE)********************/
     @keyframes showSidebar {
         from {
@@ -219,111 +322,26 @@ body {
     /********************KEY_FRAMES_ANIMATIONS_END (RESPONSIVE)********************/
 }
 
-@media (max-width: 600px) {
-    .side-bar {
-        width: 100%;
-        height: 20%;
-        padding-top: 5px;
-        padding-bottom: 5px;
-        padding-right: 10px;
-        padding-left: 10px;
-        position: fixed;
-        top: 0px;
-        left: 0px;
-        right: 0px;
-        background-color: #1E3190;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        z-index: 2;
-        animation: showSidebar 2s ease;
-    }
-    .custom-alert p {
-        font-size: 24px;
-        margin: 0;
-    }
-    .menu-link {
-        text-align: center;
-        text-decoration: none;
-        color: gray;
-        font-size: 12px;
-    }
-    .menu-img {
-        border: 6px;
-        width: 52px;
-        height: 52px;
-    }
-    #log-out-btn {
-        font-size: 12px !important;
-    }
-    .link-unselected {
-        color: gray;
-    }
-    .link-selected {
-        box-shadow: unset;
-        border-bottom: 2px solid white;
-        /*box-shadow's h-offset parameter same as the padding of sidebar so that the shadow line lies over the padding*/
-        color: white;
-    }
-}
-
 @media (max-width: 400px) {
+    .menu-symbol {
+        height: 60px;
+        width: 60px;
+        object-fit: cover;
+        cursor: pointer;
+    }
+    .menu-img {
+        width: 60px;
+        height: 60px;
+    }
     .side-bar {
-        width: 100%;
-        height: 20%;
-        padding-top: 5px;
-        padding-bottom: 5px;
-        padding-right: 8px;
-        padding-left: 0px;
-        position: fixed;
-        top: 0px;
-        left: 0px;
-        right: 0px;
-        background-color: #1E3190;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        z-index: 2;
-        animation: showSidebar 2s ease;
+        padding-left: 10px;
+        padding-right: 10px;
     }
-    .links-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding-left: 0;
-        padding-right: 0;
+    .responsive-menu {
+        width: 240px;
     }
-    .menu-link {
-        text-align: center;
-        text-decoration: none;
-        color: gray;
-        font-size: 10px;
-    }
-    .menu-img {
-        border: 6px;
-        width: 48px;
-        height: 48px;
-    }
-    #log-out-btn {
-        font-size: 10px !important;
-    }
-}
-
-@media (Max-width: 320px) {
-    .menu-link {
-        text-align: center;
-        text-decoration: none;
-        color: gray;
-        font-size: 8px;
-    }
-    .menu-img {
-        border: 6px;
-        width: 44px;
-        height: 44px;
-    }
-    #log-out-btn {
-        font-size: 8px !important;
+    .menu-logo-div { 
+        width: 200px;
     }
 }
 
