@@ -42,7 +42,7 @@ var uiConfig = {
             } else {
                 // Return type determines whether we continue the redirect automatically
                 // or whether we leave that to developer to handle.
-                return true;
+                return false;
             }
         },
         uiShown: function () {
