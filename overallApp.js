@@ -23,7 +23,7 @@ firebase.auth().onAuthStateChanged(function (user) {
 });
 
 function logUserOut() {
-    firebase.auth().signOut();
+  firebase.auth().signOut();
 }
 
 function writeUserData(userId, userName, userEmail, imageUrl) {
@@ -314,9 +314,18 @@ function isDue(dateString) {
 
 function changeProfileImg() {
     console.log('CHANGE CURRENT USER PROFILE IMG');
-    document.getElementById("profileImgInput").classList.remove("d-none");
+    let fileUploadElemet = document.createElement('input');
+    fileUploadElemet.setAttribute('accept', 'image/*');
+    fileUploadElemet.setAttribute('name', 'file');
+    fileUploadElemet.setAttribute('type', 'file');
+    fileUploadElemet.addEventListener('change', handleFileSelect);
+    fileUploadElemet.click();
+
+
+
+    //document.getElementById("profileImgInput").classList.remove("d-none");
     // setting an event listener on the file upload input button
-    document.getElementById("profileImgInput").addEventListener('change', handleFileSelect);
+    //document.getElementById("profileImgInput").addEventListener('change', handleFileSelect);
 
     // handle file upload called whenever files are selected
     function handleFileSelect(event) {
@@ -370,10 +379,10 @@ function uploadFile(file) {
             return;
         }, function () {
             // on success, display the uploaded image on the page
-            document.getElementById("profileImgInput").classList.add("d-none");
             storageRef.child('images/' + firebase.auth().currentUser.uid + '/profileImg').getDownloadURL()
                 .then(function (uri) {
                     console.log('the image uploaded and can be found at ' + uri);
+                    document.getElementById('user-img').src = uri;
                     firebase.auth().currentUser.updateProfile({
                         photoURL: uri
                     }).then(function () {
