@@ -21,39 +21,48 @@ firebase.auth().onAuthStateChanged(function (user) {
 function openDeleteAccountDialog() {
     document.getElementById("user-profile-container").classList.add("d-none");
     document.getElementById("delete-account-dialog").classList.remove("d-none");
+    //document.getElementById("psw-form").addEventListener("submit", checkCredential);
 }
 
 function closeDeleteAccountDialog() {
     document.getElementById("delete-account-dialog").classList.add("d-none");
     document.getElementById("user-profile-container").classList.remove("d-none");
+    document.getElementById("psw-info").innerHTML = "Enter your password!";
+}
+
+function checkForAnonymousDelete() {
+    if (firebase.auth().currentUser.isAnonymous) {
+        deleteProfile();
+        closeDeleteAccountDialog();
+    } else {
+        openDeleteAccountDialog();
+    }
 }
 
 async function checkCredential() {
+
     var user = firebase.auth().currentUser;
+    // Prompt the user to re-provide their sign-in credentials
     var providedPassword = document.getElementById("psw").value;
     var credential = firebase.auth.EmailAuthProvider.credential(
         user.email,
         providedPassword
     );
-    // Prompt the user to re-provide their sign-in credentials
-    await firebase.auth().signInWithEmailAndPassword(user.email, providedPassword).catch(function (error) {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        // ...
-        console.error(error);
-    });
 
-    await user.reauthenticateWithCredential(credential).then(function () {
+    user.reauthenticateWithCredential(credential).then(function () {
         // User re-authenticated.
         console.log("USER REAUTH");
         deleteProfile();
+        closeDeleteAccountDialog();
     }).catch(function (error) {
-        // An error happened.
+        // An error happened. Wrong Password or User Has No Password
         console.error(error);
+        if (error.code == 'auth/too-many-requests') {
+            document.getElementById("psw-info").innerHTML = error.message;
+        } else {
+            document.getElementById("psw-info").innerHTML = "Wrong Password!";
+        }
     });
-
-    closeDeleteAccountDialog();
 }
 
 async function deleteProfile() {
