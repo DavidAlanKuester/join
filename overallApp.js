@@ -123,7 +123,7 @@ function checkForAnonymousLogOut() {
 }
 
 function logUserOut() {
-  firebase.auth().signOut();
+    firebase.auth().signOut();
 }
 
 function writeUserData(userId, userName, userEmail, imageUrl) {
@@ -136,6 +136,59 @@ function writeUserData(userId, userName, userEmail, imageUrl) {
 }
 
 let createdTasks;
+
+
+function initalizeAnonymousUser(user) {
+    // delete all tasks of user
+    firebase.database().ref("tasks").once("value")
+        .then((tasks) => {
+            tasks.forEach(task => {
+                // delete task
+                if (task.child("creator").val() === user.uid) {
+                    firebase.database().ref("tasks/" + task.child("task-id"))
+                        .remove()
+                        .catch(console.error("Error occured when deleting the task"));
+                }
+            });
+        })
+        // add dummy tasks to user
+        .then(() => {
+            createDummyTask(user.uid, "Organise Design Thinking Workshop", "marketing",
+                "Identify new products to satisfy business needs", "2020-10-15", "High",
+                "High", user.uid, "Do");
+            createDummyTask(user.uid, "Create pitch for customer meeting", "sales",
+                "Pitch should not be longer then 5 minutes", "2021-04-10", "High",
+                "High", user.uid, "Schedule");
+            createDummyTask(user.uid, "Organise Christmas business party", "it",
+                "A location and a date also has to be decided", "202-09-10", "Low",
+                "Low", user.uid, "Delegate");
+            createDummyTask(user.uid, "Market research for new branch", "other",
+                "Evaluate if a new branch should be opened", "2020-10-10", "High",
+                "High", user.uid, "Eliminate");
+        })
+        ;
+}
+
+
+function createDummyTask(creator, newTaskTitle, newTaskCategory,
+    newTaskDescription, newTaskDueDate, newTaskUrgency,
+    newTaskImportance, newTaskAssignee, newTaskDisplay) {
+    let newTaskId = firebase.database().ref('tasks/').push().key;
+    firebase.database().ref('tasks/' + newTaskId).set(
+        {
+            "creator": creator,
+            "task-id": newTaskId,
+            "title": newTaskTitle,
+            "category": newTaskCategory,
+            "description": newTaskDescription,
+            "due-date": newTaskDueDate,
+            "urgency": newTaskUrgency,
+            "importance": newTaskImportance,
+            "assigned-to": newTaskAssignee,
+            "display": newTaskDisplay,
+        }
+    ).catch(console.error("error occured"));
+}
 
 
 /**

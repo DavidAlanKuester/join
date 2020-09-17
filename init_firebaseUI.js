@@ -26,6 +26,7 @@ var uiConfig = {
             var isNewUser = authResult.additionalUserInfo.isNewUser;
             var providerId = authResult.additionalUserInfo.providerId;
             var operationType = authResult.operationType;
+
             // Do something with the returned AuthResult.
             if (isNewUser) {
                 user.updateProfile({
@@ -33,6 +34,9 @@ var uiConfig = {
                 }).then(function () {
                     // Update successful.
                     let isDone = writeUserData(user.uid, user.displayName, user.email, user.photoURL);
+                    if (firebase.auth().currentUser.isAnonymous) {
+                        initalizeAnonymousUser(user);
+                    }
                     isDone.then(function () {
                         window.location.href = './addTask.html';
                     });

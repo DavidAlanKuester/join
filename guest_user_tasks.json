@@ -1,0 +1,50 @@
+[
+    {
+        "assigned-to" : [ "<guest-user-id>" ],
+        "category" : "marketing",
+        "creator" : "<guest-user-id>",
+        "description" : "Identify new products to satisfy business needs",
+        "display" : "Do",
+        "due-date" : "2020-10-15",
+        "importance" : "High",
+        "task-id" : "<task-id>",
+        "title" : "Organise design thinking Workshop",
+        "urgency" : "High"
+    },
+    {
+        "assigned-to" : [ "<guest-user-id>" ],
+        "category" : "sales",
+        "creator" : "<guest-user-id>",
+        "description" : "Pitch should not be longer then 5 minutes",
+        "display" : "Schedule",
+        "due-date" : "2021-04-10",
+        "importance" : "High",
+        "task-id" : "<task-id>",
+        "title" : "Create pitch for customer meeting",
+        "urgency" : "High"
+    },
+    {
+        "assigned-to" : [ "<guest-user-id>" ],
+        "category" : "marketing",
+        "creator" : "<guest-user-id>",
+        "description" : "A location and a date also has to be decided",
+        "display" : "Delegate",
+        "due-date" : "202-09-10",
+        "importance" : "Low",
+        "task-id" : "<task-id>",
+        "title" : "Organise Christmas business party",
+        "urgency" : "Low"
+    },
+    {
+        "assigned-to" : [ "<guest-user-id>" ],
+        "category" : "marketing",
+        "creator" : "<guest-user-id>",
+        "description" : "Evaluate if a new branch should be opened",
+        "display" : "Eliminate",
+        "due-date" : "2020-10-10",
+        "importance" : "High",
+        "task-id" : "<task-id>",
+        "title" : "Market research for new branch",
+        "urgency" : "High"
+    }
+]
