@@ -173,6 +173,7 @@ function initalizeAnonymousUser(user) {
 function createDummyTask(creator, newTaskTitle, newTaskCategory,
     newTaskDescription, newTaskDueDate, newTaskUrgency,
     newTaskImportance, newTaskAssignee, newTaskDisplay) {
+    let newTaskAssigneeArray = [newTaskAssignee];
     let newTaskId = firebase.database().ref('tasks/').push().key;
     firebase.database().ref('tasks/' + newTaskId).set(
         {
@@ -184,7 +185,7 @@ function createDummyTask(creator, newTaskTitle, newTaskCategory,
             "due-date": newTaskDueDate,
             "urgency": newTaskUrgency,
             "importance": newTaskImportance,
-            "assigned-to": newTaskAssignee,
+            "assigned-to": newTaskAssigneeArray,
             "display": newTaskDisplay,
         }
     ).catch(console.error("error occured"));
