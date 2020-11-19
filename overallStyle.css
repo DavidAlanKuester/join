@@ -164,7 +164,7 @@ body {
         width: 100%;
         /*if the width of sidebar is to be change, left position atribute of title-list-content class must be at least the same as the width of sidebar,
     * so that the two elements, side-bar and title-list-content, do not overlap*/
-        height: 20%;
+        height: 100px;
         padding-top: 5px;
         /*same as the positive box-shadow's h-offset value of link-selected class, so that the shadow line lies over the padding*/
         padding-bottom: 5px;
@@ -201,8 +201,8 @@ body {
     .menu-img {
         border: 6px;
         /*width: 100%;*/
-        width: 80px;
-        height: 80px;
+        width: 40px;
+        height: 40px;
     }
     .links-container {
         display: none;
@@ -235,8 +235,8 @@ body {
     }
     .menu-symbol {
         display: flex;
-        height: 80px;
-        width: 80px;
+        height: 50px;
+        width: 50px;
         object-fit: cover;
         cursor: pointer;
     }
