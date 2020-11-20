@@ -1,4 +1,4 @@
-firebase.auth().onAuthStateChanged(function (user) {
+auth.onAuthStateChanged(function (user) {
     if (user) {
         // User is signed in.
         sidebarSetUserImg();
@@ -31,7 +31,7 @@ function closeDeleteAccountDialog() {
 }
 
 function checkForAnonymousDelete() {
-    if (firebase.auth().currentUser.isAnonymous) {
+    if (auth.currentUser.isAnonymous) {
         deleteProfile();
         closeDeleteAccountDialog();
     } else {
@@ -41,7 +41,7 @@ function checkForAnonymousDelete() {
 
 async function checkCredential() {
 
-    var user = firebase.auth().currentUser;
+    var user = auth.currentUser;
     // Prompt the user to re-provide their sign-in credentials
     var providedPassword = document.getElementById("psw").value;
     var credential = firebase.auth.EmailAuthProvider.credential(
@@ -64,3 +64,13 @@ async function checkCredential() {
         }
     });
 }
+
+window.addEventListener("load", () =>{
+    auth.onAuthStateChanged( (user) =>{
+        if(user){
+            includeHTML('index');
+        }else{
+
+        }
+    })
+});

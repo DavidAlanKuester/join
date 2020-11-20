@@ -1,7 +1,7 @@
 
 
 async function deleteProfile() {
-    var user = firebase.auth().currentUser;
+    var user = auth.currentUser;
     await deleteUserTasks(user.uid);
     await deleteUserFromAssigne(user.uid);
     await deleteUserImg(user.uid);
@@ -11,7 +11,7 @@ async function deleteProfile() {
 }
 
 function deleteUser() {
-    var user = firebase.auth().currentUser;
+    var user = auth.currentUser;
     return user.delete().then(function () {
         // User deleted.
         console.log('USER DELETED', user);
@@ -36,7 +36,7 @@ function deleteUserImg(userId) {
 }
 
 function deleteUserObject(userId) {
-    return firebase.database().ref('users/' + userId).remove().then(function () {
+    return databaseRef('users/' + userId).remove().then(function () {
         console.log('DATABASE USER OBJECT DELETED');
     }).catch(function (error) {
         console.error('ERROR DELETING DATABASE USER OBJECT. ', error);
@@ -44,10 +44,10 @@ function deleteUserObject(userId) {
 }
 
 function deleteUserTasks(userId) {
-    return firebase.database().ref('tasks').once('value').then(function (snapshot) {
+    return databaseRef('tasks').once('value').then(function (snapshot) {
         snapshot.forEach(childSnapshot => {
             if (childSnapshot.child('creator').val() == userId) {
-                firebase.database().ref('tasks/' + childSnapshot.key).remove().then(function () {
+                databaseRef('tasks/' + childSnapshot.key).remove().then(function () {
                     console.log('DATABASE USER TASK DELETED');
                 }).catch(function (error) {
                     console.error('ERROR DELETING DATABASE USER TASK. ', error);
@@ -60,14 +60,14 @@ function deleteUserTasks(userId) {
 }
 
 function deleteUserFromAssigne(userId) {
-    return firebase.database().ref('tasks').once('value').then(function (snapshot) {
+    return databaseRef('tasks').once('value').then(function (snapshot) {
         snapshot.forEach(childSnapshot => {
             var childData = childSnapshot.child('assigned-to').val();
             childData.forEach((id, index) => {
                 if (id == userId) {
                     childData.splice(index, 1);
                     var newAssigneObj = getNewObjFromArray(childData);
-                    firebase.database().ref('tasks/' + childSnapshot.key + '/assigned-to/').set(newAssigneObj).then(function () {
+                    databaseRef('tasks/' + childSnapshot.key + '/assigned-to/').set(newAssigneObj).then(function () {
                         console.log('DATABASE USER FROM TASK DELETED');
                     }).catch(function (error) {
                         console.error('ERROR DELETING DATABASE USER FROM TASK. ', error);
@@ -102,7 +102,7 @@ function removeMenu() {
 }
 // ******* Responsive Menu- end ******* 
 
-firebase.auth().onAuthStateChanged(function (user) {
+auth.onAuthStateChanged(function (user) {
     if (user) {
         // User is signed in.
 
@@ -115,7 +115,7 @@ firebase.auth().onAuthStateChanged(function (user) {
 });
 
 function checkForAnonymousLogOut() {
-    if (firebase.auth().currentUser.isAnonymous) {
+    if (auth.currentUser.isAnonymous) {
         deleteProfile();
     } else {
         logUserOut();
@@ -123,11 +123,11 @@ function checkForAnonymousLogOut() {
 }
 
 function logUserOut() {
-    firebase.auth().signOut();
+    auth.signOut();
 }
 
 function writeUserData(userId, userName, userEmail, imageUrl) {
-    return firebase.database().ref('users/' + userId).set({
+    return databaseRef('users/' + userId).set({
         id: userId,
         img: imageUrl,
         name: userName,
@@ -140,12 +140,12 @@ let createdTasks;
 
 function initalizeAnonymousUser(user) {
     // delete all tasks of user
-    firebase.database().ref("tasks").once("value")
+    databaseRef("tasks").once("value")
         .then((tasks) => {
             tasks.forEach(task => {
                 // delete task
                 if (task.child("creator").val() === user.uid) {
-                    firebase.database().ref("tasks/" + task.child("task-id"))
+                    databaseRef("tasks/" + task.child("task-id"))
                         .remove()
                         .catch(console.error("Error occured when deleting the task"));
                 }
@@ -174,8 +174,8 @@ function createDummyTask(creator, newTaskTitle, newTaskCategory,
     newTaskDescription, newTaskDueDate, newTaskUrgency,
     newTaskImportance, newTaskAssignee, newTaskDisplay) {
     let newTaskAssigneeArray = [newTaskAssignee];
-    let newTaskId = firebase.database().ref('tasks/').push().key;
-    firebase.database().ref('tasks/' + newTaskId).set(
+    let newTaskId = databaseRef('tasks/').push().key;
+    databaseRef('tasks/' + newTaskId).set(
         {
             "creator": creator,
             "task-id": newTaskId,
@@ -197,7 +197,7 @@ function createDummyTask(creator, newTaskTitle, newTaskCategory,
  */
 function saveUsersToLocalStorage() {
 
-    firebase.database().ref('users').once('value').then(function (snapshot) {
+    databaseRef('users').once('value').then(function (snapshot) {
         snapshot.forEach(function (childSnapshot) {
             users.push(childSnapshot.val());
         })
@@ -299,7 +299,7 @@ function changeSideBarTo(site) {
 }
 
 function sidebarSetUserImg() {
-    document.getElementById("user-img").src = firebase.auth().currentUser.photoURL;
+    document.getElementById("user-img").src = auth.currentUser.photoURL;
 }
 
 function changeSideBarLinksToListSelected() {
@@ -333,7 +333,7 @@ function changeSideBarLinksToAddtask() {
 }
 
 function changeSideBarLinksToIndex() {
-    firebase.auth().onAuthStateChanged(function (user) {
+    auth.onAuthStateChanged(function (user) {
         if (user) {
             // User is signed in.
             document.getElementById("app-links").classList.remove("d-none");
@@ -357,7 +357,7 @@ function changeSideBarLinksToIndex() {
 
 
 function changeSideBarLinksToImprint() {
-    firebase.auth().onAuthStateChanged(function (user) {
+    auth.onAuthStateChanged(function (user) {
         if (user) {
             // User is signed in.
             document.getElementById("app-links").classList.remove("d-none");
@@ -384,7 +384,7 @@ function changeSideBarLinksToImprint() {
 
 
 function changeSideBarLinksToDataProtection() {
-    firebase.auth().onAuthStateChanged(function (user) {
+    auth.onAuthStateChanged(function (user) {
         if (user) {
             // User is signed in.
             document.getElementById("app-links").classList.remove("d-none");
@@ -411,7 +411,7 @@ function changeSideBarLinksToDataProtection() {
 
 
 function changeSideBarLinksToHelp() {
-    firebase.auth().onAuthStateChanged(function (user) {
+    auth.onAuthStateChanged(function (user) {
         if (user) {
             // User is signed in.
             document.getElementById("app-links").classList.remove("d-none");
@@ -496,10 +496,10 @@ function uploadFile(file) {
     };
 
     // use Firebase push call to upload file to Firebase
-    var uploadTask = storageRef.child('images/' + firebase.auth().currentUser.uid + '/profileImg').put(file, metadata);
+    var uploadTask = storageRef.child('images/' + auth.currentUser.uid + '/profileImg').put(file, metadata);
 
     // monitor Firebase upload progress and catch errors
-    uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
+    uploadTask.on(storage.TaskEvent.STATE_CHANGED,
         function (snapshot) {
             // calculate progress as a percentage
             var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
@@ -507,10 +507,10 @@ function uploadFile(file) {
 
             // check for a change in u0pload state
             switch (snapshot.state) {
-                case firebase.storage.TaskState.PAUSED:
+                case storage.TaskState.PAUSED:
                     console.log('Upload is paused');
                     break;
-                case firebase.storage.TaskState.RUNNING:
+                case storage.TaskState.RUNNING:
                     console.log('Upload is running');
                     break;
             }
@@ -533,14 +533,14 @@ function uploadFile(file) {
             return;
         }, function () {
             // on success, display the uploaded image on the page
-            storageRef.child('images/' + firebase.auth().currentUser.uid + '/profileImg').getDownloadURL()
+            storageRef.child('images/' + auth.currentUser.uid + '/profileImg').getDownloadURL()
                 .then(function (uri) {
                     console.log('the image uploaded and can be found at ' + uri);
                     document.getElementById('user-img').src = uri;
-                    firebase.auth().currentUser.updateProfile({
+                    auth.currentUser.updateProfile({
                         photoURL: uri
                     }).then(function () {
-                        return firebase.database().ref('users/' + firebase.auth().currentUser.uid + '/img/').set(uri);
+                        return databaseRef('users/' + auth.currentUser.uid + '/img/').set(uri);
                     });
                 });
         })

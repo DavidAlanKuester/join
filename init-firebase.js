@@ -18,3 +18,5 @@ var storage = firebase.storage();
 var storageRef = storage.ref();
 var database = firebase.database();
 var databaseRef = database.ref();
+var auth = firebase.auth();
+authRef = auth.ref;

@@ -15,7 +15,7 @@
 //     });
 
 // Initialize the FirebaseUI Widget using Firebase.
-var ui = new firebaseui.auth.AuthUI(firebase.auth());
+var ui = new firebaseui.auth.AuthUI(auth);
 
 // FirebaseUI config.
 var uiConfig = {
@@ -56,7 +56,7 @@ var uiConfig = {
             document.getElementById('loader').style.display = 'none';
         }
     },
-    signInSuccessUrl: './addTask.html',
+    signInSuccessUrl: '../addTask/',
     signInOptions: [
         firebase.auth.EmailAuthProvider.PROVIDER_ID,
         firebaseui.auth.AnonymousAuthProvider.PROVIDER_ID
