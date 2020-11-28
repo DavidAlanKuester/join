@@ -1,4 +1,4 @@
-auth.onAuthStateChanged(function (user) {
+/*auth.onAuthStateChanged(function (user) {
     if (user) {
         // User is signed in.
         sidebarSetUserImg();
@@ -63,14 +63,4 @@ async function checkCredential() {
             document.getElementById("psw-info").innerHTML = "Wrong Password!";
         }
     });
-}
-
-window.addEventListener("load", () =>{
-    auth.onAuthStateChanged( (user) =>{
-        if(user){
-            includeHTML('index');
-        }else{
-
-        }
-    })
-});
+}*/

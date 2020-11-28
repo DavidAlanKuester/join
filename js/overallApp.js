@@ -1,5 +1,5 @@
 
-
+/*
 async function deleteProfile() {
     var user = auth.currentUser;
     await deleteUserTasks(user.uid);
@@ -13,10 +13,10 @@ async function deleteProfile() {
 function deleteUser() {
     var user = auth.currentUser;
     return user.delete().then(function () {
-        // User deleted.
-        console.log('USER DELETED', user);
+						   // User deleted.
+						   console.log('USER DELETED', user);
 
-    }).catch(function (error) {
+					   }).catch(function (error) {
         // An error happened.
         console.error('ERROR', error);
     });
@@ -27,9 +27,9 @@ function deleteUserImg(userId) {
     var userImgRef = storageRef.child('images/' + userId + '/profileImg');
     // Delete the file
     return userImgRef.delete().then(function () {
-        // File deleted successfully
-        console.log('USER IMG DELETED', userImgRef);
-    }).catch(function (error) {
+								 // File deleted successfully
+								 console.log('USER IMG DELETED', userImgRef);
+							 }).catch(function (error) {
         // Uh-oh, an error occurred!
         console.error('ERROR DELETING USER IMG', error);
     });
@@ -37,26 +37,29 @@ function deleteUserImg(userId) {
 
 function deleteUserObject(userId) {
     return databaseRef('users/' + userId).remove().then(function () {
-        console.log('DATABASE USER OBJECT DELETED');
-    }).catch(function (error) {
+													 console.log('DATABASE USER OBJECT DELETED');
+												 }).catch(function (error) {
         console.error('ERROR DELETING DATABASE USER OBJECT. ', error);
     });
 }
 
 function deleteUserTasks(userId) {
-    return databaseRef('tasks').once('value').then(function (snapshot) {
-        snapshot.forEach(childSnapshot => {
-            if (childSnapshot.child('creator').val() == userId) {
-                databaseRef('tasks/' + childSnapshot.key).remove().then(function () {
-                    console.log('DATABASE USER TASK DELETED');
-                }).catch(function (error) {
-                    console.error('ERROR DELETING DATABASE USER TASK. ', error);
-                });
-            }
-        });
-    }).catch(function (error) {
-        console.error('ERROR DELETING DATABASE USER TASKS', error);
-    });
+    return databaseRef('tasks')
+		.once('value')
+		.then(function (snapshot) {
+				  snapshot.forEach(childSnapshot => {
+				  if (childSnapshot.child('creator').val() == userId)
+				  {
+					  databaseRef('tasks/' + childSnapshot.key).remove().then(function () {
+																				  console.log('DATABASE USER TASK DELETED');
+																			  }).catch(function (error) {
+						  console.error('ERROR DELETING DATABASE USER TASK. ', error);
+					  });
+				  }
+			  });
+}).catch(function (error) {
+	console.error('ERROR DELETING DATABASE USER TASKS', error);
+});
 }
 
 function deleteUserFromAssigne(userId) {
@@ -195,6 +198,8 @@ function createDummyTask(creator, newTaskTitle, newTaskCategory,
 /**
  * This method calls firebase and saves all users to the local storage
  */
+ 
+ /*
 function saveUsersToLocalStorage() {
 
     databaseRef('users').once('value').then(function (snapshot) {
@@ -209,6 +214,8 @@ function saveUsersToLocalStorage() {
 /**
  * This method retrieves all users from the local storage
  */
+ 
+ /*
 function getUsersFromLocalStorage() {
     return JSON.parse(localStorage.getItem("users"));
 }
@@ -216,6 +223,7 @@ function getUsersFromLocalStorage() {
 /**
  * This Enums defines the names of the Eisenhower Category
  */
+ /*
 const EISENHOWER_MATRIX_CATEGORIES =
 {
     DO: "Do",
@@ -234,14 +242,14 @@ Object.freeze(EISENHOWER_MATRIX_CATEGORIES);
  * 
  * @param {string} site - name of the site to which the HTML file was included
  */
-function includeHTML(site) {
+function includeSidebar() {
     var z, i, elmnt, file, xhttp;
     /* Loop through a collection of all HTML elements: */
     z = document.getElementsByTagName("*");
     for (i = 0; i < z.length; i++) {
         elmnt = z[i];
         /*search for elements with a certain atrribute:*/
-        file = elmnt.getAttribute("w3-include-html");
+        file = elmnt.getAttribute("include-sidebar");
         if (file) {
             /* Make an HTTP request using the attribute value as the file name: */
             xhttp = new XMLHttpRequest();
@@ -250,9 +258,9 @@ function includeHTML(site) {
                     if (this.status == 200) { elmnt.innerHTML = this.responseText; }
                     if (this.status == 404) { elmnt.innerHTML = "Page not found."; }
                     /* Remove the attribute, and call this function once more: */
-                    elmnt.removeAttribute("w3-include-html");
-                    changeSideBarTo(site);
-                    includeHTML();
+                    elmnt.removeAttribute("include-sidebar");
+                    //changeSideBarTo(site);
+                    includeSidebar();
                 }
             }
             xhttp.open("GET", file, true);
@@ -269,6 +277,7 @@ function includeHTML(site) {
  * 
  * @param {string} site - name of the site 
  */
+ /*
 function changeSideBarTo(site) {
     switch (site) {
         case "list":
@@ -441,6 +450,7 @@ function changeSideBarLinksToHelp() {
  * This method accepts a task and sets the display property of that task to "do"
  * @param {Json object} task - a task represented as a JSON object
  */
+ /*
 function setTaskCategoryToDo(task) {
     task["display"] = EISENHOWER_MATRIX_CATEGORIES.DO;
 }
@@ -449,6 +459,7 @@ function setTaskCategoryToDo(task) {
  * This method accepts a task and returns if the task is an important task.
  * @param {Json object} task - a task represented as a JSON object
  */
+ /*
 function isTaskImportant(task) {
     return task.importance == 0;
 }
@@ -458,6 +469,7 @@ function isTaskImportant(task) {
  * returns true if that date is today or in the past. False if not today or in the past. 
  * @param {ISO 8601 string} dateString - accepts a ISO 8601 String Syntax (YYYY-MM-DD)
  */
+ /*
 function isDue(dateString) {
     let today = new Date();
     today = new Date(today.getFullYear(), today.getMonth(), today.getDate());
@@ -545,4 +557,9 @@ function uploadFile(file) {
                 });
         })
 
+}*/
+
+
+window.onload = async function(){
+	await includeSidebar();
 }

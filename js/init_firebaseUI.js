@@ -38,7 +38,7 @@ var uiConfig = {
                         initalizeAnonymousUser(user);
                     }
                     isDone.then(function () {
-                        window.location.href = './addTask.html';
+                        window.location.href = 'addTask.html';
                     });
                 }).catch(function (error) {
                     // An error happened.
@@ -56,7 +56,7 @@ var uiConfig = {
             document.getElementById('loader').style.display = 'none';
         }
     },
-    signInSuccessUrl: '../addTask/',
+    signInSuccessUrl: 'addTask.html',
     signInOptions: [
         firebase.auth.EmailAuthProvider.PROVIDER_ID,
         firebaseui.auth.AnonymousAuthProvider.PROVIDER_ID
